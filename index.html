@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coral Club · Инициативы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Coral Club corporate design system tokens */
+  --bg:#E5ECEC; --surface:#FFFFFF; --ink:#004643; --ink-soft:#4C7371; --ink-faint:#7FA2A1;
+  --coral:#FF4A1C; --coral-dark:#D63C13; --coral-soft:#FFE7DE;
+  --teal:#20927B; --teal-soft:#E1F3EE;
+  --amber:#A9843A; --amber-soft:#F5EBD6;
+  --success:#20927B; --success-soft:#EAF6E4;
+  --border:#BFD1D0; --radius:0px; --radius-sm:0px;
+  --shadow:0 1px 2px rgba(0,70,67,.05), 0 8px 24px rgba(0,70,67,.07);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Inter',sans-serif;font-weight:300;letter-spacing:-.01em;}
+button{font-family:inherit;cursor:pointer;}
+input,textarea,select{font-family:inherit;}
+::selection{background:var(--coral-soft);}
+
+#app{min-height:100vh;display:flex;flex-direction:column;}
+
+/* ---------- Top bar ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%, var(--coral), var(--coral-dark));flex:none;}
+.brand-text .t1{font-family:'Inter',sans-serif;font-weight:600;font-size:17px;line-height:1.1;}
+.brand-text .t2{font-size:11px;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase;}
+.role-switch{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:3px;gap:2px;}
+.topbar-controls{display:flex;align-items:center;gap:10px;justify-content:flex-end;}
+.lang-switch{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:3px;gap:2px;}
+.lang-switch button{border:none;background:transparent;padding:6px 12px;border-radius:999px;font-size:11.5px;font-weight:700;color:var(--ink-soft);transition:.15s;}
+.lang-switch button.active{background:var(--ink);color:#fff;}
+.role-switch button{border:none;background:transparent;padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink-soft);transition:.15s;}
+.role-switch button.active{background:var(--ink);color:#fff;}
+.role-note{font-size:11px;color:var(--ink-faint);margin-top:4px;text-align:right;}
+
+/* ---------- Layout ---------- */
+.main{flex:1;display:flex;width:100%;}
+.wizard-shell{flex:1;display:flex;justify-content:center;padding:44px 20px 80px;}
+.wizard-card{width:100%;max-width:620px;}
+
+/* progress */
+.progress-wrap{margin-bottom:34px;}
+.progress-track{display:flex;gap:6px;}
+.progress-seg{flex:1;height:5px;border-radius:99px;background:var(--border);overflow:hidden;}
+.progress-seg.done{background:var(--coral);}
+.progress-seg.current{background:linear-gradient(90deg,var(--coral) 50%,var(--border) 50%);}
+.progress-label{margin-top:10px;font-size:12px;color:var(--ink-faint);display:flex;justify-content:space-between;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);margin-bottom:10px;}
+.q-title{font-size:24px;margin:0 0 8px;}
+.q-sub{color:var(--ink-soft);font-size:14px;margin:0 0 24px;line-height:1.5;}
+
+.field{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;color:var(--ink);background:#fff;transition:.15s;}
+.field:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-soft);}
+textarea.field{resize:vertical;min-height:120px;line-height:1.5;}
+.hint{font-size:12px;color:var(--ink-faint);margin-top:8px;}
+.char-count{font-size:12px;color:var(--ink-faint);text-align:right;margin-top:6px;}
+.error-text{font-size:12px;color:var(--coral-dark);margin-top:8px;font-weight:600;}
+
+.btn{border:none;border-radius:999px;padding:13px 24px;font-size:14px;font-weight:700;transition:.15s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:#013634;}
+.btn-primary:disabled{background:var(--border);color:var(--ink-faint);cursor:not-allowed;}
+.btn-ghost{background:transparent;color:var(--ink-soft);border:1.5px solid var(--border);}
+.btn-ghost:hover{border-color:var(--ink-soft);color:var(--ink);}
+.btn-coral{background:var(--coral);color:#fff;}
+.btn-coral:hover{background:var(--coral-dark);}
+.btn-sm{padding:8px 14px;font-size:12.5px;border-radius:0;}
+.btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:28px;}
+.btn-row .spacer{flex:1;}
+
+.choice-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+.choice-btn{border:1.5px solid var(--border);background:#fff;border-radius:var(--radius);padding:22px 18px;text-align:left;transition:.15s;}
+.choice-btn:hover{border-color:var(--ink-soft);}
+.choice-btn .cb-title{font-weight:700;font-size:15px;margin-bottom:4px;}
+.choice-btn .cb-sub{font-size:12.5px;color:var(--ink-faint);}
+.choice-btn.yes:hover{border-color:var(--teal);background:var(--teal-soft);}
+.choice-btn.no:hover{border-color:var(--coral);background:var(--coral-soft);}
+
+/* dropdown/autocomplete */
+.ac-wrap{position:relative;}
+.ac-list{margin-top:8px;border:1.5px solid var(--border);border-radius:var(--radius-sm);max-height:260px;overflow-y:auto;background:#fff;}
+.ac-item{padding:11px 15px;font-size:14px;border-bottom:1px solid var(--border);}
+.ac-item:last-child{border-bottom:none;}
+.ac-item button{width:100%;text-align:left;background:none;border:none;font-size:14px;color:var(--ink);padding:0;}
+.ac-item button:hover{color:var(--coral-dark);}
+.ac-empty{padding:14px 15px;font-size:13px;color:var(--ink-faint);}
+.new-toggle{margin-top:10px;font-size:13px;color:var(--ink-soft);background:none;border:none;text-decoration:underline;padding:0;}
+.selected-chip{display:inline-flex;align-items:center;gap:8px;background:var(--teal-soft);color:var(--teal);border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;margin-top:6px;}
+.selected-chip button{background:none;border:none;color:var(--teal);font-weight:700;padding:0;}
+
+/* percent slider */
+.percent-display{font-family:'Inter',sans-serif;font-size:56px;font-weight:300;color:var(--coral);line-height:1;margin:6px 0 20px;}
+input[type=range]{width:100%;accent-color:var(--coral);height:6px;}
+
+/* project / goal search results */
+.search-item{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.15s;}
+.search-item:hover{border-color:var(--coral);background:var(--coral-soft);}
+.search-item .si-name{font-weight:700;font-size:14px;margin-bottom:4px;}
+.search-item .si-goal{font-size:12.5px;color:var(--ink-soft);line-height:1.4;}
+.type-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border-radius:0;margin-bottom:6px;}
+.type-tag.run{background:var(--teal-soft);color:var(--teal);}
+.type-tag.change{background:var(--coral-soft);color:var(--coral-dark);}
+.type-tag.none{background:var(--bg);color:var(--ink-faint);}
+
+/* compact expandable list (projects) */
+.list-toolbar{position:sticky;top:0;background:var(--bg);padding-bottom:12px;margin-bottom:6px;z-index:5;}
+.list-toolbar-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+.list-toolbar-row:last-child{margin-bottom:0;}
+.list-toolbar input.field{flex:1;min-width:200px;}
+.list-toolbar-row select{padding:7px 14px;border:1.5px solid var(--border);border-radius:999px;font-size:12.5px;font-weight:600;color:var(--ink-soft);background:#fff;}
+.filter-chip{border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;color:var(--ink-soft);transition:.15s;}
+.filter-chip:hover{border-color:var(--ink-soft);}
+.filter-chip.active{border-color:var(--ink);background:var(--ink);color:#fff;}
+.filter-chip.active.run{border-color:var(--teal);background:var(--teal);}
+.filter-chip.active.change{border-color:var(--coral);background:var(--coral);}
+.list-count{font-size:12px;color:var(--ink-faint);margin-bottom:10px;}
+.proj-list{max-height:520px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fff;}
+.proj-row{border-bottom:1px solid var(--border);}
+.proj-row:last-child{border-bottom:none;}
+.proj-row-head{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;}
+.proj-row-head:hover{background:var(--bg);}
+.proj-row.expanded .proj-row-head{background:var(--coral-soft);}
+.proj-caret{font-size:11px;color:var(--ink-faint);width:12px;flex:none;}
+.proj-name{font-weight:700;font-size:13.5px;flex:1;}
+.proj-row-body{padding:6px 16px 20px 38px;background:#fbfbfc;border-top:1px solid var(--border);}
+.field-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-faint);margin:14px 0 7px;}
+.field-label:first-child{margin-top:2px;}
+.type-chip-row{display:flex;gap:8px;}
+.type-chip{border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:7px 16px;font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+.type-chip.active-run{border-color:var(--teal);background:var(--teal-soft);color:var(--teal);}
+.type-chip.active-change{border-color:var(--coral);background:var(--coral-soft);color:var(--coral-dark);}
+.type-chip.active-neutral{border-color:var(--ink-soft);background:var(--bg);color:var(--ink);}
+
+/* project tiles */
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;max-height:560px;overflow-y:auto;padding:4px 4px 8px;}
+.tile-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;cursor:pointer;transition:.15s;display:flex;flex-direction:column;justify-content:space-between;gap:12px;min-height:96px;}
+.tile-card:hover{border-color:var(--coral);box-shadow:var(--shadow);}
+.tile-name{font-weight:700;font-size:13.5px;line-height:1.35;color:var(--ink);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.tile-customer{align-self:flex-start;border:1.5px solid var(--coral);color:var(--coral-dark);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;white-space:nowrap;}
+.tile-customer.none{border-color:var(--border);color:var(--ink-faint);}
+
+/* accordion tracks */
+.track-block{border:1.5px solid var(--border);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden;}
+.track-head{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;cursor:pointer;background:#fff;}
+.track-head:hover{background:var(--bg);}
+.track-head .th-name{font-weight:700;font-size:14.5px;}
+.track-head .th-mission{font-size:12px;color:var(--ink-faint);margin-top:3px;}
+.track-body{padding:0 16px 16px;background:#fbfbfc;border-top:1px solid var(--border);}
+.goal-item{padding:13px 0;border-bottom:1px dashed var(--border);}
+.goal-item:last-child{border-bottom:none;}
+.goal-text{font-size:13.5px;font-weight:600;cursor:pointer;line-height:1.4;}
+.goal-text:hover{color:var(--coral-dark);}
+.kr-list{margin-top:10px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:0;}
+.kr-row{font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--border);}
+.kr-row:last-child{border-bottom:none;}
+.kr-row .kr-text{font-weight:600;color:var(--ink);}
+.kr-row .kr-hint{color:var(--ink-faint);margin-top:3px;font-style:italic;}
+
+/* goal tree (visual, step 6a) */
+.tree-wrap{overflow-x:auto;padding:4px 2px 14px;}
+.tree-inner{min-width:760px;}
+.tree-root{background:var(--ink);color:#fff;border-radius:0;padding:13px 24px;text-align:center;font-weight:700;font-size:13.5px;width:fit-content;margin:0 auto;}
+.tree-vline{width:2px;height:20px;background:var(--border);margin:0 auto;}
+.tree-hbar{position:relative;height:20px;}
+.tree-hbar::before{content:'';position:absolute;left:10%;right:10%;top:0;height:2px;background:var(--border);}
+.tree-cols{display:flex;gap:14px;align-items:flex-start;}
+.tree-col{flex:1;position:relative;display:flex;flex-direction:column;align-items:stretch;}
+.tree-col::before{content:'';position:absolute;top:-20px;left:50%;width:2px;height:20px;background:var(--border);transform:translateX(-1px);}
+.tree-track{border-radius:0;padding:12px 12px;text-align:center;border:1.5px solid;font-weight:700;font-size:12.5px;line-height:1.3;}
+.tree-track .tt-icon{font-size:18px;display:block;margin-bottom:4px;}
+.tree-goal-wrap{margin-top:16px;position:relative;}
+.tree-goal-wrap::before{content:'';position:absolute;top:-16px;left:50%;width:2px;height:16px;background:var(--border);transform:translateX(-1px);}
+.tree-goal{border:1.5px solid var(--border);background:#fff;border-radius:0;padding:10px 11px;font-size:11.5px;font-weight:600;line-height:1.35;cursor:pointer;margin-bottom:8px;transition:.15s;}
+.tree-goal:hover{border-color:var(--coral);}
+.tree-goal.selected{border-color:var(--coral);background:var(--coral-soft);}
+.tree-goal-second{margin-top:6px;}
+.tree-kr-panel{background:#fbfbfc;border:1px solid var(--border);border-radius:0;padding:10px 11px;margin:-2px 0 8px;font-size:11px;}
+.tree-kr-panel .kr-row{padding:5px 0;font-size:11px;}
+.tree-legend{display:flex;flex-wrap:wrap;gap:8px 18px;border:1px dashed var(--border);border-radius:0;padding:12px 16px;margin-top:18px;font-size:11.5px;color:var(--ink-soft);}
+.tree-legend span b{color:var(--ink);}
+.wizard-card-wide{max-width:1180px !important;}
+
+/* summary */
+.summary-row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
+.summary-row:last-child{border-bottom:none;}
+.summary-row .sr-label{color:var(--ink-faint);flex:none;width:150px;}
+.summary-row .sr-val{text-align:right;font-weight:600;}
+.result-banner{border-radius:var(--radius-sm);padding:16px;margin-bottom:22px;display:flex;gap:12px;align-items:flex-start;}
+.result-banner.project{background:var(--teal-soft);}
+.result-banner.goal{background:var(--coral-soft);}
+.result-banner.none{background:var(--amber-soft);}
+.result-banner .rb-title{font-weight:700;font-size:13.5px;margin-bottom:3px;}
+.result-banner .rb-sub{font-size:12.5px;color:var(--ink-soft);line-height:1.4;}
+
+.done-wrap{text-align:center;padding:20px 0;}
+.done-icon{width:58px;height:58px;border-radius:50%;background:var(--success-soft);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 18px;}
+
+/* ---------- Admin ---------- */
+.admin-shell{display:flex;flex:1;width:100%;}
+.admin-nav{width:220px;flex:none;background:var(--surface);border-right:1px solid var(--border);padding:20px 12px;}
+.admin-nav button{display:block;width:100%;text-align:left;padding:11px 14px;border:none;background:none;border-radius:0;font-size:13.5px;font-weight:600;color:var(--ink-soft);margin-bottom:2px;}
+.admin-nav button.active{background:var(--ink);color:#fff;}
+.admin-nav button:hover:not(.active){background:var(--bg);color:var(--ink);}
+.admin-main{flex:1;padding:32px 36px;max-width:1180px;}
+.admin-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;}
+.admin-header h2{margin:0 0 4px;font-size:22px;}
+.admin-header p{margin:0;color:var(--ink-soft);font-size:13.5px;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:30px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.stat-card .sc-num{font-family:'Inter',sans-serif;font-size:32px;font-weight:300;}
+.stat-card .sc-label{font-size:12px;color:var(--ink-faint);margin-top:4px;}
+.stat-card.coral .sc-num{color:var(--coral);}
+.stat-card.teal .sc-num{color:var(--teal);}
+.stat-card.amber .sc-num{color:var(--amber);}
+
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:13px;}
+thead th{text-align:left;background:var(--bg);color:var(--ink-faint);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:11px 14px;border-bottom:1px solid var(--border);}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#fbfbfc;}
+.cell-truncate{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+select.type-select{border:1.5px solid var(--border);border-radius:0;padding:6px 9px;font-size:12.5px;font-weight:600;background:#fff;}
+.icon-btn{border:none;background:none;color:var(--ink-faint);padding:4px 6px;border-radius:0;font-size:12px;}
+.icon-btn:hover{background:var(--bg);color:var(--coral-dark);}
+.toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap;}
+.toolbar select,.toolbar input{padding:9px 12px;border:1.5px solid var(--border);border-radius:0;font-size:13px;}
+.empty-state{padding:40px 20px;text-align:center;color:var(--ink-faint);font-size:13.5px;}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,37,69,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;}
+.modal-box{background:#fff;border-radius:var(--radius);padding:28px;width:100%;max-width:480px;max-height:86vh;overflow-y:auto;}
+.modal-box h3{margin:0 0 18px;font-size:18px;}
+.modal-box label{display:block;font-size:12px;font-weight:700;color:var(--ink-soft);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.03em;}
+.modal-box label:first-of-type{margin-top:0;}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
+.merge-option{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
+.merge-option:last-child{border-bottom:none;}
+
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:13px 22px;border-radius:999px;font-size:13.5px;font-weight:600;z-index:200;box-shadow:var(--shadow);}
+.toast.error{background:var(--coral-dark);}
+
+.loading-shell{display:flex;align-items:center;justify-content:center;height:70vh;color:var(--ink-faint);font-size:14px;}
+.login-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px 36px;max-width:380px;width:100%;box-shadow:var(--shadow);}
+.login-card .field{margin-top:6px;}
+
+@media(max-width:760px){
+  .admin-shell{flex-direction:column;}
+  .admin-nav{width:100%;display:flex;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border);padding:10px 12px;}
+  .admin-nav button{white-space:nowrap;width:auto;margin-right:4px;}
+  .admin-main{padding:20px;}
+  .choice-row{grid-template-columns:1fr;}
+  .topbar{padding:14px 16px;}
+}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading-shell">Loading data… / Загружаем данные…</div></div>
+
+<script>
+/* =========================================================
+   SEED DATA — from "Для_WEB_опросника.xlsx"
+   ========================================================= */
+const seedDepartments = [
+ "Поддержка дистрибьюторов уровень : Дивизион","Юристы Global","Мерч Global",
+ "Поддержка дистрибьюторов уровень : Дивизион","Обучение Global","PR Global",
+ "Сертификация Global","Бухгалтерия Global","НИО продукты Global",
+ "Новые рынки / Развитие Global","Регион Юг","Офис Эволюции Global","ECOM Global",
+ "Управление персоналом HR Global","Операции Global","Управление Local / Регион Запад",
+ "Маркетинг (коммуникации)","Эволюция Global","Логистика Global",
+ "Финансы международные Global","Разработка ИТ Global","Операции Европа",
+ "Подбор Global","Управление Local / Регион Россия/Беларусь",
+ "Управление Local / Регион Румыния","Маркетинг Global","Общие финансы Global",
+ "Поддержка дистрибьюторов Global","Признание дистрибьюторов Global",
+ "Логистика (-2) Global","Event Local","Рассчеты с дистрибьюторами Global",
+ "Обучение дистрибьютора Global","Even Local Азия","Снабжение Global",
+ "Управление проектами Global","Управление Local / Регион США","Репутация Global",
+ "Анализ Global","Операции Local / Регион Азия","IT и Право Global",
+ "Управление Local / Регион Север","Зрелые рынки развитие Global",
+ "ИТ (базы данных) Global","Отдел ИИ Global","Разработка продуктов и HealthOS Global",
+ "ИТ Global","Зам. рук. Проектного офиса Global/local","Финансы компании Global",
+ "Local / Операции США","Управление клиентским опытом (Global) + Управление регионом Local (UK)"
+].map((name,i)=>({id:'d'+(i+1), name}));
+
+const seedProjects = [
+ ["GLOBAL","ДП","Описание процессов","Создание карты основных процессов компании, распределения зон ответственности за процессы"],
+ ["GLOBAL","ДП","Стартовая программа для новичков","Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж"],
+ ["GLOBAL","ДП","Друзья Клуба","Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж"],
+ ["GLOBAL","ДП","Быстрый старт","Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж"],
+ ["GLOBAL","ДП","Программы лояльности","Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж"],
+ ["GLOBAL","ДРД","Digital kit",""],
+ ["GLOBAL","CX","CRM Bitrix (IP телефония для КЦ)","Повысить уровень удовлетворенности клиентов за счет качественного обслуживания (включая замену инструментов работы)"],
+ ["GLOBAL","Ecom","Refiner",""],
+ ["GLOBAL","Ecom","Промокоды","Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж"],
+ ["GLOBAL","Ecom","Адреса на сайте",""],
+ ["GLOBAL","Ecom","Курьерские службы","Автоматизация работ с курьерскими службами для повышения эффективности и повышения удовлетворенности потребителей"],
+ ["GLOBAL","Ecom","Верификация",""],
+ ["GLOBAL","Ecom","База знаний","Создание базы данных для бизнеса, чтобы каждый отдел мог анализировать ключевые показатели и планировать следующие активности"],
+ ["GLOBAL","Ecom","Упрощенная регистрация","Оптимизация формы регистрации новых членов клуба для повышения конверсии из клиентов в потребители"],
+ ["GLOBAL","Ecom","Статусная модель заказов","Обеспечить стабильную автоматическую работу процесса обработки заказов с целью сокращения ошибок и операционных издержек, повышения уровня удовлетворенности потребителей"],
+ ["GLOBAL","Ecom","ЛК Дистрибьютора — Back office",""],
+ ["GLOBAL","Ecom","Навигация по продуктам",""],
+ ["GLOBAL","GM","Пульс — Apache Superset (BI)",""],
+ ["GLOBAL","Маркетинг","AI ассистент для ЧК и Дистрибьюторов","Внедрение умного помощника в жизнь ЧК и Дистрибьюторов для повышения уровня обслуживания потребителей и Дистрибьюторов"],
+ ["GLOBAL","HR","Бизнес процессы и заявки",""],
+ ["GLOBAL","HR","Инструменты для менеджеров (дашборды)","Создание инструмента для управления бизнесом (дашборды)"],
+ ["GLOBAL","HR","Обучение сотрудников — новая платформа",""],
+ ["GLOBAL","HR","ИИ-ассистент Коралина","Внедрение умного помощника в жизнь сотрудников для повышения эффективности сотрудников"],
+ ["GLOBAL","Training","Бизнес обучение + CBA (LMS)",""],
+ ["GLOBAL","Events","Event — замена платформ",""],
+ ["GLOBAL","Finance","Внедрение 1С ERP","Автоматизация процессов закупки, товарного учета, казначейства, финансовой отчетности"],
+ ["GLOBAL","Finance","Интеграция с локальными бух. системами","Автоматизация процесса, сокращение операционных издержек и контроль налогов"],
+ ["GLOBAL","Finance","Фискализация по всем рынкам","Обеспечить работу бизнеса в соответствии с законодательством и контролирует создание налоговой базы"],
+ ["GLOBAL","Logistics","Штрихкодирование","снижение операционных издержек (контроль за стоком на складах, в ОПК, проведение инвентаризаций, etc), контроль товародвижения (хранение, отгрузка, приемка), учет в системах ERP и тд."],
+ ["GLOBAL","Marketing","Эффективная коммуникация (смс, имейл)","Повысить эффективность взаимодействия с ЧК, повысить активность ЧК за счет рассылок, как следствие рост продаж"],
+ ["GLOBAL","Marketing","Контент платформа для трафика","Создание платформы для генерации трафика новых чк и клиентов для роста продаж"],
+ ["GLOBAL","Marketing","Подписка",""],
+ ["GLOBAL","Operations","РЦ — внедрение новых систем (1С)","Автоматизировать операционную работу склада с целью повышения операционной эффективности (повышение производительности труда и сокращение издержек)"],
+ ["GLOBAL","Planning","Региональные скидки",""],
+ ["GLOBAL","Logistics","Сервис логистики","Автоматизировать логистикцу с целью повышения операционной эффективности (сокращение издержек)"],
+ ["РФ+РБ","HR","КЭДО",""],
+ ["РФ+РБ","Operations","Бизнес модель РФ (франчайзи, портал)",""],
+ ["РФ+РБ","Operations","Поставки в РФ, включая маркировку","Обеспечить работу бизнеса в соответствии с законодательством"],
+ ["РФ+РБ","Operations","Честный знак","Обеспечить работу бизнеса в соответствии с законодательством"],
+ ["РФ+РБ","Operations","Производство паучей",""],
+ ["РФ+РБ","Finance","ЭДО",""],
+ ["РФ+РБ","Operations","Транспортные документы ЭДО",""],
+ ["Азия","Ecom","Верификация Дистрибьюторов","Валидация базы ЧК для повышения эффективности коммуникации"],
+ ["Азия","Operations","Маркировка Казахстан","Обеспечить работу бизнеса в соответствии с законодательством"],
+ ["Азия","Operations","Маркировка Таджикистан / Армения","Обеспечить работу бизнеса в соответствии с законодательством"],
+ ["Азия","ДПД","Азербайджан","Открытие регистрации и доставки на рынок Азербайджан"],
+ ["Америка+Канада","ДПД","Изменение маркетинг плана",""],
+ ["Америка+Канада","ДПД","Расширение географии — Пуэрто-Рико",""],
+ ["Америка+Канада","ДПД","Расширение географии — Мексика",""],
+ ["Европа-Север","Operations","3PL в Ирландии",""],
+ ["Европа-Север","Operations","DDP для Великобритании",""],
+ ["Европа-Север","Finance","Норвегия — переход на Евро",""],
+ ["Европа-Центр","ДПД","Румыния",""],
+ ["Европа-Центр","ДПД","Подписка",""],
+ ["Европа-Запад","Operations","Склад в Германии",""],
+ ["Европа-Запад","Operations","DDP для доставки из Германии",""],
+ ["Европа-Юг","Finance","Испания — документооборот с налоговой",""],
+ ["Европа-Юг","Finance","Болгария — Евро",""],
+ ["Back office","Finance","Автоматизация учета рабочего времени",""],
+].map((p,i)=>({id:'p'+(i+1), division:p[0], customer:p[1], name:p[2], goal:p[3], type:null}));
+
+const seedTracks = [
+ {name:"Health OS трек", mission:"Делаем заботу о здоровье понятной, персонализированной и доступной каждому.", goals:[
+   {text:"За 18 мес. увеличить количество лоялистов на Х% за счет увеличения динамики на всех этапах воронки.", krs:[
+     {text:"Увеличить конверсию покупки в воронке с P1 в P2 на Х%", hint:"За 18 мес. поднять долю новичков, доходящих до лоялистов за полгода, с 10% до 13%"}
+   ]}
+ ]},
+ {name:"GrowthModel трек (новые рынки)", mission:"Создать модель устойчивого роста на новых рынках, продвигая экосистему Coral Club.", goals:[
+   {text:"К декабрю 2026 года увеличить ежемесячный товарооборот в Румынии с 300 тыс. до ~489 тыс. евро (+63%) за счёт модели «подписка + Ambassadors 2.0».", krs:[
+     {text:"К декабрю 2026 ежемесячный товарооборот в Румынии 489 тыс. евро", hint:""},
+     {text:"К декабрю 2026 10% клиентской базы Румынии купили подписку", hint:""}
+   ]},
+   {text:"За 18 месяцев протестировать процесс «Развитие рынков» минимум на 4 новых рынках, выйдя на 1500+ нативных потребителей в каждом.", krs:[
+     {text:"Количество нативных потребителей — 1500 человек", hint:"Создать методику, при которой новый рынок развивается до нужной стадии за Х мес."},
+     {text:"Количество нативных дистрибьюторов — 4", hint:"Достигнуть по каждой стране количество нативных дистрибьюторов в рангах согласно матрице развития рынка"},
+     {text:"Размер товарооборота — не менее Х", hint:""},
+     {text:"Количество открытых рынков — не менее 4", hint:"Масштабировать подход/процесс в стране"}
+   ]}
+ ]},
+ {name:"PrimeGrowth трек (зрелые рынки)", mission:"Продукт компании в каждой Х семье в странах Зрелых рынков «Россия и Казахстан».", goals:[
+   {text:"Обеспечить рост компании в целевом периоде на зрелых рынках.", krs:[
+     {text:"Россия: товарооборот вырастет на 50%", hint:"1. Увеличить количество активных дистрибьюторов 2. Увеличить количество активных потребителей"},
+     {text:"Казахстан: рост на 20%", hint:"1. Увеличить количество активных дистрибьюторов 2. Увеличить количество активных потребителей"}
+   ]}
+ ]},
+ {name:"CoralEVO трек (функциональный)", mission:"Обеспечить бизнесу бесперебойное движение к целям через стабильность процессов, развитие и реализацию проектов.", goals:[
+   {text:"За 18 месяцев запустить «ключевые инструменты проектного управления» в компании CCI.", krs:[
+     {text:"Официально запустить Офис управления проектами к декабрю 2026", hint:"Об офисе управления проектами знают все в компании"},
+     {text:"Х% проектов в бэклоге Проектного офиса имеют «предварительную» оценку ресурсной ёмкости", hint:"Проектный офис использует расчёты «предварительной оценки ресурсов»"},
+     {text:"Х% проектов перешли в стадию «решён» в срок и в рамках бюджета", hint:"Процент проектов, завершённых с достижением запланированных показателей"},
+     {text:"Провести в 2026 г. минимум 2 заседания Стратегического комитета", hint:""}
+   ]},
+   {text:"За 18 месяцев провести трансформацию операционной модели компании.", krs:[
+     {text:"100% ключевых бизнес-процессов компании описаны и согласованы", hint:"Процессный офис является важной частью операционной модели компании"},
+     {text:"100% критичных межфункциональных процессов имеют назначенные роли по RACI", hint:""},
+     {text:"Не менее 60% согласованных внутренних SLA внедрены в работу", hint:""},
+     {text:"Не менее 90% владельцев процессов ежемесячно используют метрики и отчётность для управления SLA", hint:""}
+   ]}
+ ]},
+ {name:"ITModel", mission:"Помогаем бизнесу развиваться по всему миру.", goals:[
+   {text:"Трансформировать ИТ в драйвер глобального роста с измеримым вкладом в бизнес.", krs:[
+     {text:"SLA поддержки внутренних клиентов не менее Х", hint:"Разработать и утвердить структуру Технической поддержки"},
+     {text:"SLA Разработки не ниже Х", hint:""},
+     {text:"В Х% проектов, переданных в ИТ, есть расчёт экономической эффективности", hint:"ИТ проекты управляются через единый продуктовый процесс и roadmap"},
+     {text:"Запустить Х пилотов до конца 2027 г", hint:"1. Создать протоколы взаимодействия с Core ядром 2. Внедрить процесс R&D (18 мес.) 3. Утвердить правила и полномочия для пилотов"}
+   ]}
+ ]}
+].map((t,ti)=>({
+  id:'t'+(ti+1), name:t.name, mission:t.mission,
+  goals:t.goals.map((g,gi)=>({
+    id:'t'+(ti+1)+'g'+(gi+1), text:g.text,
+    krs:g.krs.map((k,ki)=>({id:'t'+(ti+1)+'g'+(gi+1)+'k'+(ki+1), text:k.text, hint:k.hint}))
+  }))
+}));
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const PASSWORDS = { lead: 'ILoveCoralClub', admin: 'IamCoralEvo' };
+let state = {
+  ready:false, authed:false, authError:false, role:'lead', lang:'ru',
+  departments:[], projects:[], tracks:[], initiatives:[],
+  wizard:{step:'1', history:[], department:'', isNewDept:false, deptQuery:'',
+    text:'', percent:20, customer:'', projQuery:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expandedProject:null,
+    expandedTrack:null, expandedGoal:null,
+    projectId:null, trackId:null, goalId:null, submitted:null},
+  admin:{module:'dashboard', expTrack:null, expGoal:null, selectedDept:new Set(),
+    initDeptFilter:'', initCatFilter:'all', projSearch:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expProject:null},
+  modal:null, toast:null
+};
+
+function uid(p){return p+'_'+Math.random().toString(36).slice(2,9);}
+function esc(s){return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const TRANSLATIONS = {"Реестр инициатив": "Initiative Registry", "Руководитель функции": "Function Lead", "Администратор": "Administrator", "Прототип · переключатель роли временный, до подключения авторизации": "Prototype · role switch is temporary, pending authentication", "Загружаем данные…": "Loading data…", "Отдел": "Department", "Инициатива": "Initiative", "Загрузка": "Workload", "Заказчик": "Customer", "Проект?": "Project?", "Цель трека?": "Track goal?", "Итог": "Summary", "Шаг": "Step", "из 7": "of 7", "Шаг 1": "Step 1", "Впишите название своего отдела": "Type in your department name", "Не нашли отдел в списке? Укажите его вручную — мы добавим его в справочник.": "Can't find your department in the list? Type it in manually — we'll add it to the directory.", "Например, Отдел цифровых продуктов": "e.g. Digital Products Department", "← Назад к списку": "← Back to list", "Продолжить →": "Continue →", "Шаг 1 из 7": "Step 1 of 7", "Выберите свой отдел": "Select your department", "Начните вводить название — покажем совпадения из справочника (${state.departments.length} отделов).": "Start typing a name — we'll show matches from the directory (${state.departments.length} departments).", "Поиск отдела…": "Search department…", "Совпадений не найдено": "No matches found", "Не нашли свой отдел? Вписать название вручную →": "Can't find your department? Type it in manually →", "Опишите вашу инициативу": "Describe your initiative", "Коротко: что вы делаете (или планируете делать) и зачем.": "Briefly: what you're doing (or plan to do) and why.", "Например: разрабатываем единый шаблон онбординга для новых сотрудников отдела, чтобы сократить время выхода на самостоятельную работу…": "e.g.: we're building a unified onboarding template for new department hires to cut the time to independent work…", "← Назад": "← Back", "Шаг 3 из 7": "Step 3 of 7", "Сколько % рабочего времени в неделю занимает эта инициатива?": "How much of your weekly working time does this initiative take?", "Ориентировочно — точность до 5% достаточна.": "Approximate is fine — 5% precision is enough.", "Шаг 4 из 7": "Step 4 of 7", "Кто заказчик инициативы?": "Who is the initiative's sponsor?", "Укажите ФИО — это может быть коллега, руководитель другого отдела, или вы сами.": "Enter a full name — a colleague, another department's lead, or yourself.", "Иван Иванов": "Jane Doe", "Шаг 5 из 7": "Step 5 of 7", "Является ли инициатива частью одного из проектов компании?": "Is the initiative part of one of the company's projects?", "Если инициатива — это часть более крупного корпоративного проекта, выберите «Да» и найдём его в списке.": "If the initiative belongs to a larger corporate project, choose \"Yes\" and we'll find it in the list.", "Да, это часть проекта": "Yes, it's part of a project", "Покажем список проектов компании": "We'll show the company's project list", "Нет / не уверен": "No / not sure", "Проверим, влияет ли на стратегические цели": "We'll check whether it affects strategic goals", "Шаг 5 · Выбор проекта": "Step 5 · Select project", "Выберите проект из списка": "Select a project from the list", "проектов. Ищите по названию, цели или заказчику, сузьте фильтрами, кликните на плашку — увидите детали проекта.": "projects. Search by name, goal, or customer, narrow with filters, click a tile to see project details.", "Поиск проекта…": "Search project…", "Все типы": "All types", "Все заказчики": "All customers", "Все дивизионы": "All divisions", "Найдено:": "Found:", "без заказчика": "no customer", "Ничего не найдено — попробуйте другой запрос или фильтр": "Nothing found — try a different search or filter", "Без типа": "No type", "Шаг 6 из 7": "Step 6 of 7", "Может ли инициатива способствовать одной из целей стратегических треков?": "Could the initiative contribute to one of the strategic tracks' goals?", "Речь о целях на 18 месяцев внутри одного из 5 стратегических треков компании.": "This refers to the 18-month goals within one of the company's 5 strategic tracks.", "Да, влияет на цель": "Yes, it affects a goal", "Покажем дерево целей по трекам": "We'll show the goal tree by track", "Зафиксируем инициативу как самостоятельную": "We'll record the initiative as standalone", "Шаг 6 · Дерево целей": "Step 6 · Goal tree", "Выберите цель, на которую влияет инициатива": "Select the goal the initiative affects", "Кликните на цель — раскроются её ключевые результаты (KR) и кнопка выбора. Прокрутите вправо, если не помещается.": "Click a goal to reveal its key results (KRs) and a select button. Scroll right if it doesn't fit.", "Стратегические треки Coral Club": "Coral Club Strategic Tracks", "Пример:": "Example:", "KR ещё не заполнены": "KRs not filled in yet", "Выбрать эту цель →": "Select this goal →", "Трек": "Track", "— стратегическое направление на 18 мес.": "— strategic direction for 18 months.", "Цель": "Goal", "— конкретный результат трека": "— a concrete result of the track", "— измеримый ключевой результат цели": "— a measurable key result of the goal", "Проверьте и подтвердите": "Review and confirm", "Отнесена к проекту": "Linked to project", "Способствует стратегической цели": "Contributes to a strategic goal", "Самостоятельная инициатива": "Standalone initiative", "Не отнесена к проекту или стратегической цели — фиксируем как есть, для дальнейшего анализа.": "Not linked to a project or strategic goal — recorded as-is for further analysis.", "% времени в неделю": "% of time per week", "Подтвердить и сохранить": "Confirm and save", "Выбрать этот проект →": "Select this project →", "Инициатива сохранена": "Initiative saved", "Спасибо! Можете добавить ещё одну инициативу того же отдела или закончить.": "Thanks! You can add another initiative for the same department or finish.", "Сменить отдел": "Change department", "Добавить ещё инициативу →": "Add another initiative →", "Дашборд": "Dashboard", "Проекты": "Projects", "Треки и цели": "Tracks & Goals", "Отделы": "Departments", "Инициативы": "Initiatives", "Общая картина по всем поданным инициативам": "An overview of all submitted initiatives", "Инициатив подано": "Initiatives submitted", "Часть проекта": "Part of a project", "Влияют на цель трека": "Affect a track goal", "Самостоятельные": "Standalone", "Отделов подали хотя бы одну": "Departments with at least one submission", "Ещё не подали ни одной инициативы:": "Haven't submitted any initiative yet:", "отдел(ов). Список — во вкладке «Инициативы» (фильтр по отделу).": "department(s). See the \"Initiatives\" tab (filter by department).", "проектов · RUN:": "projects · RUN:", "CHANGE:": "CHANGE:", "без типа:": "no type:", "+ Добавить проект": "+ Add project", "Поиск по названию, цели или заказчику…": "Search by name, goal, or customer…", "Показано:": "Showing:", "из": "of", "треков": "tracks", "+ Добавить трек": "+ Add track", "+ Добавить цель": "+ Add goal", "KR ещё не добавлены": "No KRs added yet", "+ Добавить KR": "+ Add KR", "отделов · возможные дубли подсвечены": "departments · possible duplicates highlighted", "Объединить выбранные": "Merge selected", "+ Добавить отдел": "+ Add department", "№": "#", "Название": "Name", "подано всего, показано": "submitted total, showing", "Экспорт CSV": "Export CSV", "Все отделы": "All departments", "Все категории": "All categories", "Влияет на цель": "Affects a goal", "Дата": "Date", "Отнесена к": "Linked to", "Инициатив пока нет — как только руководители начнут заполнять форму, они появятся здесь.": "No initiatives yet — as soon as leads start filling in the form, they'll appear here.", "Проект:": "Project:", "Проект (удалён)": "Project (deleted)", "Цель (удалена)": "Goal (deleted)", "Не отнесена": "Unlinked", "Редактировать проект": "Edit project", "Добавить проект": "Add project", "Дивизион": "Division", "Например, GLOBAL": "e.g. GLOBAL", "Заказчик (функция)": "Customer (function)", "Например, Finance": "e.g. Finance", "Тип проекта": "Project type", "Не задан": "Not set", "Удалить": "Delete", "Отмена": "Cancel", "Сохранить": "Save", "Цель проекта пока не заполнена в справочнике": "The project goal hasn't been filled in yet", "Добавить трек": "Add track", "Название трека": "Track name", "Миссия": "Mission", "Добавить": "Add", "Добавить цель": "Add goal", "Текст цели (18 мес.)": "Goal text (18 months)", "Добавить KR": "Add KR", "Текст KR": "KR text", "Пример-подсказка (необязательно)": "Example hint (optional)", "Добавить отдел": "Add department", "Название отдела": "Department name", "Объединить отделы": "Merge departments", "Выберите каноническое название — остальные будут удалены, а все их инициативы перепривяжутся к нему.": "Choose the canonical name — the others will be deleted and all their initiatives reassigned to it.", "Объединить": "Merge", "Скопируйте текст ниже и вставьте в Excel (разделитель — «;»).": "Copy the text below and paste it into Excel (delimiter — \";\").", "Готово": "Done", "Не удалось сохранить изменения. Попробуйте ещё раз.": "Couldn't save the changes. Please try again.", "Опишите инициативу чуть подробнее (от 10 символов)": "Please describe the initiative in a bit more detail (10+ characters)", "Укажите ФИО заказчика инициативы": "Please enter the sponsor's full name", "Укажите название проекта": "Please enter the project name", "Проект добавлен": "Project added", "Проект удалён": "Project deleted", "Проект обновлён": "Project updated", "Укажите название трека": "Please enter the track name", "Трек добавлен": "Track added", "Укажите текст цели": "Please enter the goal text", "Цель добавлена": "Goal added", "Укажите текст KR": "Please enter the KR text", "KR добавлен": "KR added", "Цель удалена": "Goal deleted", "KR удалён": "KR deleted", "Укажите название отдела": "Please enter the department name", "Отдел добавлен": "Department added", "Отдел удалён": "Department deleted", "Выберите минимум 2 отдела для объединения": "Select at least 2 departments to merge", "Отделы объединены": "Departments merged", "GLOBAL": "GLOBAL", "РФ+РБ": "Russia+Belarus", "Азия": "Asia", "Америка+Канада": "Americas+Canada", "Европа-Север": "Europe North", "Европа-Центр": "Europe Central", "Европа-Запад": "Europe West", "Европа-Юг": "Europe South", "Back office": "Back Office", "Поддержка дистрибьюторов уровень : Дивизион": "Distributor Support (Division level)", "Юристы Global": "Legal Global", "Мерч Global": "Merchandise Global", "Обучение Global": "Training Global", "PR Global": "PR Global", "Сертификация Global": "Certification Global", "Бухгалтерия Global": "Accounting Global", "НИО продукты Global": "R&D Products Global", "Новые рынки / Развитие Global": "New Markets / Development Global", "Регион Юг": "Region South", "Офис Эволюции Global": "Evolution Office Global", "ECOM Global": "ECOM Global", "Управление персоналом HR Global": "HR Global", "Операции Global": "Operations Global", "Управление Local / Регион Запад": "Local Management / Region West", "Маркетинг (коммуникации)": "Marketing (Communications)", "Эволюция Global": "Evolution Global", "Логистика Global": "Logistics Global", "Финансы международные Global": "International Finance Global", "Разработка ИТ Global": "IT Development Global", "Операции Европа": "Operations Europe", "Подбор Global": "Recruitment Global", "Управление Local / Регион Россия/Беларусь": "Local Management / Region Russia/Belarus", "Управление Local / Регион Румыния": "Local Management / Region Romania", "Маркетинг Global": "Marketing Global", "Общие финансы Global": "General Finance Global", "Поддержка дистрибьюторов Global": "Distributor Support Global", "Признание дистрибьюторов Global": "Distributor Recognition Global", "Логистика (-2) Global": "Logistics (-2) Global", "Event Local": "Events Local", "Рассчеты с дистрибьюторами Global": "Distributor Payments Global", "Обучение дистрибьютора Global": "Distributor Training Global", "Even Local Азия": "Events Local Asia", "Снабжение Global": "Procurement Global", "Управление проектами Global": "Project Management Global", "Управление Local / Регион США": "Local Management / Region USA", "Репутация Global": "Reputation Global", "Анализ Global": "Analytics Global", "Операции Local / Регион Азия": "Operations Local / Region Asia", "IT и Право Global": "IT & Legal Global", "Управление Local / Регион Север": "Local Management / Region North", "Зрелые рынки развитие Global": "Mature Markets Development Global", "ИТ (базы данных) Global": "IT (Databases) Global", "Отдел ИИ Global": "AI Department Global", "Разработка продуктов и HealthOS Global": "Product Development & HealthOS Global", "ИТ Global": "IT Global", "Зам. рук. Проектного офиса Global/local": "Deputy Head of PMO Global/Local", "Финансы компании Global": "Company Finance Global", "Local / Операции США": "Local / Operations USA", "Управление клиентским опытом (Global) + Управление регионом Local (UK)": "Customer Experience Management (Global) + Local Region Management (UK)", "Описание процессов": "Process Mapping", "Создание карты основных процессов компании, распределения зон ответственности за процессы": "Map the company's core processes and define process ownership", "Стартовая программа для новичков": "Newcomer Starter Program", "Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж": "Find the optimal mechanics for recruiting and activating the network, and sustaining its loyalty to drive sales growth", "Друзья Клуба": "Club Friends", "Быстрый старт": "Fast Start", "Программы лояльности": "Loyalty Programs", "Digital kit": "Digital Kit", "CRM Bitrix (IP телефония для КЦ)": "CRM Bitrix (IP Telephony for Contact Center)", "Повысить уровень удовлетворенности клиентов за счет качественного обслуживания (включая замену инструментов работы)": "Increase customer satisfaction through better service quality (including replacing current work tools)", "Refiner": "Refiner", "Промокоды": "Promo Codes", "Адреса на сайте": "Website Addresses", "Курьерские службы": "Courier Services", "Автоматизация работ с курьерскими службами для повышения эффективности и повышения удовлетворенности потребителей": "Automate work with courier services to increase efficiency and customer satisfaction", "Верификация": "Verification", "База знаний": "Knowledge Base", "Создание базы данных для бизнеса, чтобы каждый отдел мог анализировать ключевые показатели и планировать следующие активности": "Build a business database so every department can analyze key metrics and plan next activities", "Упрощенная регистрация": "Simplified Registration", "Оптимизация формы регистрации новых членов клуба для повышения конверсии из клиентов в потребители": "Optimize the club registration form to improve conversion from customers to members", "Статусная модель заказов": "Order Status Model", "Обеспечить стабильную автоматическую работу процесса обработки заказов с целью сокращения ошибок и операционных издержек, повышения уровня удовлетворенности потребителей": "Ensure stable, automated order processing to reduce errors and operating costs and improve customer satisfaction", "ЛК Дистрибьютора — Back office": "Distributor Portal — Back Office", "Навигация по продуктам": "Product Navigation", "Пульс — Apache Superset (BI)": "Pulse — Apache Superset (BI)", "AI ассистент для ЧК и Дистрибьюторов": "AI Assistant for Club Members and Distributors", "Внедрение умного помощника в жизнь ЧК и Дистрибьюторов для повышения уровня обслуживания потребителей и Дистрибьюторов": "Introduce a smart assistant for club members and distributors to improve service levels", "Бизнес процессы и заявки": "Business Processes & Requests", "Инструменты для менеджеров (дашборды)": "Manager Tools (Dashboards)", "Создание инструмента для управления бизнесом (дашборды)": "Build a business-management tool (dashboards)", "Обучение сотрудников — новая платформа": "Employee Training — New Platform", "ИИ-ассистент Коралина": "AI Assistant Koralina", "Внедрение умного помощника в жизнь сотрудников для повышения эффективности сотрудников": "Introduce a smart assistant for employees to improve efficiency", "Бизнес обучение + CBA (LMS)": "Business Training + CBA (LMS)", "Event — замена платформ": "Events — Platform Replacement", "Внедрение 1С ERP": "1C ERP Implementation", "Автоматизация процессов закупки, товарного учета, казначейства, финансовой отчетности": "Automate procurement, inventory accounting, treasury, and financial reporting processes", "Интеграция с локальными бух. системами": "Integration with Local Accounting Systems", "Автоматизация процесса, сокращение операционных издержек и контроль налогов": "Automate the process, reduce operating costs, and improve tax control", "Фискализация по всем рынкам": "Fiscalization Across All Markets", "Обеспечить работу бизнеса в соответствии с законодательством и контролирует создание налоговой базы": "Ensure legal compliance and proper control of the tax base", "Штрихкодирование": "Barcoding", "снижение операционных издержек (контроль за стоком на складах, в ОПК, проведение инвентаризаций, etc), контроль товародвижения (хранение, отгрузка, приемка), учет в системах ERP и тд.": "Reduce operating costs (stock control at warehouses and pick-up points, stocktaking, etc.), control goods movement (storage, shipping, receiving), and record it in ERP systems", "Эффективная коммуникация (смс, имейл)": "Effective Communication (SMS, Email)", "Повысить эффективность взаимодействия с ЧК, повысить активность ЧК за счет рассылок, как следствие рост продаж": "Improve engagement with club members through mailings, increasing their activity and, as a result, sales", "Контент платформа для трафика": "Content Platform for Traffic", "Создание платформы для генерации трафика новых чк и клиентов для роста продаж": "Build a platform to generate traffic from new club members and customers to drive sales growth", "Подписка": "Subscription", "РЦ — внедрение новых систем (1С)": "Distribution Center — New System Rollout (1C)", "Автоматизировать операционную работу склада с целью повышения операционной эффективности (повышение производительности труда и сокращение издержек)": "Automate warehouse operations to improve operational efficiency (higher productivity, lower costs)", "Региональные скидки": "Regional Discounts", "Сервис логистики": "Logistics Service", "Автоматизировать логистикцу с целью повышения операционной эффективности (сокращение издержек)": "Automate logistics to improve operational efficiency (cost reduction)", "КЭДО": "Electronic HR Document Flow (EHR)", "Бизнес модель РФ (франчайзи, портал)": "Russia Business Model (Franchise, Portal)", "Поставки в РФ, включая маркировку": "Supplies to Russia, Including Labeling", "Обеспечить работу бизнеса в соответствии с законодательством": "Ensure business operations comply with local legislation", "Честный знак": "Chestny Znak (Product Labeling)", "Производство паучей": "Pouch Production", "ЭДО": "Electronic Document Flow (EDF)", "Транспортные документы ЭДО": "Transport Documents EDF", "Верификация Дистрибьюторов": "Distributor Verification", "Валидация базы ЧК для повышения эффективности коммуникации": "Validate the club-member database to improve communication effectiveness", "Маркировка Казахстан": "Product Labeling — Kazakhstan", "Маркировка Таджикистан / Армения": "Product Labeling — Tajikistan / Armenia", "Азербайджан": "Azerbaijan", "Открытие регистрации и доставки на рынок Азербайджан": "Launch registration and delivery in the Azerbaijan market", "Изменение маркетинг плана": "Marketing Plan Update", "Расширение географии — Пуэрто-Рико": "Geographic Expansion — Puerto Rico", "Расширение географии — Мексика": "Geographic Expansion — Mexico", "3PL в Ирландии": "3PL in Ireland", "DDP для Великобритании": "DDP for the United Kingdom", "Норвегия — переход на Евро": "Norway — Transition to Euro", "Румыния": "Romania", "Склад в Германии": "Warehouse in Germany", "DDP для доставки из Германии": "DDP for Delivery from Germany", "Испания — документооборот с налоговой": "Spain — Tax Authority Document Flow", "Болгария — Евро": "Bulgaria — Euro", "Автоматизация учета рабочего времени": "Time-Tracking Automation", "Маркетинг": "Marketing", "ДП": "DP", "ДРД": "DRD", "ДПД": "DPD", "Health OS трек": "Health OS Track", "Делаем заботу о здоровье понятной, персонализированной и доступной каждому.": "We make health care understandable, personalized, and accessible to everyone.", "За 18 мес. увеличить количество лоялистов на Х% за счет увеличения динамики на всех этапах воронки.": "Over 18 months, increase the number of loyalists by X% by improving momentum at every stage of the funnel.", "Увеличить конверсию покупки в воронке с P1 в P2 на Х%": "Increase purchase conversion in the funnel from P1 to P2 by X%", "За 18 мес. поднять долю новичков, доходящих до лоялистов за полгода, с 10% до 13%": "Over 18 months, raise the share of newcomers who reach loyalist status within six months from 10% to 13%", "GrowthModel трек (новые рынки)": "GrowthModel Track (New Markets)", "Создать модель устойчивого роста на новых рынках, продвигая экосистему Coral Club.": "Build a sustainable growth model in new markets by promoting the Coral Club ecosystem.", "К декабрю 2026 года увеличить ежемесячный товарооборот в Румынии с 300 тыс. до ~489 тыс. евро (+63%) за счёт модели «подписка + Ambassadors 2.0».": "By December 2026, increase monthly turnover in Romania from €300K to ~€489K (+63%) via the \"subscription + Ambassadors 2.0\" model.", "К декабрю 2026 ежемесячный товарооборот в Румынии 489 тыс. евро": "By December 2026, monthly turnover in Romania reaches €489K", "К декабрю 2026 10% клиентской базы Румынии купили подписку": "By December 2026, 10% of Romania's customer base has purchased a subscription", "За 18 месяцев протестировать процесс «Развитие рынков» минимум на 4 новых рынках, выйдя на 1500+ нативных потребителей в каждом.": "Over 18 months, pilot the \"Market Development\" process in at least 4 new markets, reaching 1,500+ native consumers in each.", "Количество нативных потребителей — 1500 человек": "Number of native consumers — 1,500 people", "Создать методику, при которой новый рынок развивается до нужной стадии за Х мес.": "Create a methodology that grows a new market to the target stage within X months", "Количество нативных дистрибьюторов — 4": "Number of native distributors — 4", "Достигнуть по каждой стране количество нативных дистрибьюторов в рангах согласно матрице развития рынка": "Reach the target number of ranked native distributors per country per the market-development matrix", "Размер товарооборота — не менее Х": "Turnover size — at least X", "Количество открытых рынков — не менее 4": "Number of markets opened — at least 4", "Масштабировать подход/процесс в стране": "Scale the approach/process within the country", "PrimeGrowth трек (зрелые рынки)": "PrimeGrowth Track (Mature Markets)", "Продукт компании в каждой Х семье в странах Зрелых рынков «Россия и Казахстан».": "The company's product in every X household across the Mature Markets \"Russia and Kazakhstan\".", "Обеспечить рост компании в целевом периоде на зрелых рынках.": "Ensure company growth in the target period across mature markets.", "Россия: товарооборот вырастет на 50%": "Russia: turnover grows by 50%", "1. Увеличить количество активных дистрибьюторов 2. Увеличить количество активных потребителей": "1. Increase the number of active distributors 2. Increase the number of active consumers", "Казахстан: рост на 20%": "Kazakhstan: 20% growth", "CoralEVO трек (функциональный)": "CoralEVO Track (Functional)", "Обеспечить бизнесу бесперебойное движение к целям через стабильность процессов, развитие и реализацию проектов.": "Enable uninterrupted progress toward business goals through process stability, development, and project delivery.", "За 18 месяцев запустить «ключевые инструменты проектного управления» в компании CCI.": "Over 18 months, launch the \"key project-management tools\" across CCI.", "Официально запустить Офис управления проектами к декабрю 2026": "Officially launch the Project Management Office by December 2026", "Об офисе управления проектами знают все в компании": "Everyone in the company knows about the Project Management Office", "Х% проектов в бэклоге Проектного офиса имеют «предварительную» оценку ресурсной ёмкости": "X% of projects in the PMO backlog have a \"preliminary\" resource-capacity estimate", "Проектный офис использует расчёты «предварительной оценки ресурсов»": "The PMO uses \"preliminary resource estimate\" calculations", "Х% проектов перешли в стадию «решён» в срок и в рамках бюджета": "X% of projects reached \"resolved\" status on time and within budget", "Процент проектов, завершённых с достижением запланированных показателей": "Share of projects completed while hitting their planned targets", "Провести в 2026 г. минимум 2 заседания Стратегического комитета": "Hold at least 2 Strategic Committee meetings in 2026", "За 18 месяцев провести трансформацию операционной модели компании.": "Over 18 months, transform the company's operating model.", "100% ключевых бизнес-процессов компании описаны и согласованы": "100% of the company's key business processes are documented and approved", "Процессный офис является важной частью операционной модели компании": "The Process Office is an important part of the company's operating model", "100% критичных межфункциональных процессов имеют назначенные роли по RACI": "100% of critical cross-functional processes have assigned RACI roles", "Не менее 60% согласованных внутренних SLA внедрены в работу": "At least 60% of approved internal SLAs are implemented", "Не менее 90% владельцев процессов ежемесячно используют метрики и отчётность для управления SLA": "At least 90% of process owners use metrics and reporting monthly to manage SLAs", "ITModel": "ITModel", "Помогаем бизнесу развиваться по всему миру.": "We help the business grow around the world.", "Трансформировать ИТ в драйвер глобального роста с измеримым вкладом в бизнес.": "Transform IT into a driver of global growth with a measurable contribution to the business.", "SLA поддержки внутренних клиентов не менее Х": "Internal-customer support SLA of at least X", "Разработать и утвердить структуру Технической поддержки": "Design and approve the Technical Support structure", "SLA Разработки не ниже Х": "Development SLA no lower than X", "В Х% проектов, переданных в ИТ, есть расчёт экономической эффективности": "X% of projects handed over to IT include an economic-efficiency calculation", "ИТ проекты управляются через единый продуктовый процесс и roadmap": "IT projects are managed through a single product process and roadmap", "Запустить Х пилотов до конца 2027 г": "Launch X pilots by the end of 2027", "1. Создать протоколы взаимодействия с Core ядром 2. Внедрить процесс R&D (18 мес.) 3. Утвердить правила и полномочия для пилотов": "1. Create interaction protocols with the Core 2. Implement the R&D process (18 months) 3. Approve rules and authority for pilots", "Начните вводить название — покажем совпадения из справочника": "Start typing a name — we'll show matches from the directory", "Самостоятельная": "Standalone", "отделов": "departments", "Введите пароль": "Enter password", "Доступ к реестру инициатив защищён паролем": "Access to the initiative registry is password-protected", "Пароль": "Password", "Неверный пароль. Проверьте раскладку и повторите.": "Incorrect password. Check your keyboard layout and try again.", "Войти →": "Sign in →", "Выйти": "Log out", "Доступ по паролю · нажмите «Выйти», чтобы сменить роль": "Password-protected access · click \"Log out\" to switch roles", "Данные хранятся локально в этом браузере (localStorage) и не являются общими между устройствами и пользователями.": "Data is stored locally in this browser (localStorage) and is not shared across devices or users."};
+function tr(s){ if(s===undefined||s===null) return s; if(state.lang==='en'){ return Object.prototype.hasOwnProperty.call(TRANSLATIONS,s) ? TRANSLATIONS[s] : s; } return s; }
+function setLang(l){ state.lang=l; render(); }
+function distinctVals(arr, key){ return [...new Set(arr.map(x=>x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru')); }
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+const storage = {
+  async get(key, shared){
+    const raw = localStorage.getItem('cc_'+key);
+    if(raw===null){ const e=new Error('not found'); throw e; }
+    return {key, value:raw, shared:!!shared};
+  },
+  async set(key, value, shared){
+    localStorage.setItem('cc_'+key, value);
+    return {key, value, shared:!!shared};
+  },
+  async delete(key, shared){
+    localStorage.removeItem('cc_'+key);
+    return {key, deleted:true, shared:!!shared};
+  },
+  async list(prefix, shared){
+    const p = 'cc_'+(prefix||'');
+    const keys = Object.keys(localStorage).filter(k=>k.startsWith(p)).map(k=>k.slice(3));
+    return {keys, prefix, shared:!!shared};
+  }
+};
+async function loadKey(key, seed){
+  try{
+    const r = await storage.get(key, true);
+    if(r && r.value) return JSON.parse(r.value);
+  }catch(e){}
+  try{ await storage.set(key, JSON.stringify(seed), true); }catch(e){}
+  return seed;
+}
+async function saveKey(key, data){
+  try{ await storage.set(key, JSON.stringify(data), true); }
+  catch(e){ showToast(tr('Не удалось сохранить изменения. Попробуйте ещё раз.'), 'error'); }
+}
+async function boot(){
+  state.departments = await loadKey('meta:departments', seedDepartments);
+  state.projects    = await loadKey('meta:projects:v2', seedProjects);
+  state.tracks       = await loadKey('meta:tracks', seedTracks);
+  state.initiatives  = await loadKey('data:initiatives', []);
+  state.ready = true;
+  render();
+}
+
+/* =========================================================
+   TOAST / MODAL
+   ========================================================= */
+function showToast(msg, type){
+  state.toast = {msg, type: type||'ok', id: uid('t')};
+  render();
+  const myId = state.toast.id;
+  setTimeout(()=>{ if(state.toast && state.toast.id===myId){ state.toast=null; render(); } }, 2800);
+}
+function closeModal(){ state.modal=null; render(); }
+
+/* =========================================================
+   WIZARD LOGIC
+   ========================================================= */
+function goStep(next){ state.wizard.history.push(state.wizard.step); state.wizard.step = next; render(); }
+function goBack(){
+  const h = state.wizard.history;
+  if(h.length){ state.wizard.step = h.pop(); render(); }
+}
+function resetWizard(keepDept){
+  const dept = state.wizard.department, isNew = state.wizard.isNewDept;
+  state.wizard = {step:'1', history:[], department: keepDept?dept:'', isNewDept: keepDept?isNew:false, deptQuery:'',
+    text:'', percent:20, customer:'', projQuery:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expandedProject:null,
+    expandedTrack:null, expandedGoal:null,
+    projectId:null, trackId:null, goalId:null, submitted:null};
+  if(keepDept) state.wizard.step='2';
+  render();
+}
+
+const stepOrder = ['1','2','3','4','5','6','7'];
+function progressIndex(step){
+  if(step==='5a') return 4;
+  if(step==='6a') return 5;
+  const i = stepOrder.indexOf(step);
+  return i<0?0:i;
+}
+
+function setRole(r){ state.role=r; render(); }
+
+/* ---- auth ---- */
+function submitPassword(){
+  const el = document.getElementById('passwordInput');
+  const v = el ? el.value : '';
+  if(v===PASSWORDS.lead){ state.authed=true; state.role='lead'; state.authError=false; render(); }
+  else if(v===PASSWORDS.admin){ state.authed=true; state.role='admin'; state.authError=false; render(); }
+  else{
+    state.authError=true; render();
+    const el2 = document.getElementById('passwordInput');
+    if(el2){ el2.focus(); el2.select && el2.select(); }
+  }
+}
+function handlePasswordKey(e){ if(e.key==='Enter') submitPassword(); }
+function logout(){ state.authed=false; state.authError=false; render(); }
+
+/* ---- field setters ---- */
+function setDeptQuery(v){ state.wizard.deptQuery=v; render(); }
+function pickDept(name){ state.wizard.department=name; state.wizard.isNewDept=false; goStep('2'); }
+function toggleNewDept(){ state.wizard.isNewDept=!state.wizard.isNewDept; state.wizard.department=''; render(); }
+function confirmNewDept(){
+  const v = document.getElementById('newDeptInput').value.trim();
+  if(v.length<2) return;
+  state.wizard.department=v; goStep('2');
+}
+function setText(v){ state.wizard.text=v; }
+function nextFromText(){
+  const v = document.getElementById('initiativeText').value.trim();
+  if(v.length<10){ showToast(tr('Опишите инициативу чуть подробнее (от 10 символов)'),'error'); return; }
+  state.wizard.text=v; goStep('3');
+}
+function setPercent(v){ state.wizard.percent=parseInt(v); render(); }
+function nextFromCustomer(){
+  const v = document.getElementById('customerInput').value.trim();
+  if(!v){ showToast(tr('Укажите ФИО заказчика инициативы'),'error'); return; }
+  state.wizard.customer=v; goStep('5');
+}
+function branchProject(yes){ if(yes){ goStep('5a'); } else { goStep('6'); } }
+function branchGoal(yes){ if(yes){ goStep('6a'); } else { finalizeCategory('none'); } }
+function setProjQuery(v){ state.wizard.projQuery=v; render(); }
+function setWizProjType(v){ state.wizard.projTypeFilter=v; render(); }
+function setWizProjCustomer(v){ state.wizard.projCustomerFilter=v; render(); }
+function setWizProjDivision(v){ state.wizard.projDivisionFilter=v; render(); }
+function toggleWizProject(id){ state.wizard.expandedProject = state.wizard.expandedProject===id? null : id; render(); }
+function openProjectPreview(id){ state.modal={kind:'projectPreview', id}; render(); }
+function pickProject(id){ state.wizard.projectId=id; state.modal=null; finalizeCategory('project'); }
+function toggleTrack(id){ state.wizard.expandedTrack = state.wizard.expandedTrack===id? null : id; state.wizard.expandedGoal=null; render(); }
+function toggleGoal(id){ state.wizard.expandedGoal = state.wizard.expandedGoal===id? null : id; render(); }
+function pickGoal(trackId, goalId){ state.wizard.trackId=trackId; state.wizard.goalId=goalId; finalizeCategory('goal'); }
+function finalizeCategory(cat){ state.wizard.category=cat; goStep('7'); }
+
+async function submitInitiative(){
+  const w = state.wizard;
+  const record = {
+    id: uid('init'), department:w.department, text:w.text, percent:w.percent, customer:w.customer,
+    category:w.category, projectId:w.projectId||null, trackId:w.trackId||null, goalId:w.goalId||null,
+    submittedAt: new Date().toISOString()
+  };
+  state.initiatives = [...state.initiatives, record];
+  await saveKey('data:initiatives', state.initiatives);
+  if(w.isNewDept && !state.departments.some(d=>d.name===w.department)){
+    state.departments = [...state.departments, {id:uid('d'), name:w.department}];
+    await saveKey('meta:departments', state.departments);
+  }
+  state.wizard.submitted = record.id;
+  goStep('done');
+  showToast(tr('Инициатива сохранена'));
+}
+
+/* =========================================================
+   RENDER: TOP BAR
+   ========================================================= */
+function renderLogin(){
+  return `
+  <div class="login-shell">
+    <div class="login-card">
+      <div class="brand-mark" style="margin:0 auto 18px;"></div>
+      <div style="text-align:center;font-family:'Inter',sans-serif;font-weight:600;font-size:17px;margin-bottom:2px;">Coral Club</div>
+      <h2 class="q-title" style="text-align:center;font-size:21px;margin-bottom:8px;">${tr('Введите пароль')}</h2>
+      <p class="q-sub" style="text-align:center;">${tr('Доступ к реестру инициатив защищён паролем')}</p>
+      <input id="passwordInput" type="password" class="field" placeholder="${tr('Пароль')}" onkeydown="handlePasswordKey(event)" autofocus>
+      ${state.authError? `<div class="error-text" style="text-align:center;">${tr('Неверный пароль. Проверьте раскладку и повторите.')}</div>` : ''}
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px;" onclick="submitPassword()">${tr('Войти →')}</button>
+      <div style="text-align:center;margin-top:22px;">
+        <div class="lang-switch" style="display:inline-flex;">
+          <button class="${state.lang==='ru'?'active':''}" onclick="setLang('ru')">RU</button>
+          <button class="${state.lang==='en'?'active':''}" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderTopbar(){
+  return `
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-text"><div class="t1">Coral Club</div><div class="t2">${tr('Реестр инициатив')}</div></div>
+    </div>
+    <div>
+      <div class="topbar-controls">
+        <div class="lang-switch">
+          <button class="${state.lang==='ru'?'active':''}" onclick="setLang('ru')">RU</button>
+          <button class="${state.lang==='en'?'active':''}" onclick="setLang('en')">EN</button>
+        </div>
+        <div class="role-switch">
+          <button class="active" style="cursor:default;" disabled>${state.role==='lead'?tr('Руководитель функции'):tr('Администратор')}</button>
+          <button onclick="logout()">${tr('Выйти')}</button>
+        </div>
+      </div>
+      <div class="role-note">${tr('Доступ по паролю · нажмите «Выйти», чтобы сменить роль')}</div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================
+   RENDER: WIZARD
+   ========================================================= */
+function progressBar(){
+  const idx = progressIndex(state.wizard.step);
+  const labels = [tr('Отдел'),tr('Инициатива'),tr('Загрузка'),tr('Заказчик'),tr('Проект?'),tr('Цель трека?'),tr('Итог')];
+  let segs='';
+  for(let i=0;i<7;i++){
+    let cls = i<idx?'done':(i===idx?'current':'');
+    segs += `<div class="progress-seg ${cls}"></div>`;
+  }
+  return `<div class="progress-wrap"><div class="progress-track">${segs}</div>
+    <div class="progress-label"><span>${tr('Шаг')} ${idx+1} ${tr('из 7')}</span><span>${labels[idx]}</span></div></div>`;
+}
+
+function renderWizard(){
+  if(state.wizard.step==='done') return renderDone();
+  const w = state.wizard;
+  let body='';
+  if(w.step==='1') body = stepDept();
+  else if(w.step==='2') body = stepText();
+  else if(w.step==='3') body = stepPercent();
+  else if(w.step==='4') body = stepCustomer();
+  else if(w.step==='5') body = stepBranchProject();
+  else if(w.step==='5a') body = stepProjectPick();
+  else if(w.step==='6') body = stepBranchGoal();
+  else if(w.step==='6a') body = stepGoalPick();
+  else if(w.step==='7') body = stepSummary();
+
+  return `<div class="wizard-shell"><div class="wizard-card ${(w.step==='6a'||w.step==='5a')?'wizard-card-wide':''}">${progressBar()}<div class="card">${body}</div></div></div>`;
+}
+
+function stepDept(){
+  const w = state.wizard;
+  if(w.isNewDept){
+    return `
+    <div class="eyebrow">${tr('Шаг 1')}</div>
+    <h2 class="q-title">${tr('Впишите название своего отдела')}</h2>
+    <p class="q-sub">${tr('Не нашли отдел в списке? Укажите его вручную — мы добавим его в справочник.')}</p>
+    <input id="newDeptInput" class="field" placeholder="${tr('Например, Отдел цифровых продуктов')}" autofocus>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleNewDept()">${tr('← Назад к списку')}</button>
+      <button class="btn btn-primary" onclick="confirmNewDept()">${tr('Продолжить →')}</button>
+    </div>`;
+  }
+  const q = (w.deptQuery||'').toLowerCase();
+  const matches = state.departments.filter(d=>tr(d.name).toLowerCase().includes(q)).slice(0,8);
+  return `
+  <div class="eyebrow">${tr('Шаг 1 из 7')}</div>
+  <h2 class="q-title">${tr('Выберите свой отдел')}</h2>
+  <p class="q-sub">${tr('Начните вводить название — покажем совпадения из справочника')} (${state.departments.length} ${tr('отделов')}).</p>
+  <div class="ac-wrap">
+    <input id="deptSearchInput" class="field" placeholder="${tr('Поиск отдела…')}" value="${esc(w.deptQuery)}" oninput="setDeptQuery(this.value)">
+    <div class="ac-list">
+      ${matches.length? matches.map(d=>`<div class="ac-item"><button onclick="pickDept('${esc(d.name).replace(/'/g,"\\'")}')">${esc(tr(d.name))}</button></div>`).join('') : '<div class="ac-empty">'+tr('Совпадений не найдено')+'</div>'}
+    </div>
+  </div>
+  <button class="new-toggle" onclick="toggleNewDept()">${tr('Не нашли свой отдел? Вписать название вручную →')}</button>`;
+}
+
+function stepText(){
+  const w = state.wizard;
+  return `
+  <div class="eyebrow">${esc(w.department)}</div>
+  <h2 class="q-title">${tr('Опишите вашу инициативу')}</h2>
+  <p class="q-sub">${tr('Коротко: что вы делаете (или планируете делать) и зачем.')}</p>
+  <textarea id="initiativeText" class="field" placeholder="${tr('Например: разрабатываем единый шаблон онбординга для новых сотрудников отдела, чтобы сократить время выхода на самостоятельную работу…')}">${esc(w.text)}</textarea>
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button>
+    <button class="btn btn-primary" onclick="nextFromText()">${tr('Продолжить →')}</button>
+  </div>`;
+}
+
+function stepPercent(){
+  const w = state.wizard;
+  return `
+  <div class="eyebrow">${tr('Шаг 3 из 7')}</div>
+  <h2 class="q-title">${tr('Сколько % рабочего времени в неделю занимает эта инициатива?')}</h2>
+  <p class="q-sub">${tr('Ориентировочно — точность до 5% достаточна.')}</p>
+  <div class="percent-display">${w.percent}%</div>
+  <input type="range" min="0" max="100" step="5" value="${w.percent}" oninput="setPercent(this.value)">
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button>
+    <button class="btn btn-primary" onclick="goStep('4')">${tr('Продолжить →')}</button>
+  </div>`;
+}
+
+function stepCustomer(){
+  const w = state.wizard;
+  return `
+  <div class="eyebrow">${tr('Шаг 4 из 7')}</div>
+  <h2 class="q-title">${tr('Кто заказчик инициативы?')}</h2>
+  <p class="q-sub">${tr('Укажите ФИО — это может быть коллега, руководитель другого отдела, или вы сами.')}</p>
+  <input id="customerInput" class="field" placeholder="${tr('Иван Иванов')}" value="${esc(w.customer)}">
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button>
+    <button class="btn btn-primary" onclick="nextFromCustomer()">${tr('Продолжить →')}</button>
+  </div>`;
+}
+
+function stepBranchProject(){
+  return `
+  <div class="eyebrow">${tr('Шаг 5 из 7')}</div>
+  <h2 class="q-title">${tr('Является ли инициатива частью одного из проектов компании?')}</h2>
+  <p class="q-sub">${tr('Если инициатива — это часть более крупного корпоративного проекта, выберите «Да» и найдём его в списке.')}</p>
+  <div class="choice-row">
+    <button class="choice-btn yes" onclick="branchProject(true)"><div class="cb-title">${tr('Да, это часть проекта')}</div><div class="cb-sub">${tr('Покажем список проектов компании')}</div></button>
+    <button class="choice-btn no" onclick="branchProject(false)"><div class="cb-title">${tr('Нет / не уверен')}</div><div class="cb-sub">${tr('Проверим, влияет ли на стратегические цели')}</div></button>
+  </div>
+  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><div class="spacer"></div></div>`;
+}
+
+function stepProjectPick(){
+  const w = state.wizard;
+  const q = (w.projQuery||'').toLowerCase();
+  const tf = w.projTypeFilter||'all';
+  const matches = state.projects.filter(p=>
+    (p.name.toLowerCase().includes(q) || (p.goal||'').toLowerCase().includes(q) || (p.customer||'').toLowerCase().includes(q)) &&
+    (tf==='all' || (tf==='none'? !p.type : p.type===tf)) &&
+    (!w.projCustomerFilter || p.customer===w.projCustomerFilter) &&
+    (!w.projDivisionFilter || p.division===w.projDivisionFilter)
+  );
+  const customers = distinctVals(state.projects,'customer');
+  const divisions = distinctVals(state.projects,'division');
+  return `
+  <div class="eyebrow">${tr('Шаг 5 · Выбор проекта')}</div>
+  <h2 class="q-title">${tr('Выберите проект из списка')}</h2>
+  <p class="q-sub">${state.projects.length} ${tr('проектов. Ищите по названию, цели или заказчику, сузьте фильтрами, кликните на плашку — увидите детали проекта.')}</p>
+  <div class="list-toolbar">
+    <div class="list-toolbar-row">
+      <input id="wizProjSearch" class="field" placeholder="${tr('Поиск проекта…')}" value="${esc(w.projQuery)}" oninput="setProjQuery(this.value)">
+    </div>
+    <div class="list-toolbar-row">
+      <button class="filter-chip ${tf==='all'?'active':''}" onclick="setWizProjType('all')">${tr('Все типы')}</button>
+      <button class="filter-chip ${tf==='RUN'?'active run':''}" onclick="setWizProjType('RUN')">RUN</button>
+      <button class="filter-chip ${tf==='CHANGE'?'active change':''}" onclick="setWizProjType('CHANGE')">CHANGE</button>
+      <select onchange="setWizProjCustomer(this.value)">
+        <option value="">${tr('Все заказчики')}</option>
+        ${customers.map(c=>`<option value="${esc(c)}" ${w.projCustomerFilter===c?'selected':''}>${esc(tr(c))}</option>`).join('')}
+      </select>
+      <select onchange="setWizProjDivision(this.value)">
+        <option value="">${tr('Все дивизионы')}</option>
+        ${divisions.map(d=>`<option value="${esc(d)}" ${w.projDivisionFilter===d?'selected':''}>${esc(tr(d))}</option>`).join('')}
+      </select>
+    </div>
+  </div>
+  <div class="list-count">${tr('Найдено:')} ${matches.length}</div>
+  <div class="tile-grid">
+    ${matches.length? matches.map(p=>`
+      <div class="tile-card" onclick="openProjectPreview('${p.id}')">
+        <div class="tile-name">${esc(tr(p.name))}</div>
+        <div class="tile-customer ${p.customer?'':'none'}">${esc(p.customer? tr(p.customer) : tr('без заказчика'))}</div>
+      </div>`).join('') : '<div class="ac-empty">'+tr('Ничего не найдено — попробуйте другой запрос или фильтр')+'</div>'}
+  </div>
+  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><div class="spacer"></div></div>`;
+}
+
+function stepBranchGoal(){
+  return `
+  <div class="eyebrow">${tr('Шаг 6 из 7')}</div>
+  <h2 class="q-title">${tr('Может ли инициатива способствовать одной из целей стратегических треков?')}</h2>
+  <p class="q-sub">${tr('Речь о целях на 18 месяцев внутри одного из 5 стратегических треков компании.')}</p>
+  <div class="choice-row">
+    <button class="choice-btn yes" onclick="branchGoal(true)"><div class="cb-title">${tr('Да, влияет на цель')}</div><div class="cb-sub">${tr('Покажем дерево целей по трекам')}</div></button>
+    <button class="choice-btn no" onclick="branchGoal(false)"><div class="cb-title">${tr('Нет / не уверен')}</div><div class="cb-sub">${tr('Зафиксируем инициативу как самостоятельную')}</div></button>
+  </div>
+  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><div class="spacer"></div></div>`;
+}
+
+const trackVisuals = {
+  't1':{icon:'🧬', color:'#20927B'},
+  't2':{icon:'🌍', color:'#C8A24A'},
+  't3':{icon:'📈', color:'#FF4A1C'},
+  't4':{icon:'⚙️', color:'#6B3F8E'},
+  't5':{icon:'💻', color:'#1E9BD9'}
+};
+
+function goalNodeHtml(t, g, w){
+  const selected = w.expandedGoal===g.id;
+  let html = `<div class="tree-goal ${selected?'selected':''}" onclick="toggleGoal('${g.id}')">🎯 ${esc(tr(g.text))}</div>`;
+  if(selected){
+    html += `<div class="tree-kr-panel">
+      ${g.krs.length? g.krs.map(k=>`<div class="kr-row"><div class="kr-text">${esc(tr(k.text))}</div>${k.hint?`<div class="kr-hint">${tr('Пример:')} ${esc(tr(k.hint))}</div>`:''}</div>`).join('') : '<div class="ac-empty" style="padding:4px 0;">'+tr('KR ещё не заполнены')+'</div>'}
+      <div style="margin-top:8px;"><button class="btn btn-coral btn-sm" onclick="pickGoal('${t.id}','${g.id}')">${tr('Выбрать эту цель →')}</button></div>
+    </div>`;
+  }
+  return html;
+}
+
+function stepGoalPick(){
+  const w = state.wizard;
+  return `
+  <div class="eyebrow">${tr('Шаг 6 · Дерево целей')}</div>
+  <h2 class="q-title">${tr('Выберите цель, на которую влияет инициатива')}</h2>
+  <p class="q-sub">${tr('Кликните на цель — раскроются её ключевые результаты (KR) и кнопка выбора. Прокрутите вправо, если не помещается.')}</p>
+  <div class="tree-wrap"><div class="tree-inner">
+    <div class="tree-root">🏆 ${tr('Стратегические треки Coral Club')}</div>
+    <div class="tree-vline"></div>
+    <div class="tree-hbar"></div>
+    <div class="tree-cols">
+      ${state.tracks.map(t=>{
+        const v = trackVisuals[t.id] || {icon:'🎯', color:'#4C7371'};
+        return `
+        <div class="tree-col">
+          <div class="tree-track" style="border-color:${v.color};color:${v.color};background:${v.color}14;" title="${esc(tr(t.mission))}">
+            <span class="tt-icon">${v.icon}</span>${esc(tr(t.name))}
+          </div>
+          ${t.goals.map((g,gi)=>`<div class="tree-goal-wrap ${gi>0?'tree-goal-second':''}">${goalNodeHtml(t,g,w)}</div>`).join('')}
+        </div>`;
+      }).join('')}
+    </div>
+  </div></div>
+  <div class="tree-legend">
+    <span>🏆 <b>${tr('Трек')}</b> ${tr('— стратегическое направление на 18 мес.')}</span>
+    <span>🎯 <b>${tr('Цель')}</b> ${tr('— конкретный результат трека')}</span>
+    <span><b>KR</b> ${tr('— измеримый ключевой результат цели')}</span>
+  </div>
+  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><div class="spacer"></div></div>`;
+}
+
+function findProject(id){ return state.projects.find(p=>p.id===id); }
+function findTrack(id){ return state.tracks.find(t=>t.id===id); }
+function findGoal(trackId, goalId){ const t=findTrack(trackId); return t? t.goals.find(g=>g.id===goalId): null; }
+
+function stepSummary(){
+  const w = state.wizard;
+  let banner='';
+  if(w.category==='project'){
+    const p = findProject(w.projectId);
+    banner = `<div class="result-banner project"><div><div class="rb-title">${tr('Отнесена к проекту')}</div><div class="rb-sub"><b>${esc(tr(p.name))}</b><br>${esc(tr(p.goal))}</div></div></div>`;
+  } else if(w.category==='goal'){
+    const t = findTrack(w.trackId), g = findGoal(w.trackId,w.goalId);
+    banner = `<div class="result-banner goal"><div><div class="rb-title">${tr('Способствует стратегической цели')}</div><div class="rb-sub"><b>${esc(tr(t.name))}</b><br>${esc(tr(g.text))}</div></div></div>`;
+  } else {
+    banner = `<div class="result-banner none"><div><div class="rb-title">${tr('Самостоятельная инициатива')}</div><div class="rb-sub">${tr('Не отнесена к проекту или стратегической цели — фиксируем как есть, для дальнейшего анализа.')}</div></div></div>`;
+  }
+  return `
+  <div class="eyebrow">${tr('Шаг')} 7 ${tr('из 7')}</div>
+  <h2 class="q-title">${tr('Проверьте и подтвердите')}</h2>
+  ${banner}
+  <div class="summary-row"><div class="sr-label">${tr('Отдел')}</div><div class="sr-val">${esc(tr(w.department))}</div></div>
+  <div class="summary-row"><div class="sr-label">${tr('Инициатива')}</div><div class="sr-val">${esc(w.text)}</div></div>
+  <div class="summary-row"><div class="sr-label">${tr('Загрузка')}</div><div class="sr-val">${w.percent} ${tr('% времени в неделю')}</div></div>
+  <div class="summary-row"><div class="sr-label">${tr('Заказчик')}</div><div class="sr-val">${esc(w.customer)}</div></div>
+  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><button class="btn btn-primary" onclick="submitInitiative()">${tr('Подтвердить и сохранить')}</button></div>`;
+}
+
+function renderDone(){
+  return `<div class="wizard-shell"><div class="wizard-card"><div class="card done-wrap">
+    <div class="done-icon">✓</div>
+    <h2 class="q-title">${tr('Инициатива сохранена')}</h2>
+    <p class="q-sub">${tr('Спасибо! Можете добавить ещё одну инициативу того же отдела или закончить.')}</p>
+    <div class="btn-row" style="justify-content:center;gap:12px;">
+      <button class="btn btn-ghost" onclick="resetWizard(false)">${tr('Сменить отдел')}</button>
+      <button class="btn btn-primary" onclick="resetWizard(true)">${tr('Добавить ещё инициативу →')}</button>
+    </div>
+  </div></div></div>`;
+}
+
+/* =========================================================
+   RENDER: ADMIN
+   ========================================================= */
+function setAdminModule(m){ state.admin.module=m; render(); }
+
+function renderAdmin(){
+  const mods = [['dashboard','Дашборд'],['projects','Проекты'],['tracks','Треки и цели'],['departments','Отделы'],['initiatives','Инициативы']];
+  return `<div class="admin-shell">
+    <div class="admin-nav">${mods.map(m=>`<button class="${state.admin.module===m[0]?'active':''}" onclick="setAdminModule('${m[0]}')">${tr(m[1])}</button>`).join('')}</div>
+    <div class="admin-main">${
+      state.admin.module==='dashboard'? adminDashboard():
+      state.admin.module==='projects'? adminProjects():
+      state.admin.module==='tracks'? adminTracks():
+      state.admin.module==='departments'? adminDepartments():
+      adminInitiatives()
+    }</div>
+  </div>`;
+}
+
+function adminDashboard(){
+  const total = state.initiatives.length;
+  const toProject = state.initiatives.filter(i=>i.category==='project').length;
+  const toGoal = state.initiatives.filter(i=>i.category==='goal').length;
+  const none = state.initiatives.filter(i=>i.category==='none').length;
+  const activeDepts = new Set(state.initiatives.map(i=>i.department));
+  const untouchedDepts = state.departments.length - activeDepts.size;
+  return `
+  <div class="admin-header"><div><h2>${tr('Дашборд')}</h2><p>${tr('Общая картина по всем поданным инициативам')}</p></div></div>
+  <div class="ac-empty" style="border:1px dashed var(--border);padding:10px 14px;margin-bottom:18px;">⚠ ${tr('Данные хранятся локально в этом браузере (localStorage) и не являются общими между устройствами и пользователями.')}</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="sc-num">${total}</div><div class="sc-label">${tr('Инициатив подано')}</div></div>
+    <div class="stat-card teal"><div class="sc-num">${toProject}</div><div class="sc-label">${tr('Часть проекта')}</div></div>
+    <div class="stat-card coral"><div class="sc-num">${toGoal}</div><div class="sc-label">${tr('Влияют на цель трека')}</div></div>
+    <div class="stat-card amber"><div class="sc-num">${none}</div><div class="sc-label">${tr('Самостоятельные')}</div></div>
+    <div class="stat-card"><div class="sc-num">${activeDepts.size}/${state.departments.length}</div><div class="sc-label">${tr('Отделов подали хотя бы одну')}</div></div>
+  </div>
+  <p class="q-sub">${tr('Ещё не подали ни одной инициативы:')} <b>${untouchedDepts}</b> ${tr('отдел(ов). Список — во вкладке «Инициативы» (фильтр по отделу).')}</p>`;
+}
+
+function projectTypeBadgeCounts(){
+  const run = state.projects.filter(p=>p.type==='RUN').length;
+  const ch = state.projects.filter(p=>p.type==='CHANGE').length;
+  const un = state.projects.length - run - ch;
+  return {run,ch,un};
+}
+
+async function setProjectType(id, val){
+  const p = state.projects.find(p=>p.id===id);
+  p.type = val || null;
+  await saveKey('meta:projects:v2', state.projects);
+  render();
+}
+function setAdminProjSearch(v){ state.admin.projSearch=v; render(); }
+function setAdminProjType(v){ state.admin.projTypeFilter=v; render(); }
+function setAdminProjCustomer(v){ state.admin.projCustomerFilter=v; render(); }
+function setAdminProjDivision(v){ state.admin.projDivisionFilter=v; render(); }
+function openAddProjectModal(){
+  state.modal = {kind:'addProject'};
+  render();
+}
+async function submitAddProject(){
+  const name = document.getElementById('mProjName').value.trim();
+  const division = document.getElementById('mProjDivision').value.trim();
+  const customer = document.getElementById('mProjCustomer').value.trim();
+  const goal = document.getElementById('mProjGoal').value.trim();
+  if(!name){ showToast(tr('Укажите название проекта'),'error'); return; }
+  state.projects = [...state.projects, {id:uid('p'), name, goal, division, customer, type:null}];
+  await saveKey('meta:projects:v2', state.projects);
+  closeModal(); showToast(tr('Проект добавлен'));
+}
+async function deleteProject(id){
+  state.projects = state.projects.filter(p=>p.id!==id);
+  await saveKey('meta:projects:v2', state.projects);
+  closeModal(); showToast(tr('Проект удалён'));
+}
+function openEditProjectModal(id){ state.modal={kind:'editProject', id}; render(); }
+async function submitEditProject(id){
+  const p = state.projects.find(p=>p.id===id);
+  p.name = document.getElementById('mProjName').value.trim();
+  p.division = document.getElementById('mProjDivision').value.trim();
+  p.customer = document.getElementById('mProjCustomer').value.trim();
+  p.goal = document.getElementById('mProjGoal').value.trim();
+  await saveKey('meta:projects:v2', state.projects);
+  closeModal(); showToast(tr('Проект обновлён'));
+}
+
+function adminProjects(){
+  const c = projectTypeBadgeCounts();
+  const q = (state.admin.projSearch||'').toLowerCase();
+  const tf = state.admin.projTypeFilter||'all';
+  const matches = state.projects.filter(p=>
+    (p.name.toLowerCase().includes(q) || (p.goal||'').toLowerCase().includes(q) || (p.customer||'').toLowerCase().includes(q)) &&
+    (tf==='all' || (tf==='none'? !p.type : p.type===tf)) &&
+    (!state.admin.projCustomerFilter || p.customer===state.admin.projCustomerFilter) &&
+    (!state.admin.projDivisionFilter || p.division===state.admin.projDivisionFilter)
+  );
+  const customers = distinctVals(state.projects,'customer');
+  const divisions = distinctVals(state.projects,'division');
+  return `
+  <div class="admin-header"><div><h2>${tr('Проекты')}</h2><p>${state.projects.length} ${tr('проектов · RUN:')} ${c.run} · ${tr('CHANGE:')} ${c.ch} · ${tr('без типа:')} ${c.un}</p></div>
+  <button class="btn btn-coral btn-sm" onclick="openAddProjectModal()">${tr('+ Добавить проект')}</button></div>
+  <div class="list-toolbar">
+    <div class="list-toolbar-row">
+      <input id="adminProjSearch" class="field" placeholder="${tr('Поиск по названию, цели или заказчику…')}" value="${esc(state.admin.projSearch)}" oninput="setAdminProjSearch(this.value)">
+    </div>
+    <div class="list-toolbar-row">
+      <button class="filter-chip ${tf==='all'?'active':''}" onclick="setAdminProjType('all')">${tr('Все типы')}</button>
+      <button class="filter-chip ${tf==='RUN'?'active run':''}" onclick="setAdminProjType('RUN')">RUN</button>
+      <button class="filter-chip ${tf==='CHANGE'?'active change':''}" onclick="setAdminProjType('CHANGE')">CHANGE</button>
+      <button class="filter-chip ${tf==='none'?'active':''}" onclick="setAdminProjType('none')">${tr('Без типа')}</button>
+      <select onchange="setAdminProjCustomer(this.value)">
+        <option value="">${tr('Все заказчики')}</option>
+        ${customers.map(cu=>`<option value="${esc(cu)}" ${state.admin.projCustomerFilter===cu?'selected':''}>${esc(tr(cu))}</option>`).join('')}
+      </select>
+      <select onchange="setAdminProjDivision(this.value)">
+        <option value="">${tr('Все дивизионы')}</option>
+        ${divisions.map(d=>`<option value="${esc(d)}" ${state.admin.projDivisionFilter===d?'selected':''}>${esc(tr(d))}</option>`).join('')}
+      </select>
+    </div>
+  </div>
+  <div class="list-count">${tr('Показано:')} ${matches.length} ${tr('из')} ${state.projects.length}</div>
+  <div class="tile-grid">
+    ${matches.length? matches.map(p=>`
+      <div class="tile-card" onclick="openEditProjectModal('${p.id}')">
+        <div class="tile-name">${esc(tr(p.name))}</div>
+        <div class="tile-customer ${p.customer?'':'none'}">${esc(p.customer? tr(p.customer) : tr('без заказчика'))}</div>
+      </div>`).join('') : '<div class="ac-empty">'+tr('Ничего не найдено — попробуйте другой запрос или фильтр')+'</div>'}
+  </div>`;
+}
+
+/* ---- tracks admin ---- */
+function adminExpTrack(id){ state.admin.expTrack = state.admin.expTrack===id?null:id; state.admin.expGoal=null; render(); }
+function adminExpGoal(id){ state.admin.expGoal = state.admin.expGoal===id?null:id; render(); }
+function openAddTrackModal(){ state.modal={kind:'addTrack'}; render(); }
+async function submitAddTrack(){
+  const name = document.getElementById('mTrackName').value.trim();
+  const mission = document.getElementById('mTrackMission').value.trim();
+  if(!name) return showToast(tr('Укажите название трека'),'error');
+  state.tracks = [...state.tracks, {id:uid('t'), name, mission, goals:[]}];
+  await saveKey('meta:tracks', state.tracks); closeModal(); showToast(tr('Трек добавлен'));
+}
+function openAddGoalModal(trackId){ state.modal={kind:'addGoal', trackId}; render(); }
+async function submitAddGoal(trackId){
+  const text = document.getElementById('mGoalText').value.trim();
+  if(!text) return showToast(tr('Укажите текст цели'),'error');
+  const t = state.tracks.find(t=>t.id===trackId);
+  t.goals.push({id:uid('g'), text, krs:[]});
+  await saveKey('meta:tracks', state.tracks); closeModal(); showToast(tr('Цель добавлена'));
+}
+function openAddKrModal(trackId, goalId){ state.modal={kind:'addKr', trackId, goalId}; render(); }
+async function submitAddKr(trackId, goalId){
+  const text = document.getElementById('mKrText').value.trim();
+  const hint = document.getElementById('mKrHint').value.trim();
+  if(!text) return showToast(tr('Укажите текст KR'),'error');
+  const t = state.tracks.find(t=>t.id===trackId), g = t.goals.find(g=>g.id===goalId);
+  g.krs.push({id:uid('k'), text, hint});
+  await saveKey('meta:tracks', state.tracks); closeModal(); showToast(tr('KR добавлен'));
+}
+async function deleteGoal(trackId, goalId){
+  const t = state.tracks.find(t=>t.id===trackId);
+  t.goals = t.goals.filter(g=>g.id!==goalId);
+  await saveKey('meta:tracks', state.tracks); render(); showToast(tr('Цель удалена'));
+}
+async function deleteKr(trackId, goalId, krId){
+  const t = state.tracks.find(t=>t.id===trackId), g = t.goals.find(g=>g.id===goalId);
+  g.krs = g.krs.filter(k=>k.id!==krId);
+  await saveKey('meta:tracks', state.tracks); render(); showToast(tr('KR удалён'));
+}
+
+function adminTracks(){
+  return `
+  <div class="admin-header"><div><h2>${tr('Треки и цели')}</h2><p>${state.tracks.length} ${tr('треков')}</p></div>
+  <button class="btn btn-coral btn-sm" onclick="openAddTrackModal()">${tr('+ Добавить трек')}</button></div>
+  ${state.tracks.map(t=>`
+    <div class="track-block">
+      <div class="track-head" onclick="adminExpTrack('${t.id}')">
+        <div><div class="th-name">${esc(tr(t.name))}</div><div class="th-mission">${esc(tr(t.mission))}</div></div>
+        <div>${state.admin.expTrack===t.id?'−':'+'}</div>
+      </div>
+      ${state.admin.expTrack===t.id? `<div class="track-body">
+        ${t.goals.map(g=>`
+          <div class="goal-item">
+            <div style="display:flex;justify-content:space-between;gap:10px;">
+              <div class="goal-text" onclick="adminExpGoal('${g.id}')">🎯 ${esc(tr(g.text))}</div>
+              <button class="icon-btn" onclick="deleteGoal('${t.id}','${g.id}')">✕</button>
+            </div>
+            ${state.admin.expGoal===g.id? `
+              <div class="kr-list">
+                ${g.krs.map(k=>`<div class="kr-row" style="display:flex;justify-content:space-between;gap:8px;"><div><div class="kr-text">${esc(tr(k.text))}</div>${k.hint?`<div class="kr-hint">${tr('Пример:')} ${esc(tr(k.hint))}</div>`:''}</div><button class="icon-btn" onclick="deleteKr('${t.id}','${g.id}','${k.id}')">✕</button></div>`).join('')}
+                ${!g.krs.length? '<div class="ac-empty">'+tr('KR ещё не добавлены')+'</div>':''}
+              </div>
+              <div style="margin-top:8px;"><button class="btn btn-ghost btn-sm" onclick="openAddKrModal('${t.id}','${g.id}')">${tr('+ Добавить KR')}</button></div>
+            `:''}
+          </div>`).join('')}
+        <div style="margin-top:12px;"><button class="btn btn-ghost btn-sm" onclick="openAddGoalModal('${t.id}')">${tr('+ Добавить цель')}</button></div>
+      </div>`:''}
+    </div>`).join('')}`;
+}
+
+/* ---- departments admin ---- */
+function toggleDeptSel(id){
+  const s = state.admin.selectedDept;
+  if(s.has(id)) s.delete(id); else s.add(id);
+  render();
+}
+function openAddDeptModal(){ state.modal={kind:'addDept'}; render(); }
+async function submitAddDept(){
+  const name = document.getElementById('mDeptName').value.trim();
+  if(!name) return showToast(tr('Укажите название отдела'),'error');
+  state.departments = [...state.departments, {id:uid('d'), name}];
+  await saveKey('meta:departments', state.departments); closeModal(); showToast(tr('Отдел добавлен'));
+}
+async function deleteDept(id){
+  state.departments = state.departments.filter(d=>d.id!==id);
+  await saveKey('meta:departments', state.departments); render(); showToast(tr('Отдел удалён'));
+}
+function openMergeModal(){
+  if(state.admin.selectedDept.size<2){ showToast(tr('Выберите минимум 2 отдела для объединения'),'error'); return; }
+  state.modal={kind:'mergeDept'}; render();
+}
+async function submitMerge(){
+  const canonicalId = document.querySelector('input[name=mergeCanon]:checked').value;
+  const selIds = [...state.admin.selectedDept];
+  const canonical = state.departments.find(d=>d.id===canonicalId);
+  const others = state.departments.filter(d=>selIds.includes(d.id) && d.id!==canonicalId);
+  const otherNames = others.map(d=>d.name);
+  state.initiatives = state.initiatives.map(init=> otherNames.includes(init.department) ? {...init, department:canonical.name} : init);
+  state.departments = state.departments.filter(d=> !selIds.includes(d.id) || d.id===canonicalId);
+  await saveKey('meta:departments', state.departments);
+  await saveKey('data:initiatives', state.initiatives);
+  state.admin.selectedDept = new Set();
+  closeModal(); showToast(tr('Отделы объединены'));
+}
+
+function adminDepartments(){
+  const dupNames = {};
+  state.departments.forEach(d=>{ dupNames[d.name]=(dupNames[d.name]||0)+1; });
+  return `
+  <div class="admin-header"><div><h2>${tr('Отделы')}</h2><p>${state.departments.length} ${tr('отделов · возможные дубли подсвечены')}</p></div>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-ghost btn-sm" onclick="openMergeModal()">${tr('Объединить выбранные')}</button>
+    <button class="btn btn-coral btn-sm" onclick="openAddDeptModal()">${tr('+ Добавить отдел')}</button>
+  </div></div>
+  <table><thead><tr><th style="width:34px"></th><th style="width:40px">${tr('№')}</th><th>${tr('Название')}</th><th style="width:70px"></th></tr></thead>
+  <tbody>${state.departments.map((d,i)=>`
+    <tr style="${dupNames[d.name]>1?'background:var(--amber-soft)':''}">
+      <td><input type="checkbox" ${state.admin.selectedDept.has(d.id)?'checked':''} onchange="toggleDeptSel('${d.id}')"></td>
+      <td>${i+1}</td><td>${esc(tr(d.name))}</td>
+      <td><button class="icon-btn" onclick="deleteDept('${d.id}')">✕</button></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+/* ---- initiatives admin ---- */
+function setInitDeptFilter(v){ state.admin.initDeptFilter=v; render(); }
+function setInitCatFilter(v){ state.admin.initCatFilter=v; render(); }
+function categoryLabel(init){
+  if(init.category==='project'){ const p=findProject(init.projectId); return p? tr('Проект:')+' '+tr(p.name) : tr('Проект (удалён)'); }
+  if(init.category==='goal'){ const t=findTrack(init.trackId), g=findGoal(init.trackId, init.goalId); return (t&&g)? tr(t.name)+' — '+tr(g.text) : tr('Цель (удалена)'); }
+  return tr('Не отнесена');
+}
+function openExportModal(){
+  const rows = filteredInitiatives();
+  const header = [tr('Отдел'),tr('Инициатива'),'%',tr('Заказчик'),tr('Отнесена к'),tr('Дата')];
+  const lines = [header.join(';')].concat(rows.map(r=>[r.department, r.text.replace(/;/g,','), r.percent+'%', r.customer, categoryLabel(r).replace(/;/g,','), new Date(r.submittedAt).toLocaleDateString('ru-RU')].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')));
+  state.modal = {kind:'export', csv: lines.join('\\n')};
+  render();
+}
+function filteredInitiatives(){
+  return state.initiatives.filter(i=>
+    (!state.admin.initDeptFilter || i.department===state.admin.initDeptFilter) &&
+    (state.admin.initCatFilter==='all' || i.category===state.admin.initCatFilter)
+  );
+}
+function adminInitiatives(){
+  const rows = filteredInitiatives();
+  const depts = [...new Set(state.initiatives.map(i=>i.department))];
+  return `
+  <div class="admin-header"><div><h2>${tr('Инициативы')}</h2><p>${state.initiatives.length} ${tr('подано всего, показано')} ${rows.length}</p></div>
+  <button class="btn btn-ghost btn-sm" onclick="openExportModal()">${tr('Экспорт CSV')}</button></div>
+  <div class="toolbar">
+    <select onchange="setInitDeptFilter(this.value)">
+      <option value="">${tr('Все отделы')}</option>
+      ${depts.map(d=>`<option value="${esc(d)}" ${state.admin.initDeptFilter===d?'selected':''}>${esc(tr(d))}</option>`).join('')}
+    </select>
+    <select onchange="setInitCatFilter(this.value)">
+      <option value="all" ${state.admin.initCatFilter==='all'?'selected':''}>${tr('Все категории')}</option>
+      <option value="project" ${state.admin.initCatFilter==='project'?'selected':''}>${tr('Часть проекта')}</option>
+      <option value="goal" ${state.admin.initCatFilter==='goal'?'selected':''}>${tr('Влияет на цель')}</option>
+      <option value="none" ${state.admin.initCatFilter==='none'?'selected':''}>${tr('Самостоятельная')}</option>
+    </select>
+  </div>
+  ${rows.length? `<table><thead><tr><th>${tr('Отдел')}</th><th>${tr('Инициатива')}</th><th style="width:60px">%</th><th>${tr('Заказчик')}</th><th>${tr('Отнесена к')}</th><th style="width:100px">${tr('Дата')}</th></tr></thead>
+  <tbody>${rows.map(r=>`<tr>
+    <td>${esc(tr(r.department))}</td>
+    <td class="cell-truncate" title="${esc(r.text)}">${esc(r.text)}</td>
+    <td>${r.percent}%</td>
+    <td>${esc(r.customer)}</td>
+    <td class="cell-truncate" title="${esc(categoryLabel(r))}">${esc(categoryLabel(r))}</td>
+    <td>${new Date(r.submittedAt).toLocaleDateString(state.lang==='en'?'en-GB':'ru-RU')}</td>
+  </tr>`).join('')}</tbody></table>` : '<div class="empty-state">'+tr('Инициатив пока нет — как только руководители начнут заполнять форму, они появятся здесь.')+'</div>'}`;
+}
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+function renderModal(){
+  const m = state.modal;
+  if(!m) return '';
+  let content='';
+  if(m.kind==='addProject' || m.kind==='editProject'){
+    const p = m.id? state.projects.find(p=>p.id===m.id) : {name:'',goal:'',division:'',customer:''};
+    content = `<h3>${m.id?tr('Редактировать проект'):tr('Добавить проект')}</h3>
+      <label>${tr('Название')}</label><input id="mProjName" class="field" value="${esc(m.id?tr(p.name):p.name)}">
+      <label>${tr('Дивизион')}</label><input id="mProjDivision" class="field" placeholder="${tr('Например, GLOBAL')}" value="${esc(p.division||'')}">
+      <label>${tr('Заказчик (функция)')}</label><input id="mProjCustomer" class="field" placeholder="${tr('Например, Finance')}" value="${esc(p.customer||'')}">
+      <label>${tr('Цель')}</label><textarea id="mProjGoal" class="field" style="min-height:80px;">${esc(m.id?tr(p.goal||''):(p.goal||''))}</textarea>
+      ${m.id? `<label>${tr('Тип проекта')}</label>
+      <div class="type-chip-row">
+        <button type="button" class="type-chip ${p.type==='RUN'?'active-run':''}" onclick="setProjectType('${m.id}','RUN')">RUN</button>
+        <button type="button" class="type-chip ${p.type==='CHANGE'?'active-change':''}" onclick="setProjectType('${m.id}','CHANGE')">CHANGE</button>
+        <button type="button" class="type-chip ${!p.type?'active-neutral':''}" onclick="setProjectType('${m.id}','')">${tr('Не задан')}</button>
+      </div>` : ''}
+      <div class="modal-actions">
+      ${m.id? `<button class="btn btn-ghost" style="color:var(--coral-dark);margin-right:auto;" onclick="deleteProject('${m.id}')">${tr('Удалить')}</button>`:''}
+      <button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="${m.id?`submitEditProject('${m.id}')`:'submitAddProject()'}">${tr('Сохранить')}</button></div>`;
+  } else if(m.kind==='projectPreview'){
+    const p = state.projects.find(p=>p.id===m.id);
+    content = `<h3>${esc(tr(p.name))}</h3>
+      <p class="q-sub" style="margin:0 0 16px;">${esc(p.division? tr(p.division) : '—')} · ${esc(p.customer? tr(p.customer) : tr('без заказчика'))}${p.type?` · ${p.type}`:''}</p>
+      ${p.goal? `<div class="si-goal" style="line-height:1.5;">${esc(tr(p.goal))}</div>` : `<div class="ac-empty" style="padding:0;">${tr('Цель проекта пока не заполнена в справочнике')}</div>`}
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-coral" onclick="pickProject('${p.id}')">${tr('Выбрать этот проект →')}</button></div>`;
+  } else if(m.kind==='addTrack'){
+    content = `<h3>${tr('Добавить трек')}</h3>
+      <label>${tr('Название трека')}</label><input id="mTrackName" class="field">
+      <label>${tr('Миссия')}</label><textarea id="mTrackMission" class="field" style="min-height:70px;"></textarea>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="submitAddTrack()">${tr('Добавить')}</button></div>`;
+  } else if(m.kind==='addGoal'){
+    content = `<h3>${tr('Добавить цель')}</h3>
+      <label>${tr('Текст цели (18 мес.)')}</label><textarea id="mGoalText" class="field" style="min-height:90px;"></textarea>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="submitAddGoal('${m.trackId}')">${tr('Добавить')}</button></div>`;
+  } else if(m.kind==='addKr'){
+    content = `<h3>${tr('Добавить KR')}</h3>
+      <label>${tr('Текст KR')}</label><textarea id="mKrText" class="field" style="min-height:70px;"></textarea>
+      <label>${tr('Пример-подсказка (необязательно)')}</label><textarea id="mKrHint" class="field" style="min-height:60px;"></textarea>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="submitAddKr('${m.trackId}','${m.goalId}')">${tr('Добавить')}</button></div>`;
+  } else if(m.kind==='addDept'){
+    content = `<h3>${tr('Добавить отдел')}</h3>
+      <label>${tr('Название отдела')}</label><input id="mDeptName" class="field">
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="submitAddDept()">${tr('Добавить')}</button></div>`;
+  } else if(m.kind==='mergeDept'){
+    const sel = state.departments.filter(d=>state.admin.selectedDept.has(d.id));
+    content = `<h3>${tr('Объединить отделы')}</h3><p class="q-sub">${tr('Выберите каноническое название — остальные будут удалены, а все их инициативы перепривяжутся к нему.')}</p>
+      ${sel.map((d,i)=>`<div class="merge-option"><input type="radio" name="mergeCanon" value="${d.id}" id="mc_${d.id}" ${i===0?'checked':''}><label for="mc_${d.id}" style="margin:0;text-transform:none;font-weight:500;font-size:13.5px;color:var(--ink);">${esc(tr(d.name))}</label></div>`).join('')}
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="submitMerge()">${tr('Объединить')}</button></div>`;
+  } else if(m.kind==='export'){
+    content = `<h3>${tr('Экспорт CSV')}</h3><p class="q-sub">${tr('Скопируйте текст ниже и вставьте в Excel (разделитель — «;»).')}</p>
+      <textarea class="field" style="min-height:220px;font-family:monospace;font-size:11.5px;" onclick="this.select()" readonly>${esc(m.csv)}</textarea>
+      <div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">${tr('Готово')}</button></div>`;
+  }
+  return `<div class="modal-overlay" onclick="if(event.target===this) closeModal()"><div class="modal-box">${content}</div></div>`;
+}
+
+/* =========================================================
+   ROOT RENDER
+   ========================================================= */
+function render(){
+  const root = document.getElementById('app');
+  if(!state.ready){ root.innerHTML = '<div class="loading-shell">'+(state.lang==='en'?'Loading data…':'Загружаем данные…')+'</div>'; return; }
+  // preserve focus + cursor position across full re-render (search fields etc.)
+  const active = document.activeElement;
+  const activeId = active && active.id ? active.id : null;
+  const selStart = (active && 'selectionStart' in active) ? active.selectionStart : null;
+  const selEnd = (active && 'selectionEnd' in active) ? active.selectionEnd : null;
+
+  if(!state.authed){
+    root.innerHTML = renderLogin();
+  } else {
+    root.innerHTML = `
+      ${renderTopbar()}
+      <div class="main">${state.role==='lead' ? renderWizard() : renderAdmin()}</div>
+      ${state.modal? renderModal() : ''}
+      ${state.toast? `<div class="toast ${state.toast.type==='error'?'error':''}">${esc(state.toast.msg)}</div>` : ''}
+    `;
+  }
+
+  if(activeId){
+    const el = document.getElementById(activeId);
+    if(el){
+      el.focus();
+      if(selStart!=null && el.setSelectionRange){ try{ el.setSelectionRange(selStart, selEnd); }catch(e){} }
+    }
+  }
+}
+
+boot();
+</script>
+</body>
+</html>

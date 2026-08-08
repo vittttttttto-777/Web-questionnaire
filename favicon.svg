@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coral Club">
+  <circle cx="32" cy="32" r="32" fill="#004643"/>
+  <g stroke="#FF4A1C" stroke-width="5" stroke-linecap="round" fill="none">
+    <path d="M32 48 L18 28"/>
+    <path d="M32 48 L32 22"/>
+    <path d="M32 48 L46 28"/>
+  </g>
+  <circle cx="32" cy="48" r="4.5" fill="#FF4A1C"/>
+  <circle cx="18" cy="28" r="6" fill="#FF4A1C"/>
+  <circle cx="32" cy="22" r="7" fill="#FF4A1C"/>
+  <circle cx="46" cy="28" r="6" fill="#FF4A1C"/>
+</svg>

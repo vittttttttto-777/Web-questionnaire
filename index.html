@@ -33,6 +33,9 @@ input,textarea,select{font-family:inherit;}
 
 /* ---------- Top bar ---------- */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;}
+.test-banner{background:var(--amber);color:#fff;text-align:center;padding:9px 16px;font-size:12.5px;font-weight:700;position:sticky;top:73px;z-index:19;}
+.test-banner-btn{background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.6);color:#fff;border-radius:999px;padding:3px 12px;font-size:11.5px;font-weight:700;margin-left:8px;}
+.test-banner-btn:hover{background:rgba(255,255,255,.4);}
 .brand{display:flex;align-items:center;gap:10px;}
 .brand-mark{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%, var(--coral), var(--coral-dark));flex:none;}
 .brand-text .t1{font-family:'Inter',sans-serif;font-weight:600;font-size:17px;line-height:1.1;}
@@ -105,6 +108,31 @@ textarea.field{resize:vertical;min-height:120px;line-height:1.5;}
 
 /* percent slider */
 .percent-display{font-family:'Inter',sans-serif;font-size:56px;font-weight:300;color:var(--coral);line-height:1;margin:6px 0 20px;}
+
+/* batch initiative entry */
+.batch-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:10px;}
+.batch-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.batch-idx{width:16px;flex:none;color:var(--ink-faint);font-size:13px;font-weight:600;}
+.batch-row .field{margin:0;}
+.batch-row input.field.batch-name{flex:1.6;min-width:160px;}
+.batch-customer{flex:1;min-width:130px;}
+.batch-type{flex:1;min-width:150px;color:var(--ink);}
+.batch-percent{display:flex;align-items:center;gap:4px;flex:none;width:76px;border:1.5px solid var(--border);padding:0 8px;background:#fff;}
+.batch-percent input{width:38px;border:none;padding:11px 0;font-size:14px;text-align:right;}
+.batch-percent input:focus{outline:none;}
+.batch-percent span{color:var(--ink-faint);font-size:13px;}
+.percent-banner{display:flex;justify-content:space-between;align-items:center;background:var(--teal-soft);color:var(--teal);padding:12px 16px;font-weight:700;font-size:13.5px;margin-top:14px;}
+.percent-banner.over{background:var(--coral-soft);color:var(--coral-dark);}
+.percent-banner b{font-size:16px;}
+
+/* initiative list (step 3) */
+.init-list{display:flex;flex-direction:column;gap:8px;max-height:480px;overflow-y:auto;margin-bottom:6px;}
+.init-row{display:flex;align-items:center;gap:12px;border:1.5px solid var(--border);padding:12px 14px;}
+.init-row.checked{border-color:var(--coral);background:var(--coral-soft);}
+.init-row input[type=checkbox]{flex:none;width:17px;height:17px;accent-color:var(--coral);}
+.init-main{flex:1;cursor:pointer;min-width:0;}
+.init-name{font-weight:700;font-size:13.5px;}
+.init-meta{font-size:12px;color:var(--ink-faint);margin-top:2px;}
 input[type=range]{width:100%;accent-color:var(--coral);height:6px;}
 
 /* project / goal search results */
@@ -222,6 +250,9 @@ input[type=range]{width:100%;accent-color:var(--coral);height:6px;}
 .admin-header p{margin:0;color:var(--ink-soft);font-size:13.5px;}
 
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:30px;}
+.test-toggle-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:18px;}
+.test-toggle{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;}
+.test-toggle input{width:34px;height:19px;accent-color:var(--amber);cursor:pointer;}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
 .stat-card .sc-num{font-family:'Inter',sans-serif;font-size:32px;font-weight:300;}
 .stat-card .sc-label{font-size:12px;color:var(--ink-faint);margin-top:4px;}
@@ -268,6 +299,69 @@ select.type-select{border:1.5px solid var(--border);border-radius:0;padding:6px 
   .admin-main{padding:20px;}
   .choice-row{grid-template-columns:1fr;}
   .topbar{padding:14px 16px;}
+}
+/* ---- Glossary tree (embedded, scoped to avoid clashing with app styles) ---- */
+.glossary-embed{
+  --gl-bg:#f4f2ee; --gl-ink:#1f2a2e; --gl-muted:#5c6b6e;
+  --gl-strategic:#0e6f5c; --gl-strategic-ink:#ffffff;
+  --gl-project:#2dd9b7; --gl-project-ink:#0b3b32;
+  --gl-okr:#bfe4fb; --gl-okr-ink:#0b3b52;
+  --gl-task:#dfeeff; --gl-task-ink:#1c3a52;
+  --gl-outcome:#fdedb0; --gl-outcome-border:#d99a2b; --gl-outcome-ink:#6b4a05;
+  --gl-question:#7c5cbf; --gl-line:#b9c4c1;
+  background:var(--gl-bg); color:var(--gl-ink); font-family:'Helvetica Neue',Arial,sans-serif;
+  padding:36px 20px 56px; margin:-32px -32px 0; border-radius:0 0 0 0;
+}
+.glossary-embed .gl-header{max-width:720px;margin:0 auto 40px;text-align:center;}
+.glossary-embed .gl-eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--gl-strategic);font-weight:700;margin-bottom:10px;}
+.glossary-embed h2.gl-h1{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;margin:0 0 12px;letter-spacing:-.01em;color:var(--gl-ink);}
+.glossary-embed .gl-sub{color:var(--gl-muted);font-size:14px;line-height:1.6;margin:0 auto;max-width:560px;}
+.glossary-embed .gl-sub b{color:var(--gl-ink);}
+.glossary-embed .gl-wrapper{position:relative;max-width:720px;margin:0 auto;}
+.glossary-embed svg.gl-connectors{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;}
+.glossary-embed svg.gl-connectors path{fill:none;stroke:var(--gl-line);stroke-width:2px;}
+.glossary-embed .gl-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;
+  grid-template-areas:"strategic strategic" "project . " "okrL okrR" "taskL taskR" "product process";
+  row-gap:48px;column-gap:20px;z-index:1;}
+.glossary-embed .gl-cell{display:flex;justify-content:center;}
+.glossary-embed .gl-cell.strategic{grid-area:strategic;}
+.glossary-embed .gl-cell.project{grid-area:project;}
+.glossary-embed .gl-cell.okrL{grid-area:okrL;}
+.glossary-embed .gl-cell.okrR{grid-area:okrR;}
+.glossary-embed .gl-cell.taskL{grid-area:taskL;}
+.glossary-embed .gl-cell.taskR{grid-area:taskR;}
+.glossary-embed .gl-cell.product{grid-area:product;}
+.glossary-embed .gl-cell.process{grid-area:process;}
+.glossary-embed .gl-node{width:100%;max-width:250px;border-radius:4px;box-shadow:0 3px 10px rgba(31,42,46,.10);
+  padding:15px 15px 13px;cursor:pointer;position:relative;transition:transform .16s ease,box-shadow .16s ease;
+  border:1px solid transparent;}
+.glossary-embed .gl-node:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(31,42,46,.16);}
+.glossary-embed .gl-node.gl-strategic-c{background:var(--gl-strategic);color:var(--gl-strategic-ink);}
+.glossary-embed .gl-node.gl-project-c{background:var(--gl-project);color:var(--gl-project-ink);}
+.glossary-embed .gl-node.gl-okr-c{background:var(--gl-okr);color:var(--gl-okr-ink);}
+.glossary-embed .gl-node.gl-task-c{background:var(--gl-task);color:var(--gl-task-ink);}
+.glossary-embed .gl-node.gl-outcome-c{background:var(--gl-outcome);color:var(--gl-outcome-ink);border-color:var(--gl-outcome-border);}
+.glossary-embed .gl-term-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.72;margin-bottom:6px;display:block;font-weight:700;}
+.glossary-embed .gl-term-name{font-size:15px;font-weight:700;margin:0 0 7px;line-height:1.25;text-align:center;}
+.glossary-embed .gl-term-text{font-size:12px;line-height:1.5;margin:0;text-align:center;min-height:56px;}
+.glossary-embed .gl-term-text.gl-q{font-weight:700;font-style:italic;}
+.glossary-embed .gl-node.gl-state-q{box-shadow:0 3px 10px rgba(31,42,46,.10), inset 0 0 0 2px var(--gl-question);}
+.glossary-embed .gl-node.gl-state-q .gl-term-label{color:var(--gl-question);opacity:1;}
+.glossary-embed .gl-tabs{display:flex;gap:4px;margin-top:11px;justify-content:center;}
+.glossary-embed .gl-tab-btn{font-size:9px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:4px 8px;
+  border-radius:12px;border:1px solid currentColor;background:transparent;cursor:pointer;opacity:.5;
+  transition:opacity .15s ease,background .15s ease,color .15s ease;color:inherit;}
+.glossary-embed .gl-tab-btn.active{opacity:1;background:rgba(0,0,0,.08);}
+.glossary-embed .gl-node.gl-state-q .gl-tab-btn.active{background:var(--gl-question);color:#fff;border-color:var(--gl-question);}
+.glossary-embed .gl-legend{max-width:640px;margin:36px auto 0;display:flex;justify-content:center;flex-wrap:wrap;gap:16px;font-size:11px;color:var(--gl-muted);}
+.glossary-embed .gl-legend-item{display:flex;align-items:center;gap:6px;}
+.glossary-embed .gl-swatch{width:11px;height:11px;border-radius:3px;display:inline-block;}
+@media (max-width:640px){
+  .glossary-embed .gl-grid{row-gap:38px;column-gap:10px;}
+  .glossary-embed .gl-node{padding:11px 9px 9px;}
+  .glossary-embed .gl-term-name{font-size:12.5px;}
+  .glossary-embed .gl-term-text{font-size:10.5px;min-height:56px;}
+  .glossary-embed h2.gl-h1{font-size:20px;}
 }
 </style>
 </head>
@@ -419,20 +513,21 @@ const seedTracks = [
    STATE
    ========================================================= */
 let state = {
-  ready:false, authed:false, authError:false, role:'lead', lang:'ru',
+  ready:false, authed:false, authError:false, role:'lead', lang:'ru', testMode:false,
   departments:[], projects:[], tracks:[], initiatives:[],
   wizard:{step:'1', history:[], department:'', isNewDept:false, deptQuery:'',
-    text:'', percent:20, customer:'', projQuery:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expandedProject:null,
-    expandedTrack:null, expandedGoal:null,
-    projectId:null, trackId:null, goalId:null, submitted:null},
+    batchRows:[{text:'',customer:'',percent:20,activityType:''}], sessionIds:[], selectedIds:[], activeGroupIds:[],
+    matchCategory:null, matchProjectId:null, matchTrackId:null, matchGoalId:null,
+    projQuery:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expandedProject:null,
+    expandedTrack:null, expandedGoal:null},
   admin:{module:'dashboard', expTrack:null, expGoal:null, selectedDept:new Set(),
-    initDeptFilter:'', initCatFilter:'all', projSearch:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expProject:null},
+    initDeptFilter:'', initCatFilter:'all', initTestFilter:'all', projSearch:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expProject:null},
   modal:null, toast:null
 };
 
 function uid(p){return p+'_'+Math.random().toString(36).slice(2,9);}
 function esc(s){return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-const TRANSLATIONS = {"Реестр инициатив": "Initiative Registry", "Руководитель функции": "Function Lead", "Администратор": "Administrator", "Прототип · переключатель роли временный, до подключения авторизации": "Prototype · role switch is temporary, pending authentication", "Загружаем данные…": "Loading data…", "Отдел": "Department", "Инициатива": "Initiative", "Загрузка": "Workload", "Заказчик": "Customer", "Проект?": "Project?", "Цель трека?": "Track goal?", "Итог": "Summary", "Шаг": "Step", "из 7": "of 7", "Шаг 1": "Step 1", "Впишите название своего отдела": "Type in your department name", "Не нашли отдел в списке? Укажите его вручную — мы добавим его в справочник.": "Can't find your department in the list? Type it in manually — we'll add it to the directory.", "Например, Отдел цифровых продуктов": "e.g. Digital Products Department", "← Назад к списку": "← Back to list", "Продолжить →": "Continue →", "Шаг 1 из 7": "Step 1 of 7", "Выберите свой отдел": "Select your department", "Начните вводить название — покажем совпадения из справочника (${state.departments.length} отделов).": "Start typing a name — we'll show matches from the directory (${state.departments.length} departments).", "Поиск отдела…": "Search department…", "Совпадений не найдено": "No matches found", "Не нашли свой отдел? Вписать название вручную →": "Can't find your department? Type it in manually →", "Опишите вашу инициативу": "Describe your initiative", "Коротко: что вы делаете (или планируете делать) и зачем.": "Briefly: what you're doing (or plan to do) and why.", "Например: разрабатываем единый шаблон онбординга для новых сотрудников отдела, чтобы сократить время выхода на самостоятельную работу…": "e.g.: we're building a unified onboarding template for new department hires to cut the time to independent work…", "← Назад": "← Back", "Шаг 3 из 7": "Step 3 of 7", "Сколько % рабочего времени в неделю занимает эта инициатива?": "How much of your weekly working time does this initiative take?", "Ориентировочно — точность до 5% достаточна.": "Approximate is fine — 5% precision is enough.", "Шаг 4 из 7": "Step 4 of 7", "Кто заказчик инициативы?": "Who is the initiative's sponsor?", "Укажите ФИО — это может быть коллега, руководитель другого отдела, или вы сами.": "Enter a full name — a colleague, another department's lead, or yourself.", "Иван Иванов": "Jane Doe", "Шаг 5 из 7": "Step 5 of 7", "Является ли инициатива частью одного из проектов компании?": "Is the initiative part of one of the company's projects?", "Если инициатива — это часть более крупного корпоративного проекта, выберите «Да» и найдём его в списке.": "If the initiative belongs to a larger corporate project, choose \"Yes\" and we'll find it in the list.", "Да, это часть проекта": "Yes, it's part of a project", "Покажем список проектов компании": "We'll show the company's project list", "Нет / не уверен": "No / not sure", "Проверим, влияет ли на стратегические цели": "We'll check whether it affects strategic goals", "Шаг 5 · Выбор проекта": "Step 5 · Select project", "Выберите проект из списка": "Select a project from the list", "проектов. Ищите по названию, цели или заказчику, сузьте фильтрами, кликните на плашку — увидите детали проекта.": "projects. Search by name, goal, or customer, narrow with filters, click a tile to see project details.", "Поиск проекта…": "Search project…", "Все типы": "All types", "Все заказчики": "All customers", "Все дивизионы": "All divisions", "Найдено:": "Found:", "без заказчика": "no customer", "Ничего не найдено — попробуйте другой запрос или фильтр": "Nothing found — try a different search or filter", "Без типа": "No type", "Шаг 6 из 7": "Step 6 of 7", "Может ли инициатива способствовать одной из целей стратегических треков?": "Could the initiative contribute to one of the strategic tracks' goals?", "Речь о целях на 18 месяцев внутри одного из 5 стратегических треков компании.": "This refers to the 18-month goals within one of the company's 5 strategic tracks.", "Да, влияет на цель": "Yes, it affects a goal", "Покажем дерево целей по трекам": "We'll show the goal tree by track", "Зафиксируем инициативу как самостоятельную": "We'll record the initiative as standalone", "Шаг 6 · Дерево целей": "Step 6 · Goal tree", "Выберите цель, на которую влияет инициатива": "Select the goal the initiative affects", "Кликните на цель — раскроются её ключевые результаты (KR) и кнопка выбора. Прокрутите вправо, если не помещается.": "Click a goal to reveal its key results (KRs) and a select button. Scroll right if it doesn't fit.", "Стратегические треки Coral Club": "Coral Club Strategic Tracks", "Пример:": "Example:", "KR ещё не заполнены": "KRs not filled in yet", "Выбрать эту цель →": "Select this goal →", "Трек": "Track", "— стратегическое направление на 18 мес.": "— strategic direction for 18 months.", "Цель": "Goal", "— конкретный результат трека": "— a concrete result of the track", "— измеримый ключевой результат цели": "— a measurable key result of the goal", "Проверьте и подтвердите": "Review and confirm", "Отнесена к проекту": "Linked to project", "Способствует стратегической цели": "Contributes to a strategic goal", "Самостоятельная инициатива": "Standalone initiative", "Не отнесена к проекту или стратегической цели — фиксируем как есть, для дальнейшего анализа.": "Not linked to a project or strategic goal — recorded as-is for further analysis.", "% времени в неделю": "% of time per week", "Подтвердить и сохранить": "Confirm and save", "Выбрать этот проект →": "Select this project →", "Инициатива сохранена": "Initiative saved", "Спасибо! Можете добавить ещё одну инициативу того же отдела или закончить.": "Thanks! You can add another initiative for the same department or finish.", "Сменить отдел": "Change department", "Добавить ещё инициативу →": "Add another initiative →", "Дашборд": "Dashboard", "Проекты": "Projects", "Треки и цели": "Tracks & Goals", "Отделы": "Departments", "Инициативы": "Initiatives", "Общая картина по всем поданным инициативам": "An overview of all submitted initiatives", "Инициатив подано": "Initiatives submitted", "Часть проекта": "Part of a project", "Влияют на цель трека": "Affect a track goal", "Самостоятельные": "Standalone", "Отделов подали хотя бы одну": "Departments with at least one submission", "Ещё не подали ни одной инициативы:": "Haven't submitted any initiative yet:", "отдел(ов). Список — во вкладке «Инициативы» (фильтр по отделу).": "department(s). See the \"Initiatives\" tab (filter by department).", "проектов · RUN:": "projects · RUN:", "CHANGE:": "CHANGE:", "без типа:": "no type:", "+ Добавить проект": "+ Add project", "Поиск по названию, цели или заказчику…": "Search by name, goal, or customer…", "Показано:": "Showing:", "из": "of", "треков": "tracks", "+ Добавить трек": "+ Add track", "+ Добавить цель": "+ Add goal", "KR ещё не добавлены": "No KRs added yet", "+ Добавить KR": "+ Add KR", "отделов · возможные дубли подсвечены": "departments · possible duplicates highlighted", "Объединить выбранные": "Merge selected", "+ Добавить отдел": "+ Add department", "№": "#", "Название": "Name", "подано всего, показано": "submitted total, showing", "Экспорт CSV": "Export CSV", "Все отделы": "All departments", "Все категории": "All categories", "Влияет на цель": "Affects a goal", "Дата": "Date", "Отнесена к": "Linked to", "Инициатив пока нет — как только руководители начнут заполнять форму, они появятся здесь.": "No initiatives yet — as soon as leads start filling in the form, they'll appear here.", "Проект:": "Project:", "Проект (удалён)": "Project (deleted)", "Цель (удалена)": "Goal (deleted)", "Не отнесена": "Unlinked", "Редактировать проект": "Edit project", "Добавить проект": "Add project", "Дивизион": "Division", "Например, GLOBAL": "e.g. GLOBAL", "Заказчик (функция)": "Customer (function)", "Например, Finance": "e.g. Finance", "Тип проекта": "Project type", "Не задан": "Not set", "Удалить": "Delete", "Отмена": "Cancel", "Сохранить": "Save", "Цель проекта пока не заполнена в справочнике": "The project goal hasn't been filled in yet", "Добавить трек": "Add track", "Название трека": "Track name", "Миссия": "Mission", "Добавить": "Add", "Добавить цель": "Add goal", "Текст цели (18 мес.)": "Goal text (18 months)", "Добавить KR": "Add KR", "Текст KR": "KR text", "Пример-подсказка (необязательно)": "Example hint (optional)", "Добавить отдел": "Add department", "Название отдела": "Department name", "Объединить отделы": "Merge departments", "Выберите каноническое название — остальные будут удалены, а все их инициативы перепривяжутся к нему.": "Choose the canonical name — the others will be deleted and all their initiatives reassigned to it.", "Объединить": "Merge", "Скопируйте текст ниже и вставьте в Excel (разделитель — «;»).": "Copy the text below and paste it into Excel (delimiter — \";\").", "Готово": "Done", "Не удалось сохранить изменения. Попробуйте ещё раз.": "Couldn't save the changes. Please try again.", "Опишите инициативу чуть подробнее (от 10 символов)": "Please describe the initiative in a bit more detail (10+ characters)", "Укажите ФИО заказчика инициативы": "Please enter the sponsor's full name", "Укажите название проекта": "Please enter the project name", "Проект добавлен": "Project added", "Проект удалён": "Project deleted", "Проект обновлён": "Project updated", "Укажите название трека": "Please enter the track name", "Трек добавлен": "Track added", "Укажите текст цели": "Please enter the goal text", "Цель добавлена": "Goal added", "Укажите текст KR": "Please enter the KR text", "KR добавлен": "KR added", "Цель удалена": "Goal deleted", "KR удалён": "KR deleted", "Укажите название отдела": "Please enter the department name", "Отдел добавлен": "Department added", "Отдел удалён": "Department deleted", "Выберите минимум 2 отдела для объединения": "Select at least 2 departments to merge", "Отделы объединены": "Departments merged", "GLOBAL": "GLOBAL", "РФ+РБ": "Russia+Belarus", "Азия": "Asia", "Америка+Канада": "Americas+Canada", "Европа-Север": "Europe North", "Европа-Центр": "Europe Central", "Европа-Запад": "Europe West", "Европа-Юг": "Europe South", "Back office": "Back Office", "Поддержка дистрибьюторов уровень : Дивизион": "Distributor Support (Division level)", "Юристы Global": "Legal Global", "Мерч Global": "Merchandise Global", "Обучение Global": "Training Global", "PR Global": "PR Global", "Сертификация Global": "Certification Global", "Бухгалтерия Global": "Accounting Global", "НИО продукты Global": "R&D Products Global", "Новые рынки / Развитие Global": "New Markets / Development Global", "Регион Юг": "Region South", "Офис Эволюции Global": "Evolution Office Global", "ECOM Global": "ECOM Global", "Управление персоналом HR Global": "HR Global", "Операции Global": "Operations Global", "Управление Local / Регион Запад": "Local Management / Region West", "Маркетинг (коммуникации)": "Marketing (Communications)", "Эволюция Global": "Evolution Global", "Логистика Global": "Logistics Global", "Финансы международные Global": "International Finance Global", "Разработка ИТ Global": "IT Development Global", "Операции Европа": "Operations Europe", "Подбор Global": "Recruitment Global", "Управление Local / Регион Россия/Беларусь": "Local Management / Region Russia/Belarus", "Управление Local / Регион Румыния": "Local Management / Region Romania", "Маркетинг Global": "Marketing Global", "Общие финансы Global": "General Finance Global", "Поддержка дистрибьюторов Global": "Distributor Support Global", "Признание дистрибьюторов Global": "Distributor Recognition Global", "Логистика (-2) Global": "Logistics (-2) Global", "Event Local": "Events Local", "Рассчеты с дистрибьюторами Global": "Distributor Payments Global", "Обучение дистрибьютора Global": "Distributor Training Global", "Even Local Азия": "Events Local Asia", "Снабжение Global": "Procurement Global", "Управление проектами Global": "Project Management Global", "Управление Local / Регион США": "Local Management / Region USA", "Репутация Global": "Reputation Global", "Анализ Global": "Analytics Global", "Операции Local / Регион Азия": "Operations Local / Region Asia", "IT и Право Global": "IT & Legal Global", "Управление Local / Регион Север": "Local Management / Region North", "Зрелые рынки развитие Global": "Mature Markets Development Global", "ИТ (базы данных) Global": "IT (Databases) Global", "Отдел ИИ Global": "AI Department Global", "Разработка продуктов и HealthOS Global": "Product Development & HealthOS Global", "ИТ Global": "IT Global", "Зам. рук. Проектного офиса Global/local": "Deputy Head of PMO Global/Local", "Финансы компании Global": "Company Finance Global", "Local / Операции США": "Local / Operations USA", "Управление клиентским опытом (Global) + Управление регионом Local (UK)": "Customer Experience Management (Global) + Local Region Management (UK)", "Описание процессов": "Process Mapping", "Создание карты основных процессов компании, распределения зон ответственности за процессы": "Map the company's core processes and define process ownership", "Стартовая программа для новичков": "Newcomer Starter Program", "Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж": "Find the optimal mechanics for recruiting and activating the network, and sustaining its loyalty to drive sales growth", "Друзья Клуба": "Club Friends", "Быстрый старт": "Fast Start", "Программы лояльности": "Loyalty Programs", "Digital kit": "Digital Kit", "CRM Bitrix (IP телефония для КЦ)": "CRM Bitrix (IP Telephony for Contact Center)", "Повысить уровень удовлетворенности клиентов за счет качественного обслуживания (включая замену инструментов работы)": "Increase customer satisfaction through better service quality (including replacing current work tools)", "Refiner": "Refiner", "Промокоды": "Promo Codes", "Адреса на сайте": "Website Addresses", "Курьерские службы": "Courier Services", "Автоматизация работ с курьерскими службами для повышения эффективности и повышения удовлетворенности потребителей": "Automate work with courier services to increase efficiency and customer satisfaction", "Верификация": "Verification", "База знаний": "Knowledge Base", "Создание базы данных для бизнеса, чтобы каждый отдел мог анализировать ключевые показатели и планировать следующие активности": "Build a business database so every department can analyze key metrics and plan next activities", "Упрощенная регистрация": "Simplified Registration", "Оптимизация формы регистрации новых членов клуба для повышения конверсии из клиентов в потребители": "Optimize the club registration form to improve conversion from customers to members", "Статусная модель заказов": "Order Status Model", "Обеспечить стабильную автоматическую работу процесса обработки заказов с целью сокращения ошибок и операционных издержек, повышения уровня удовлетворенности потребителей": "Ensure stable, automated order processing to reduce errors and operating costs and improve customer satisfaction", "ЛК Дистрибьютора — Back office": "Distributor Portal — Back Office", "Навигация по продуктам": "Product Navigation", "Пульс — Apache Superset (BI)": "Pulse — Apache Superset (BI)", "AI ассистент для ЧК и Дистрибьюторов": "AI Assistant for Club Members and Distributors", "Внедрение умного помощника в жизнь ЧК и Дистрибьюторов для повышения уровня обслуживания потребителей и Дистрибьюторов": "Introduce a smart assistant for club members and distributors to improve service levels", "Бизнес процессы и заявки": "Business Processes & Requests", "Инструменты для менеджеров (дашборды)": "Manager Tools (Dashboards)", "Создание инструмента для управления бизнесом (дашборды)": "Build a business-management tool (dashboards)", "Обучение сотрудников — новая платформа": "Employee Training — New Platform", "ИИ-ассистент Коралина": "AI Assistant Koralina", "Внедрение умного помощника в жизнь сотрудников для повышения эффективности сотрудников": "Introduce a smart assistant for employees to improve efficiency", "Бизнес обучение + CBA (LMS)": "Business Training + CBA (LMS)", "Event — замена платформ": "Events — Platform Replacement", "Внедрение 1С ERP": "1C ERP Implementation", "Автоматизация процессов закупки, товарного учета, казначейства, финансовой отчетности": "Automate procurement, inventory accounting, treasury, and financial reporting processes", "Интеграция с локальными бух. системами": "Integration with Local Accounting Systems", "Автоматизация процесса, сокращение операционных издержек и контроль налогов": "Automate the process, reduce operating costs, and improve tax control", "Фискализация по всем рынкам": "Fiscalization Across All Markets", "Обеспечить работу бизнеса в соответствии с законодательством и контролирует создание налоговой базы": "Ensure legal compliance and proper control of the tax base", "Штрихкодирование": "Barcoding", "снижение операционных издержек (контроль за стоком на складах, в ОПК, проведение инвентаризаций, etc), контроль товародвижения (хранение, отгрузка, приемка), учет в системах ERP и тд.": "Reduce operating costs (stock control at warehouses and pick-up points, stocktaking, etc.), control goods movement (storage, shipping, receiving), and record it in ERP systems", "Эффективная коммуникация (смс, имейл)": "Effective Communication (SMS, Email)", "Повысить эффективность взаимодействия с ЧК, повысить активность ЧК за счет рассылок, как следствие рост продаж": "Improve engagement with club members through mailings, increasing their activity and, as a result, sales", "Контент платформа для трафика": "Content Platform for Traffic", "Создание платформы для генерации трафика новых чк и клиентов для роста продаж": "Build a platform to generate traffic from new club members and customers to drive sales growth", "Подписка": "Subscription", "РЦ — внедрение новых систем (1С)": "Distribution Center — New System Rollout (1C)", "Автоматизировать операционную работу склада с целью повышения операционной эффективности (повышение производительности труда и сокращение издержек)": "Automate warehouse operations to improve operational efficiency (higher productivity, lower costs)", "Региональные скидки": "Regional Discounts", "Сервис логистики": "Logistics Service", "Автоматизировать логистикцу с целью повышения операционной эффективности (сокращение издержек)": "Automate logistics to improve operational efficiency (cost reduction)", "КЭДО": "Electronic HR Document Flow (EHR)", "Бизнес модель РФ (франчайзи, портал)": "Russia Business Model (Franchise, Portal)", "Поставки в РФ, включая маркировку": "Supplies to Russia, Including Labeling", "Обеспечить работу бизнеса в соответствии с законодательством": "Ensure business operations comply with local legislation", "Честный знак": "Chestny Znak (Product Labeling)", "Производство паучей": "Pouch Production", "ЭДО": "Electronic Document Flow (EDF)", "Транспортные документы ЭДО": "Transport Documents EDF", "Верификация Дистрибьюторов": "Distributor Verification", "Валидация базы ЧК для повышения эффективности коммуникации": "Validate the club-member database to improve communication effectiveness", "Маркировка Казахстан": "Product Labeling — Kazakhstan", "Маркировка Таджикистан / Армения": "Product Labeling — Tajikistan / Armenia", "Азербайджан": "Azerbaijan", "Открытие регистрации и доставки на рынок Азербайджан": "Launch registration and delivery in the Azerbaijan market", "Изменение маркетинг плана": "Marketing Plan Update", "Расширение географии — Пуэрто-Рико": "Geographic Expansion — Puerto Rico", "Расширение географии — Мексика": "Geographic Expansion — Mexico", "3PL в Ирландии": "3PL in Ireland", "DDP для Великобритании": "DDP for the United Kingdom", "Норвегия — переход на Евро": "Norway — Transition to Euro", "Румыния": "Romania", "Склад в Германии": "Warehouse in Germany", "DDP для доставки из Германии": "DDP for Delivery from Germany", "Испания — документооборот с налоговой": "Spain — Tax Authority Document Flow", "Болгария — Евро": "Bulgaria — Euro", "Автоматизация учета рабочего времени": "Time-Tracking Automation", "Маркетинг": "Marketing", "ДП": "DP", "ДРД": "DRD", "ДПД": "DPD", "Health OS трек": "Health OS Track", "Делаем заботу о здоровье понятной, персонализированной и доступной каждому.": "We make health care understandable, personalized, and accessible to everyone.", "За 18 мес. увеличить количество лоялистов на Х% за счет увеличения динамики на всех этапах воронки.": "Over 18 months, increase the number of loyalists by X% by improving momentum at every stage of the funnel.", "Увеличить конверсию покупки в воронке с P1 в P2 на Х%": "Increase purchase conversion in the funnel from P1 to P2 by X%", "За 18 мес. поднять долю новичков, доходящих до лоялистов за полгода, с 10% до 13%": "Over 18 months, raise the share of newcomers who reach loyalist status within six months from 10% to 13%", "GrowthModel трек (новые рынки)": "GrowthModel Track (New Markets)", "Создать модель устойчивого роста на новых рынках, продвигая экосистему Coral Club.": "Build a sustainable growth model in new markets by promoting the Coral Club ecosystem.", "К декабрю 2026 года увеличить ежемесячный товарооборот в Румынии с 300 тыс. до ~489 тыс. евро (+63%) за счёт модели «подписка + Ambassadors 2.0».": "By December 2026, increase monthly turnover in Romania from €300K to ~€489K (+63%) via the \"subscription + Ambassadors 2.0\" model.", "К декабрю 2026 ежемесячный товарооборот в Румынии 489 тыс. евро": "By December 2026, monthly turnover in Romania reaches €489K", "К декабрю 2026 10% клиентской базы Румынии купили подписку": "By December 2026, 10% of Romania's customer base has purchased a subscription", "За 18 месяцев протестировать процесс «Развитие рынков» минимум на 4 новых рынках, выйдя на 1500+ нативных потребителей в каждом.": "Over 18 months, pilot the \"Market Development\" process in at least 4 new markets, reaching 1,500+ native consumers in each.", "Количество нативных потребителей — 1500 человек": "Number of native consumers — 1,500 people", "Создать методику, при которой новый рынок развивается до нужной стадии за Х мес.": "Create a methodology that grows a new market to the target stage within X months", "Количество нативных дистрибьюторов — 4": "Number of native distributors — 4", "Достигнуть по каждой стране количество нативных дистрибьюторов в рангах согласно матрице развития рынка": "Reach the target number of ranked native distributors per country per the market-development matrix", "Размер товарооборота — не менее Х": "Turnover size — at least X", "Количество открытых рынков — не менее 4": "Number of markets opened — at least 4", "Масштабировать подход/процесс в стране": "Scale the approach/process within the country", "PrimeGrowth трек (зрелые рынки)": "PrimeGrowth Track (Mature Markets)", "Продукт компании в каждой Х семье в странах Зрелых рынков «Россия и Казахстан».": "The company's product in every X household across the Mature Markets \"Russia and Kazakhstan\".", "Обеспечить рост компании в целевом периоде на зрелых рынках.": "Ensure company growth in the target period across mature markets.", "Россия: товарооборот вырастет на 50%": "Russia: turnover grows by 50%", "1. Увеличить количество активных дистрибьюторов 2. Увеличить количество активных потребителей": "1. Increase the number of active distributors 2. Increase the number of active consumers", "Казахстан: рост на 20%": "Kazakhstan: 20% growth", "CoralEVO трек (функциональный)": "CoralEVO Track (Functional)", "Обеспечить бизнесу бесперебойное движение к целям через стабильность процессов, развитие и реализацию проектов.": "Enable uninterrupted progress toward business goals through process stability, development, and project delivery.", "За 18 месяцев запустить «ключевые инструменты проектного управления» в компании CCI.": "Over 18 months, launch the \"key project-management tools\" across CCI.", "Официально запустить Офис управления проектами к декабрю 2026": "Officially launch the Project Management Office by December 2026", "Об офисе управления проектами знают все в компании": "Everyone in the company knows about the Project Management Office", "Х% проектов в бэклоге Проектного офиса имеют «предварительную» оценку ресурсной ёмкости": "X% of projects in the PMO backlog have a \"preliminary\" resource-capacity estimate", "Проектный офис использует расчёты «предварительной оценки ресурсов»": "The PMO uses \"preliminary resource estimate\" calculations", "Х% проектов перешли в стадию «решён» в срок и в рамках бюджета": "X% of projects reached \"resolved\" status on time and within budget", "Процент проектов, завершённых с достижением запланированных показателей": "Share of projects completed while hitting their planned targets", "Провести в 2026 г. минимум 2 заседания Стратегического комитета": "Hold at least 2 Strategic Committee meetings in 2026", "За 18 месяцев провести трансформацию операционной модели компании.": "Over 18 months, transform the company's operating model.", "100% ключевых бизнес-процессов компании описаны и согласованы": "100% of the company's key business processes are documented and approved", "Процессный офис является важной частью операционной модели компании": "The Process Office is an important part of the company's operating model", "100% критичных межфункциональных процессов имеют назначенные роли по RACI": "100% of critical cross-functional processes have assigned RACI roles", "Не менее 60% согласованных внутренних SLA внедрены в работу": "At least 60% of approved internal SLAs are implemented", "Не менее 90% владельцев процессов ежемесячно используют метрики и отчётность для управления SLA": "At least 90% of process owners use metrics and reporting monthly to manage SLAs", "ITModel": "ITModel", "Помогаем бизнесу развиваться по всему миру.": "We help the business grow around the world.", "Трансформировать ИТ в драйвер глобального роста с измеримым вкладом в бизнес.": "Transform IT into a driver of global growth with a measurable contribution to the business.", "SLA поддержки внутренних клиентов не менее Х": "Internal-customer support SLA of at least X", "Разработать и утвердить структуру Технической поддержки": "Design and approve the Technical Support structure", "SLA Разработки не ниже Х": "Development SLA no lower than X", "В Х% проектов, переданных в ИТ, есть расчёт экономической эффективности": "X% of projects handed over to IT include an economic-efficiency calculation", "ИТ проекты управляются через единый продуктовый процесс и roadmap": "IT projects are managed through a single product process and roadmap", "Запустить Х пилотов до конца 2027 г": "Launch X pilots by the end of 2027", "1. Создать протоколы взаимодействия с Core ядром 2. Внедрить процесс R&D (18 мес.) 3. Утвердить правила и полномочия для пилотов": "1. Create interaction protocols with the Core 2. Implement the R&D process (18 months) 3. Approve rules and authority for pilots", "Начните вводить название — покажем совпадения из справочника": "Start typing a name — we'll show matches from the directory", "Самостоятельная": "Standalone", "отделов": "departments", "Введите пароль": "Enter password", "Доступ к реестру инициатив защищён паролем": "Access to the initiative registry is password-protected", "Пароль": "Password", "Неверный пароль. Проверьте раскладку и повторите.": "Incorrect password. Check your keyboard layout and try again.", "Войти →": "Sign in →", "Выйти": "Log out", "Доступ по паролю · нажмите «Выйти», чтобы сменить роль": "Password-protected access · click \"Log out\" to switch roles", "Данные хранятся в общей базе Supabase и видны всем пользователям сайта, независимо от браузера и устройства.": "Data is stored in a shared Supabase database and is visible to all site users, regardless of browser or device.", "Формируем файл…": "Building file…", "Файл Excel скачан": "Excel file downloaded", "Не удалось сформировать Excel-файл. Попробуйте ещё раз.": "Couldn't generate the Excel file. Please try again.", "Скачать Excel (по шаблону)": "Download Excel (template)"};
+const TRANSLATIONS = {"Реестр инициатив": "Initiative Registry", "Руководитель функции": "Function Lead", "Администратор": "Administrator", "Прототип · переключатель роли временный, до подключения авторизации": "Prototype · role switch is temporary, pending authentication", "Загружаем данные…": "Loading data…", "Отдел": "Department", "Инициатива": "Initiative", "Загрузка": "Workload", "Заказчик": "Customer", "Проект?": "Project?", "Цель трека?": "Track goal?", "Итог": "Summary", "Шаг": "Step", "из 7": "of 7", "Шаг 1": "Step 1", "Впишите название своего отдела": "Type in your department name", "Не нашли отдел в списке? Укажите его вручную — мы добавим его в справочник.": "Can't find your department in the list? Type it in manually — we'll add it to the directory.", "Например, Отдел цифровых продуктов": "e.g. Digital Products Department", "← Назад к списку": "← Back to list", "Продолжить →": "Continue →", "Шаг 1 из 7": "Step 1 of 7", "Выберите свой отдел": "Select your department", "Начните вводить название — покажем совпадения из справочника (${state.departments.length} отделов).": "Start typing a name — we'll show matches from the directory (${state.departments.length} departments).", "Поиск отдела…": "Search department…", "Совпадений не найдено": "No matches found", "Не нашли свой отдел? Вписать название вручную →": "Can't find your department? Type it in manually →", "Опишите вашу инициативу": "Describe your initiative", "Коротко: что вы делаете (или планируете делать) и зачем.": "Briefly: what you're doing (or plan to do) and why.", "Например: разрабатываем единый шаблон онбординга для новых сотрудников отдела, чтобы сократить время выхода на самостоятельную работу…": "e.g.: we're building a unified onboarding template for new department hires to cut the time to independent work…", "← Назад": "← Back", "Шаг 3 из 7": "Step 3 of 7", "Сколько % рабочего времени в неделю занимает эта инициатива?": "How much of your weekly working time does this initiative take?", "Ориентировочно — точность до 5% достаточна.": "Approximate is fine — 5% precision is enough.", "Шаг 4 из 7": "Step 4 of 7", "Кто заказчик инициативы?": "Who is the initiative's sponsor?", "Укажите ФИО — это может быть коллега, руководитель другого отдела, или вы сами.": "Enter a full name — a colleague, another department's lead, or yourself.", "Иван Иванов": "Jane Doe", "Шаг 5 из 7": "Step 5 of 7", "Является ли инициатива частью одного из проектов компании?": "Is the initiative part of one of the company's projects?", "Если инициатива — это часть более крупного корпоративного проекта, выберите «Да» и найдём его в списке.": "If the initiative belongs to a larger corporate project, choose \"Yes\" and we'll find it in the list.", "Да, это часть проекта": "Yes, it's part of a project", "Покажем список проектов компании": "We'll show the company's project list", "Нет / не уверен": "No / not sure", "Проверим, влияет ли на стратегические цели": "We'll check whether it affects strategic goals", "Шаг 5 · Выбор проекта": "Step 5 · Select project", "Выберите проект из списка": "Select a project from the list", "проектов. Ищите по названию, цели или заказчику, сузьте фильтрами, кликните на плашку — увидите детали проекта.": "projects. Search by name, goal, or customer, narrow with filters, click a tile to see project details.", "Поиск проекта…": "Search project…", "Все типы": "All types", "Все заказчики": "All customers", "Все дивизионы": "All divisions", "Найдено:": "Found:", "без заказчика": "no customer", "Ничего не найдено — попробуйте другой запрос или фильтр": "Nothing found — try a different search or filter", "Без типа": "No type", "Шаг 6 из 7": "Step 6 of 7", "Может ли инициатива способствовать одной из целей стратегических треков?": "Could the initiative contribute to one of the strategic tracks' goals?", "Речь о целях на 18 месяцев внутри одного из 5 стратегических треков компании.": "This refers to the 18-month goals within one of the company's 5 strategic tracks.", "Да, влияет на цель": "Yes, it affects a goal", "Покажем дерево целей по трекам": "We'll show the goal tree by track", "Зафиксируем инициативу как самостоятельную": "We'll record the initiative as standalone", "Шаг 6 · Дерево целей": "Step 6 · Goal tree", "Выберите цель, на которую влияет инициатива": "Select the goal the initiative affects", "Кликните на цель — раскроются её ключевые результаты (KR) и кнопка выбора. Прокрутите вправо, если не помещается.": "Click a goal to reveal its key results (KRs) and a select button. Scroll right if it doesn't fit.", "Стратегические треки Coral Club": "Coral Club Strategic Tracks", "Пример:": "Example:", "KR ещё не заполнены": "KRs not filled in yet", "Выбрать эту цель →": "Select this goal →", "Трек": "Track", "— стратегическое направление на 18 мес.": "— strategic direction for 18 months.", "Цель": "Goal", "— конкретный результат трека": "— a concrete result of the track", "— измеримый ключевой результат цели": "— a measurable key result of the goal", "Проверьте и подтвердите": "Review and confirm", "Отнесена к проекту": "Linked to project", "Способствует стратегической цели": "Contributes to a strategic goal", "Самостоятельная инициатива": "Standalone initiative", "Не отнесена к проекту или стратегической цели — фиксируем как есть, для дальнейшего анализа.": "Not linked to a project or strategic goal — recorded as-is for further analysis.", "% времени в неделю": "% of time per week", "Подтвердить и сохранить": "Confirm and save", "Выбрать этот проект →": "Select this project →", "Инициатива сохранена": "Initiative saved", "Спасибо! Можете добавить ещё одну инициативу того же отдела или закончить.": "Thanks! You can add another initiative for the same department or finish.", "Сменить отдел": "Change department", "Добавить ещё инициативу →": "Add another initiative →", "Дашборд": "Dashboard", "Проекты": "Projects", "Треки и цели": "Tracks & Goals", "Отделы": "Departments", "Инициативы": "Initiatives", "Общая картина по всем поданным инициативам": "An overview of all submitted initiatives", "Инициатив подано": "Initiatives submitted", "Часть проекта": "Part of a project", "Влияют на цель трека": "Affect a track goal", "Самостоятельные": "Standalone", "Отделов подали хотя бы одну": "Departments with at least one submission", "Ещё не подали ни одной инициативы:": "Haven't submitted any initiative yet:", "отдел(ов). Список — во вкладке «Инициативы» (фильтр по отделу).": "department(s). See the \"Initiatives\" tab (filter by department).", "проектов · RUN:": "projects · RUN:", "CHANGE:": "CHANGE:", "без типа:": "no type:", "+ Добавить проект": "+ Add project", "Поиск по названию, цели или заказчику…": "Search by name, goal, or customer…", "Показано:": "Showing:", "из": "of", "треков": "tracks", "+ Добавить трек": "+ Add track", "+ Добавить цель": "+ Add goal", "KR ещё не добавлены": "No KRs added yet", "+ Добавить KR": "+ Add KR", "отделов · возможные дубли подсвечены": "departments · possible duplicates highlighted", "Объединить выбранные": "Merge selected", "+ Добавить отдел": "+ Add department", "№": "#", "Название": "Name", "подано всего, показано": "submitted total, showing", "Экспорт CSV": "Export CSV", "Все отделы": "All departments", "Все категории": "All categories", "Влияет на цель": "Affects a goal", "Дата": "Date", "Отнесена к": "Linked to", "Инициатив пока нет — как только руководители начнут заполнять форму, они появятся здесь.": "No initiatives yet — as soon as leads start filling in the form, they'll appear here.", "Проект:": "Project:", "Проект (удалён)": "Project (deleted)", "Цель (удалена)": "Goal (deleted)", "Не отнесена": "Unlinked", "Редактировать проект": "Edit project", "Добавить проект": "Add project", "Дивизион": "Division", "Например, GLOBAL": "e.g. GLOBAL", "Заказчик (функция)": "Customer (function)", "Например, Finance": "e.g. Finance", "Тип проекта": "Project type", "Не задан": "Not set", "Удалить": "Delete", "Отмена": "Cancel", "Сохранить": "Save", "Цель проекта пока не заполнена в справочнике": "The project goal hasn't been filled in yet", "Добавить трек": "Add track", "Название трека": "Track name", "Миссия": "Mission", "Добавить": "Add", "Добавить цель": "Add goal", "Текст цели (18 мес.)": "Goal text (18 months)", "Добавить KR": "Add KR", "Текст KR": "KR text", "Пример-подсказка (необязательно)": "Example hint (optional)", "Добавить отдел": "Add department", "Название отдела": "Department name", "Объединить отделы": "Merge departments", "Выберите каноническое название — остальные будут удалены, а все их инициативы перепривяжутся к нему.": "Choose the canonical name — the others will be deleted and all their initiatives reassigned to it.", "Объединить": "Merge", "Скопируйте текст ниже и вставьте в Excel (разделитель — «;»).": "Copy the text below and paste it into Excel (delimiter — \";\").", "Готово": "Done", "Не удалось сохранить изменения. Попробуйте ещё раз.": "Couldn't save the changes. Please try again.", "Опишите инициативу чуть подробнее (от 10 символов)": "Please describe the initiative in a bit more detail (10+ characters)", "Укажите ФИО заказчика инициативы": "Please enter the sponsor's full name", "Укажите название проекта": "Please enter the project name", "Проект добавлен": "Project added", "Проект удалён": "Project deleted", "Проект обновлён": "Project updated", "Укажите название трека": "Please enter the track name", "Трек добавлен": "Track added", "Укажите текст цели": "Please enter the goal text", "Цель добавлена": "Goal added", "Укажите текст KR": "Please enter the KR text", "KR добавлен": "KR added", "Цель удалена": "Goal deleted", "KR удалён": "KR deleted", "Укажите название отдела": "Please enter the department name", "Отдел добавлен": "Department added", "Отдел удалён": "Department deleted", "Выберите минимум 2 отдела для объединения": "Select at least 2 departments to merge", "Отделы объединены": "Departments merged", "GLOBAL": "GLOBAL", "РФ+РБ": "Russia+Belarus", "Азия": "Asia", "Америка+Канада": "Americas+Canada", "Европа-Север": "Europe North", "Европа-Центр": "Europe Central", "Европа-Запад": "Europe West", "Европа-Юг": "Europe South", "Back office": "Back Office", "Поддержка дистрибьюторов уровень : Дивизион": "Distributor Support (Division level)", "Юристы Global": "Legal Global", "Мерч Global": "Merchandise Global", "Обучение Global": "Training Global", "PR Global": "PR Global", "Сертификация Global": "Certification Global", "Бухгалтерия Global": "Accounting Global", "НИО продукты Global": "R&D Products Global", "Новые рынки / Развитие Global": "New Markets / Development Global", "Регион Юг": "Region South", "Офис Эволюции Global": "Evolution Office Global", "ECOM Global": "ECOM Global", "Управление персоналом HR Global": "HR Global", "Операции Global": "Operations Global", "Управление Local / Регион Запад": "Local Management / Region West", "Маркетинг (коммуникации)": "Marketing (Communications)", "Эволюция Global": "Evolution Global", "Логистика Global": "Logistics Global", "Финансы международные Global": "International Finance Global", "Разработка ИТ Global": "IT Development Global", "Операции Европа": "Operations Europe", "Подбор Global": "Recruitment Global", "Управление Local / Регион Россия/Беларусь": "Local Management / Region Russia/Belarus", "Управление Local / Регион Румыния": "Local Management / Region Romania", "Маркетинг Global": "Marketing Global", "Общие финансы Global": "General Finance Global", "Поддержка дистрибьюторов Global": "Distributor Support Global", "Признание дистрибьюторов Global": "Distributor Recognition Global", "Логистика (-2) Global": "Logistics (-2) Global", "Event Local": "Events Local", "Рассчеты с дистрибьюторами Global": "Distributor Payments Global", "Обучение дистрибьютора Global": "Distributor Training Global", "Even Local Азия": "Events Local Asia", "Снабжение Global": "Procurement Global", "Управление проектами Global": "Project Management Global", "Управление Local / Регион США": "Local Management / Region USA", "Репутация Global": "Reputation Global", "Анализ Global": "Analytics Global", "Операции Local / Регион Азия": "Operations Local / Region Asia", "IT и Право Global": "IT & Legal Global", "Управление Local / Регион Север": "Local Management / Region North", "Зрелые рынки развитие Global": "Mature Markets Development Global", "ИТ (базы данных) Global": "IT (Databases) Global", "Отдел ИИ Global": "AI Department Global", "Разработка продуктов и HealthOS Global": "Product Development & HealthOS Global", "ИТ Global": "IT Global", "Зам. рук. Проектного офиса Global/local": "Deputy Head of PMO Global/Local", "Финансы компании Global": "Company Finance Global", "Local / Операции США": "Local / Operations USA", "Управление клиентским опытом (Global) + Управление регионом Local (UK)": "Customer Experience Management (Global) + Local Region Management (UK)", "Описание процессов": "Process Mapping", "Создание карты основных процессов компании, распределения зон ответственности за процессы": "Map the company's core processes and define process ownership", "Стартовая программа для новичков": "Newcomer Starter Program", "Поиск оптимальных механик для набора и активации сети, поддержки лояльности сети для роста продаж": "Find the optimal mechanics for recruiting and activating the network, and sustaining its loyalty to drive sales growth", "Друзья Клуба": "Club Friends", "Быстрый старт": "Fast Start", "Программы лояльности": "Loyalty Programs", "Digital kit": "Digital Kit", "CRM Bitrix (IP телефония для КЦ)": "CRM Bitrix (IP Telephony for Contact Center)", "Повысить уровень удовлетворенности клиентов за счет качественного обслуживания (включая замену инструментов работы)": "Increase customer satisfaction through better service quality (including replacing current work tools)", "Refiner": "Refiner", "Промокоды": "Promo Codes", "Адреса на сайте": "Website Addresses", "Курьерские службы": "Courier Services", "Автоматизация работ с курьерскими службами для повышения эффективности и повышения удовлетворенности потребителей": "Automate work with courier services to increase efficiency and customer satisfaction", "Верификация": "Verification", "База знаний": "Knowledge Base", "Создание базы данных для бизнеса, чтобы каждый отдел мог анализировать ключевые показатели и планировать следующие активности": "Build a business database so every department can analyze key metrics and plan next activities", "Упрощенная регистрация": "Simplified Registration", "Оптимизация формы регистрации новых членов клуба для повышения конверсии из клиентов в потребители": "Optimize the club registration form to improve conversion from customers to members", "Статусная модель заказов": "Order Status Model", "Обеспечить стабильную автоматическую работу процесса обработки заказов с целью сокращения ошибок и операционных издержек, повышения уровня удовлетворенности потребителей": "Ensure stable, automated order processing to reduce errors and operating costs and improve customer satisfaction", "ЛК Дистрибьютора — Back office": "Distributor Portal — Back Office", "Навигация по продуктам": "Product Navigation", "Пульс — Apache Superset (BI)": "Pulse — Apache Superset (BI)", "AI ассистент для ЧК и Дистрибьюторов": "AI Assistant for Club Members and Distributors", "Внедрение умного помощника в жизнь ЧК и Дистрибьюторов для повышения уровня обслуживания потребителей и Дистрибьюторов": "Introduce a smart assistant for club members and distributors to improve service levels", "Бизнес процессы и заявки": "Business Processes & Requests", "Инструменты для менеджеров (дашборды)": "Manager Tools (Dashboards)", "Создание инструмента для управления бизнесом (дашборды)": "Build a business-management tool (dashboards)", "Обучение сотрудников — новая платформа": "Employee Training — New Platform", "ИИ-ассистент Коралина": "AI Assistant Koralina", "Внедрение умного помощника в жизнь сотрудников для повышения эффективности сотрудников": "Introduce a smart assistant for employees to improve efficiency", "Бизнес обучение + CBA (LMS)": "Business Training + CBA (LMS)", "Event — замена платформ": "Events — Platform Replacement", "Внедрение 1С ERP": "1C ERP Implementation", "Автоматизация процессов закупки, товарного учета, казначейства, финансовой отчетности": "Automate procurement, inventory accounting, treasury, and financial reporting processes", "Интеграция с локальными бух. системами": "Integration with Local Accounting Systems", "Автоматизация процесса, сокращение операционных издержек и контроль налогов": "Automate the process, reduce operating costs, and improve tax control", "Фискализация по всем рынкам": "Fiscalization Across All Markets", "Обеспечить работу бизнеса в соответствии с законодательством и контролирует создание налоговой базы": "Ensure legal compliance and proper control of the tax base", "Штрихкодирование": "Barcoding", "снижение операционных издержек (контроль за стоком на складах, в ОПК, проведение инвентаризаций, etc), контроль товародвижения (хранение, отгрузка, приемка), учет в системах ERP и тд.": "Reduce operating costs (stock control at warehouses and pick-up points, stocktaking, etc.), control goods movement (storage, shipping, receiving), and record it in ERP systems", "Эффективная коммуникация (смс, имейл)": "Effective Communication (SMS, Email)", "Повысить эффективность взаимодействия с ЧК, повысить активность ЧК за счет рассылок, как следствие рост продаж": "Improve engagement with club members through mailings, increasing their activity and, as a result, sales", "Контент платформа для трафика": "Content Platform for Traffic", "Создание платформы для генерации трафика новых чк и клиентов для роста продаж": "Build a platform to generate traffic from new club members and customers to drive sales growth", "Подписка": "Subscription", "РЦ — внедрение новых систем (1С)": "Distribution Center — New System Rollout (1C)", "Автоматизировать операционную работу склада с целью повышения операционной эффективности (повышение производительности труда и сокращение издержек)": "Automate warehouse operations to improve operational efficiency (higher productivity, lower costs)", "Региональные скидки": "Regional Discounts", "Сервис логистики": "Logistics Service", "Автоматизировать логистикцу с целью повышения операционной эффективности (сокращение издержек)": "Automate logistics to improve operational efficiency (cost reduction)", "КЭДО": "Electronic HR Document Flow (EHR)", "Бизнес модель РФ (франчайзи, портал)": "Russia Business Model (Franchise, Portal)", "Поставки в РФ, включая маркировку": "Supplies to Russia, Including Labeling", "Обеспечить работу бизнеса в соответствии с законодательством": "Ensure business operations comply with local legislation", "Честный знак": "Chestny Znak (Product Labeling)", "Производство паучей": "Pouch Production", "ЭДО": "Electronic Document Flow (EDF)", "Транспортные документы ЭДО": "Transport Documents EDF", "Верификация Дистрибьюторов": "Distributor Verification", "Валидация базы ЧК для повышения эффективности коммуникации": "Validate the club-member database to improve communication effectiveness", "Маркировка Казахстан": "Product Labeling — Kazakhstan", "Маркировка Таджикистан / Армения": "Product Labeling — Tajikistan / Armenia", "Азербайджан": "Azerbaijan", "Открытие регистрации и доставки на рынок Азербайджан": "Launch registration and delivery in the Azerbaijan market", "Изменение маркетинг плана": "Marketing Plan Update", "Расширение географии — Пуэрто-Рико": "Geographic Expansion — Puerto Rico", "Расширение географии — Мексика": "Geographic Expansion — Mexico", "3PL в Ирландии": "3PL in Ireland", "DDP для Великобритании": "DDP for the United Kingdom", "Норвегия — переход на Евро": "Norway — Transition to Euro", "Румыния": "Romania", "Склад в Германии": "Warehouse in Germany", "DDP для доставки из Германии": "DDP for Delivery from Germany", "Испания — документооборот с налоговой": "Spain — Tax Authority Document Flow", "Болгария — Евро": "Bulgaria — Euro", "Автоматизация учета рабочего времени": "Time-Tracking Automation", "Маркетинг": "Marketing", "ДП": "DP", "ДРД": "DRD", "ДПД": "DPD", "Health OS трек": "Health OS Track", "Делаем заботу о здоровье понятной, персонализированной и доступной каждому.": "We make health care understandable, personalized, and accessible to everyone.", "За 18 мес. увеличить количество лоялистов на Х% за счет увеличения динамики на всех этапах воронки.": "Over 18 months, increase the number of loyalists by X% by improving momentum at every stage of the funnel.", "Увеличить конверсию покупки в воронке с P1 в P2 на Х%": "Increase purchase conversion in the funnel from P1 to P2 by X%", "За 18 мес. поднять долю новичков, доходящих до лоялистов за полгода, с 10% до 13%": "Over 18 months, raise the share of newcomers who reach loyalist status within six months from 10% to 13%", "GrowthModel трек (новые рынки)": "GrowthModel Track (New Markets)", "Создать модель устойчивого роста на новых рынках, продвигая экосистему Coral Club.": "Build a sustainable growth model in new markets by promoting the Coral Club ecosystem.", "К декабрю 2026 года увеличить ежемесячный товарооборот в Румынии с 300 тыс. до ~489 тыс. евро (+63%) за счёт модели «подписка + Ambassadors 2.0».": "By December 2026, increase monthly turnover in Romania from €300K to ~€489K (+63%) via the \"subscription + Ambassadors 2.0\" model.", "К декабрю 2026 ежемесячный товарооборот в Румынии 489 тыс. евро": "By December 2026, monthly turnover in Romania reaches €489K", "К декабрю 2026 10% клиентской базы Румынии купили подписку": "By December 2026, 10% of Romania's customer base has purchased a subscription", "За 18 месяцев протестировать процесс «Развитие рынков» минимум на 4 новых рынках, выйдя на 1500+ нативных потребителей в каждом.": "Over 18 months, pilot the \"Market Development\" process in at least 4 new markets, reaching 1,500+ native consumers in each.", "Количество нативных потребителей — 1500 человек": "Number of native consumers — 1,500 people", "Создать методику, при которой новый рынок развивается до нужной стадии за Х мес.": "Create a methodology that grows a new market to the target stage within X months", "Количество нативных дистрибьюторов — 4": "Number of native distributors — 4", "Достигнуть по каждой стране количество нативных дистрибьюторов в рангах согласно матрице развития рынка": "Reach the target number of ranked native distributors per country per the market-development matrix", "Размер товарооборота — не менее Х": "Turnover size — at least X", "Количество открытых рынков — не менее 4": "Number of markets opened — at least 4", "Масштабировать подход/процесс в стране": "Scale the approach/process within the country", "PrimeGrowth трек (зрелые рынки)": "PrimeGrowth Track (Mature Markets)", "Продукт компании в каждой Х семье в странах Зрелых рынков «Россия и Казахстан».": "The company's product in every X household across the Mature Markets \"Russia and Kazakhstan\".", "Обеспечить рост компании в целевом периоде на зрелых рынках.": "Ensure company growth in the target period across mature markets.", "Россия: товарооборот вырастет на 50%": "Russia: turnover grows by 50%", "1. Увеличить количество активных дистрибьюторов 2. Увеличить количество активных потребителей": "1. Increase the number of active distributors 2. Increase the number of active consumers", "Казахстан: рост на 20%": "Kazakhstan: 20% growth", "CoralEVO трек (функциональный)": "CoralEVO Track (Functional)", "Обеспечить бизнесу бесперебойное движение к целям через стабильность процессов, развитие и реализацию проектов.": "Enable uninterrupted progress toward business goals through process stability, development, and project delivery.", "За 18 месяцев запустить «ключевые инструменты проектного управления» в компании CCI.": "Over 18 months, launch the \"key project-management tools\" across CCI.", "Официально запустить Офис управления проектами к декабрю 2026": "Officially launch the Project Management Office by December 2026", "Об офисе управления проектами знают все в компании": "Everyone in the company knows about the Project Management Office", "Х% проектов в бэклоге Проектного офиса имеют «предварительную» оценку ресурсной ёмкости": "X% of projects in the PMO backlog have a \"preliminary\" resource-capacity estimate", "Проектный офис использует расчёты «предварительной оценки ресурсов»": "The PMO uses \"preliminary resource estimate\" calculations", "Х% проектов перешли в стадию «решён» в срок и в рамках бюджета": "X% of projects reached \"resolved\" status on time and within budget", "Процент проектов, завершённых с достижением запланированных показателей": "Share of projects completed while hitting their planned targets", "Провести в 2026 г. минимум 2 заседания Стратегического комитета": "Hold at least 2 Strategic Committee meetings in 2026", "За 18 месяцев провести трансформацию операционной модели компании.": "Over 18 months, transform the company's operating model.", "100% ключевых бизнес-процессов компании описаны и согласованы": "100% of the company's key business processes are documented and approved", "Процессный офис является важной частью операционной модели компании": "The Process Office is an important part of the company's operating model", "100% критичных межфункциональных процессов имеют назначенные роли по RACI": "100% of critical cross-functional processes have assigned RACI roles", "Не менее 60% согласованных внутренних SLA внедрены в работу": "At least 60% of approved internal SLAs are implemented", "Не менее 90% владельцев процессов ежемесячно используют метрики и отчётность для управления SLA": "At least 90% of process owners use metrics and reporting monthly to manage SLAs", "ITModel": "ITModel", "Помогаем бизнесу развиваться по всему миру.": "We help the business grow around the world.", "Трансформировать ИТ в драйвер глобального роста с измеримым вкладом в бизнес.": "Transform IT into a driver of global growth with a measurable contribution to the business.", "SLA поддержки внутренних клиентов не менее Х": "Internal-customer support SLA of at least X", "Разработать и утвердить структуру Технической поддержки": "Design and approve the Technical Support structure", "SLA Разработки не ниже Х": "Development SLA no lower than X", "В Х% проектов, переданных в ИТ, есть расчёт экономической эффективности": "X% of projects handed over to IT include an economic-efficiency calculation", "ИТ проекты управляются через единый продуктовый процесс и roadmap": "IT projects are managed through a single product process and roadmap", "Запустить Х пилотов до конца 2027 г": "Launch X pilots by the end of 2027", "1. Создать протоколы взаимодействия с Core ядром 2. Внедрить процесс R&D (18 мес.) 3. Утвердить правила и полномочия для пилотов": "1. Create interaction protocols with the Core 2. Implement the R&D process (18 months) 3. Approve rules and authority for pilots", "Начните вводить название — покажем совпадения из справочника": "Start typing a name — we'll show matches from the directory", "Самостоятельная": "Standalone", "отделов": "departments", "Введите пароль": "Enter password", "Доступ к реестру инициатив защищён паролем": "Access to the initiative registry is password-protected", "Пароль": "Password", "Неверный пароль. Проверьте раскладку и повторите.": "Incorrect password. Check your keyboard layout and try again.", "Войти →": "Sign in →", "Выйти": "Log out", "Доступ по паролю · нажмите «Выйти», чтобы сменить роль": "Password-protected access · click \"Log out\" to switch roles", "Данные хранятся в общей базе Supabase и видны всем пользователям сайта, независимо от браузера и устройства.": "Data is stored in a shared Supabase database and is visible to all site users, regardless of browser or device.", "Формируем файл…": "Building file…", "Файл Excel скачан": "Excel file downloaded", "Не удалось сформировать Excel-файл. Попробуйте ещё раз.": "Couldn't generate the Excel file. Please try again.", "Скачать Excel (по шаблону)": "Download Excel (template)", "Шаг 1 из 4": "Step 1 of 4", "Опишите свои инициативы": "Describe your initiatives", "Укажите до 10 инициатив. Для каждой — заказчика и долю времени, которую она забирает. Сумма по всем инициативам не может превышать 100%.": "List up to 10 initiatives. For each, add a customer and the share of time it takes. The total across all initiatives can't exceed 100%.", "Название инициативы": "Initiative name", "Заказчик (ФИО)": "Customer (full name)", "Удалить строку": "Remove row", "+ Добавить инициативу": "+ Add initiative", "Занято времени": "Time allocated", "Сумма превышает 100% — уменьшите долю одной из инициатив.": "The total exceeds 100% — reduce the share of one of the initiatives.", "Далее →": "Next →", "Максимум 10 инициатив за раз": "Maximum 10 initiatives at a time", "Добавьте хотя бы одну инициативу": "Add at least one initiative", "Сумма процентов превышает 100% — уменьшите долю одной из инициатив": "The percentage total exceeds 100% — reduce the share of one of the initiatives", "Можно выбрать не более 3 инициатив за раз": "You can select up to 3 initiatives at a time", "Шаг 2 из 4": "Step 2 of 4", "Список инициатив": "List of initiatives", "Выберите одну или несколько (до 3) инициатив, чтобы указать, к чему они относятся.": "Select one or several (up to 3) initiatives to specify what they relate to.", "Осталось необработанных:": "Unprocessed remaining:", "Не обработана": "Not processed", "без названия": "untitled", "времени": "of time", "Список пуст": "The list is empty", "← Изменить список": "← Edit list", "Инициатива удалена": "Initiative deleted", "Инициатива обновлена": "Initiative updated", "Редактировать инициативу": "Edit initiative", "Теперь мы на 1 шаг ближе к приоритизации.": "We're now one step closer to prioritization.", "Завершить": "Finish", "Спасибо за ваши инициативы!": "Thank you for your initiatives!", "Форма закрыта — данные сохранены. Можете закрыть вкладку браузера.": "The form is closed — your data is saved. You can close this browser tab.", "Начать сначала": "Start over", "Не обработаны": "Not processed", "Редактировать": "Edit", "Спасибо! Теперь мы на 1 шаг ближе к приоритизации.": "Thank you! We're now one step closer to prioritization.", "Цель:": "Goal:", "Режим тестирования включён — все новые инициативы автоматически помечаются как тестовые.": "Test mode is on — all new initiatives are automatically flagged as test.", "Выключить": "Turn off", "Режим тестирования (новые инициативы помечаются как тестовые)": "Test mode (new initiatives are flagged as test)", "Помечено тестовыми:": "Flagged as test:", "Тест": "Test", "Тест и реальные": "Test and real", "Только реальные": "Real only", "Только тестовые": "Test only", "Пометить видимые как тест": "Mark visible as test", "Отмечено тестовыми:": "Marked as test:", "Термин": "Term", "Пример": "Example", "Вопрос": "Question", "Корпоративный глоссарий": "Corporate glossary", "Иерархия рабочих сущностей": "Hierarchy of work entities", "У каждой карточки три режима:": "Each card has three modes:", "определение,": "definition,", "как это выглядит в жизни,": "what it looks like in practice,", "что стоит спросить себя, чтобы сформулировать этот уровень правильно.": "what to ask yourself to phrase this level correctly.", "Показать все определения": "Show all definitions", "Понятно, дальше →": "Got it, continue →", "Проект": "Project", "Задача": "Task", "Результат": "Outcome", "Стратегия": "Strategy", "Режим «Вопрос»": "\"Question\" mode", "Тип активности": "Activity type", "Стратегическая инициатива": "Strategic initiative", "Бизнес-направление с целевым эффектом, привязано к цели из дерева целей, есть заказчик.": "A business direction with a target effect, linked to a goal in the goal tree, with a named sponsor.", "Повысить удержание дистрибьюторов на 20%.": "Increase distributor retention by 20%.", "Что мы хотим изменить в бизнесе? Куда идём?": "What do we want to change in the business? Where are we headed?", "Временная работа с уникальным результатом, датами и ресурсами.": "Temporary work with a unique outcome, dates, and resources.", "Разработать личный кабинет дистрибьютора.": "Build the distributor's personal account.", "Что конкретно мы хотим создать или изменить? Что нужно для этого сделать?": "What exactly do we want to create or change? What needs to be done for that?", "Инициатива OKR": "OKR initiative", "Квартальное действие внутри проекта, двигающее его метрики.": "A quarterly action within a project that moves its metrics.", "Реализовать модуль отслеживания заказов (Q1).": "Build the order-tracking module (Q1).", "Что делаем в этом квартале?": "What are we doing this quarter?", "Действие, двигающее Key Result к Objective, горизонт — один квартал.": "An action that moves a Key Result toward an Objective, one-quarter horizon.", "Добавить push-уведомление о статусе заказа.": "Add a push notification for order status.", "Атомарная единица работы, один исполнитель, до 2 недель.": "An atomic unit of work, one owner, up to 2 weeks.", "Подготовить прототип экрана отслеживания.": "Prepare a prototype of the tracking screen.", "Что именно делаем сейчас и кто это делает?": "What exactly are we doing now, and who's doing it?", "Настроить шаблон push-уведомления.": "Configure the push-notification template.", "Воспроизводимый результат, регулярно поставляемый клиенту через процесс.": "A reproducible outcome delivered to the customer regularly through a process.", "Личный кабинет с отслеживанием заказов.": "A personal account with order tracking.", "Что в итоге получает пользователь?": "What does the user ultimately get?", "Повторяющаяся деятельность по расписанию или триггеру, измеряется эффективностью.": "Recurring activity on a schedule or trigger, measured by efficiency.", "Обработка онлайн-заказа и поддержка.": "Online order processing and support.", "Что мы регулярно делаем? Что повторяется снова и снова?": "What do we do regularly? What repeats over and over?", "Продукт": "Product", "Процесс": "Process", "Максимум 10 активностей за раз": "Maximum 10 activities at a time", "Добавьте хотя бы одну активность": "Add at least one activity", "Сумма процентов превышает 100% — уменьшите долю одной из активностей": "The percentage total exceeds 100% — reduce the share of one of the activities", "Можно выбрать не более 3 активностей за раз": "You can select up to 3 activities at a time", "Опишите свои активности": "Describe your activities", "Укажите до 10 активностей. Для каждой — заказчика и долю времени, которую она забирает. Сумма по всем активностям не может превышать 100%.": "List up to 10 activities. For each, add a customer and the share of time it takes. The total across all activities can't exceed 100%.", "Название активности": "Activity name", "+ Добавить активность": "+ Add activity", "Сумма превышает 100% — уменьшите долю одной из активностей.": "The total exceeds 100% — reduce the share of one of the activities.", "Список активностей": "List of activities", "Выберите одну или несколько (до 3) активностей, чтобы указать, к чему они относятся.": "Select one or several (up to 3) activities to specify what they relate to.", "Активность удалена": "Activity deleted", "Активность обновлена": "Activity updated", "Редактировать активность": "Edit activity"};
 function tr(s){ if(s===undefined||s===null) return s; if(state.lang==='en'){ return Object.prototype.hasOwnProperty.call(TRANSLATIONS,s) ? TRANSLATIONS[s] : s; } return s; }
 function setLang(l){ state.lang=l; render(); }
 function distinctVals(arr, key){ return [...new Set(arr.map(x=>x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru')); }
@@ -499,7 +594,13 @@ async function boot(){
   state.projects    = await loadKey('meta:projects:v2', seedProjects);
   state.tracks       = await loadKey('meta:tracks', seedTracks);
   state.initiatives  = await loadKey('data:initiatives', []);
+  state.testMode      = await loadKey('settings:testMode', false);
   state.ready = true;
+  render();
+}
+async function setTestMode(v){
+  state.testMode = !!v;
+  await saveKey('settings:testMode', state.testMode);
   render();
 }
 
@@ -522,14 +623,20 @@ function goBack(){
   const h = state.wizard.history;
   if(h.length){ state.wizard.step = h.pop(); render(); }
 }
+function jumpStep(step){ state.wizard.history=[]; state.wizard.step=step; render(); }
 function resetWizard(keepDept){
   const dept = state.wizard.department, isNew = state.wizard.isNewDept;
   state.wizard = {step:'1', history:[], department: keepDept?dept:'', isNewDept: keepDept?isNew:false, deptQuery:'',
-    text:'', percent:20, customer:'', projQuery:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expandedProject:null,
-    expandedTrack:null, expandedGoal:null,
-    projectId:null, trackId:null, goalId:null, submitted:null};
+    batchRows:[{text:'',customer:'',percent:20,activityType:''}], sessionIds:[], selectedIds:[], activeGroupIds:[],
+    matchCategory:null, matchProjectId:null, matchTrackId:null, matchGoalId:null,
+    projQuery:'', projTypeFilter:'all', projCustomerFilter:'', projDivisionFilter:'', expandedProject:null,
+    expandedTrack:null, expandedGoal:null};
   if(keepDept) state.wizard.step='2';
   render();
+}
+function addMoreInitiatives(){
+  state.wizard.batchRows=[{text:'',customer:'',percent:20,activityType:''}];
+  jumpStep('1g');
 }
 
 const stepOrder = ['1','2','3','4','5','6','7'];
@@ -575,55 +682,141 @@ function logout(){ state.authed=false; state.authError=false; render(); }
 
 /* ---- field setters ---- */
 function setDeptQuery(v){ state.wizard.deptQuery=v; render(); }
-function pickDept(name){ state.wizard.department=name; state.wizard.isNewDept=false; goStep('2'); }
+function pickDept(name){ state.wizard.department=name; state.wizard.isNewDept=false; state.wizard.batchRows=[{text:'',customer:'',percent:20,activityType:''}]; state.wizard.sessionIds=[]; goStep('1g'); }
 function toggleNewDept(){ state.wizard.isNewDept=!state.wizard.isNewDept; state.wizard.department=''; render(); }
 function confirmNewDept(){
   const v = document.getElementById('newDeptInput').value.trim();
   if(v.length<2) return;
-  state.wizard.department=v; goStep('2');
+  state.wizard.department=v; state.wizard.batchRows=[{text:'',customer:'',percent:20,activityType:''}]; state.wizard.sessionIds=[]; goStep('1g');
 }
-function setText(v){ state.wizard.text=v; }
-function nextFromText(){
-  const v = document.getElementById('initiativeText').value.trim();
-  if(v.length<10){ showToast(tr('Опишите инициативу чуть подробнее (от 10 символов)'),'error'); return; }
-  state.wizard.text=v; goStep('3');
+
+/* ---- batch initiative entry (step 2) ---- */
+function addBatchRow(){
+  if(state.wizard.batchRows.length>=10){ showToast(tr('Максимум 10 активностей за раз'),'error'); return; }
+  state.wizard.batchRows.push({text:'',customer:'',percent:20,activityType:''});
+  render();
 }
-function setPercent(v){ state.wizard.percent=parseInt(v); render(); }
-function nextFromCustomer(){
-  const v = document.getElementById('customerInput').value.trim();
-  if(!v){ showToast(tr('Укажите ФИО заказчика инициативы'),'error'); return; }
-  state.wizard.customer=v; goStep('5');
+function removeBatchRow(idx){
+  state.wizard.batchRows.splice(idx,1);
+  if(state.wizard.batchRows.length===0) state.wizard.batchRows.push({text:'',customer:'',percent:20,activityType:''});
+  render();
 }
+function setBatchField(idx, field, value){
+  state.wizard.batchRows[idx][field] = field==='percent' ? (parseInt(value)||0) : value;
+  render();
+}
+async function submitBatchEntry(){
+  const w = state.wizard;
+  const filled = w.batchRows.filter(r=>r.text && r.text.trim());
+  if(!filled.length){ showToast(tr('Добавьте хотя бы одну активность'),'error'); return; }
+  const sum = w.batchRows.reduce((s,r)=> s + (parseInt(r.percent)||0), 0);
+  if(sum>100){ showToast(tr('Сумма процентов превышает 100% — уменьшите долю одной из активностей'),'error'); return; }
+
+  const keepIds = filled.filter(r=>r.id).map(r=>r.id);
+  const stalePendingIds = state.initiatives
+    .filter(i=> w.sessionIds.includes(i.id) && i.category===null && !keepIds.includes(i.id))
+    .map(i=>i.id);
+  if(stalePendingIds.length){
+    state.initiatives = state.initiatives.filter(i=>!stalePendingIds.includes(i.id));
+    w.sessionIds = w.sessionIds.filter(id=>!stalePendingIds.includes(id));
+  }
+
+  filled.forEach(r=>{
+    if(r.id){
+      const it = state.initiatives.find(i=>i.id===r.id);
+      if(it){ it.text=r.text.trim(); it.customer=(r.customer||'').trim(); it.percent=parseInt(r.percent)||0; it.activityType=r.activityType||''; }
+    } else {
+      const rec = { id:uid('init'), department:w.department, text:r.text.trim(), customer:(r.customer||'').trim(),
+        percent:parseInt(r.percent)||0, activityType:r.activityType||'', category:null, projectId:null, trackId:null, goalId:null,
+        isTest: !!state.testMode,
+        submittedAt:new Date().toISOString() };
+      state.initiatives = [...state.initiatives, rec];
+      w.sessionIds.push(rec.id);
+    }
+  });
+  await saveKey('data:initiatives', state.initiatives);
+  if(w.isNewDept && !state.departments.some(d=>d.name===w.department)){
+    state.departments = [...state.departments, {id:uid('d'), name:w.department}];
+    await saveKey('meta:departments', state.departments);
+  }
+  jumpStep('3');
+}
+function backToBatchEntry(){
+  const pending = sessionInitiatives().filter(i=>i.category===null)
+    .map(i=>({id:i.id, text:i.text, customer:i.customer, percent:i.percent, activityType:i.activityType||''}));
+  state.wizard.batchRows = pending.length? pending : [{text:'',customer:'',percent:20,activityType:''}];
+  goStep('2');
+}
+
+/* ---- initiative list / selection (step 3) ---- */
+function sessionInitiatives(){
+  return state.initiatives.filter(i=>state.wizard.sessionIds.includes(i.id));
+}
+function toggleSelectRow(id){
+  const s = state.wizard.selectedIds;
+  const i = s.indexOf(id);
+  if(i>=0){ s.splice(i,1); }
+  else{
+    if(s.length>=3){ showToast(tr('Можно выбрать не более 3 активностей за раз'),'error'); return; }
+    s.push(id);
+  }
+  render();
+}
+function proceedToMatch(){
+  const w = state.wizard;
+  if(!w.selectedIds.length) return;
+  w.activeGroupIds=[...w.selectedIds]; w.selectedIds=[];
+  w.matchCategory=null; w.matchProjectId=null; w.matchTrackId=null; w.matchGoalId=null;
+  goStep('5');
+}
+function openEditInitiativeModal(id){ state.modal={kind:'editInitiative', id}; render(); }
+async function submitEditInitiative(id){
+  const it = state.initiatives.find(i=>i.id===id);
+  it.text = document.getElementById('mInitText').value.trim();
+  it.customer = document.getElementById('mInitCustomer').value.trim();
+  it.percent = parseInt(document.getElementById('mInitPercent').value)||0;
+  const typeEl = document.getElementById('mInitType');
+  if(typeEl) it.activityType = typeEl.value;
+  await saveKey('data:initiatives', state.initiatives);
+  closeModal(); showToast(tr('Активность обновлена'));
+}
+async function deleteInitiativeRow(id){
+  state.initiatives = state.initiatives.filter(i=>i.id!==id);
+  state.wizard.sessionIds = state.wizard.sessionIds.filter(x=>x!==id);
+  state.wizard.selectedIds = state.wizard.selectedIds.filter(x=>x!==id);
+  await saveKey('data:initiatives', state.initiatives);
+  showToast(tr('Активность удалена'));
+  render();
+}
+
 function branchProject(yes){ if(yes){ goStep('5a'); } else { goStep('6'); } }
-function branchGoal(yes){ if(yes){ goStep('6a'); } else { finalizeCategory('none'); } }
+function branchGoal(yes){ if(yes){ goStep('6a'); } else { state.wizard.matchCategory='none'; goStep('7'); } }
 function setProjQuery(v){ state.wizard.projQuery=v; render(); }
 function setWizProjType(v){ state.wizard.projTypeFilter=v; render(); }
 function setWizProjCustomer(v){ state.wizard.projCustomerFilter=v; render(); }
 function setWizProjDivision(v){ state.wizard.projDivisionFilter=v; render(); }
 function toggleWizProject(id){ state.wizard.expandedProject = state.wizard.expandedProject===id? null : id; render(); }
 function openProjectPreview(id){ state.modal={kind:'projectPreview', id}; render(); }
-function pickProject(id){ state.wizard.projectId=id; state.modal=null; finalizeCategory('project'); }
+function pickProject(id){ state.wizard.matchProjectId=id; state.wizard.matchCategory='project'; state.modal=null; goStep('7'); }
 function toggleTrack(id){ state.wizard.expandedTrack = state.wizard.expandedTrack===id? null : id; state.wizard.expandedGoal=null; render(); }
 function toggleGoal(id){ state.wizard.expandedGoal = state.wizard.expandedGoal===id? null : id; render(); }
-function pickGoal(trackId, goalId){ state.wizard.trackId=trackId; state.wizard.goalId=goalId; finalizeCategory('goal'); }
-function finalizeCategory(cat){ state.wizard.category=cat; goStep('7'); }
+function pickGoal(trackId, goalId){ state.wizard.matchTrackId=trackId; state.wizard.matchGoalId=goalId; state.wizard.matchCategory='goal'; goStep('7'); }
 
-async function submitInitiative(){
+async function submitGroupMatch(){
   const w = state.wizard;
-  const record = {
-    id: uid('init'), department:w.department, text:w.text, percent:w.percent, customer:w.customer,
-    category:w.category, projectId:w.projectId||null, trackId:w.trackId||null, goalId:w.goalId||null,
-    submittedAt: new Date().toISOString()
-  };
-  state.initiatives = [...state.initiatives, record];
+  const ids = w.activeGroupIds;
+  state.initiatives = state.initiatives.map(i=>{
+    if(!ids.includes(i.id)) return i;
+    return { ...i, category:w.matchCategory,
+      projectId: w.matchCategory==='project' ? w.matchProjectId : null,
+      trackId:   w.matchCategory==='goal' ? w.matchTrackId : null,
+      goalId:    w.matchCategory==='goal' ? w.matchGoalId : null };
+  });
   await saveKey('data:initiatives', state.initiatives);
-  if(w.isNewDept && !state.departments.some(d=>d.name===w.department)){
-    state.departments = [...state.departments, {id:uid('d'), name:w.department}];
-    await saveKey('meta:departments', state.departments);
-  }
-  state.wizard.submitted = record.id;
-  goStep('done');
+  w.activeGroupIds=[];
+  const remaining = sessionInitiatives().filter(i=>i.category===null).length;
   showToast(tr('Инициатива сохранена'));
+  if(remaining>0){ jumpStep('3'); } else { jumpStep('sessionDone'); }
 }
 
 /* =========================================================
@@ -650,6 +843,9 @@ function renderLogin(){
   </div>`;
 }
 
+function renderTestBanner(){
+  return `<div class="test-banner">🧪 ${tr('Режим тестирования включён — все новые инициативы автоматически помечаются как тестовые.')}${state.role==='admin'? ` <button class="test-banner-btn" onclick="setTestMode(false)">${tr('Выключить')}</button>`:''}</div>`;
+}
 function renderTopbar(){
   return `
   <div class="topbar">
@@ -689,20 +885,23 @@ function progressBar(){
 }
 
 function renderWizard(){
-  if(state.wizard.step==='done') return renderDone();
   const w = state.wizard;
+  if(w.step==='sessionDone') return renderSessionDone();
+  if(w.step==='closed') return renderClosed();
   let body='';
   if(w.step==='1') body = stepDept();
-  else if(w.step==='2') body = stepText();
-  else if(w.step==='3') body = stepPercent();
-  else if(w.step==='4') body = stepCustomer();
+  else if(w.step==='1g') body = stepGlossary();
+  else if(w.step==='2') body = stepBatchEntry();
+  else if(w.step==='3') body = stepInitiativeList();
   else if(w.step==='5') body = stepBranchProject();
   else if(w.step==='5a') body = stepProjectPick();
   else if(w.step==='6') body = stepBranchGoal();
   else if(w.step==='6a') body = stepGoalPick();
   else if(w.step==='7') body = stepSummary();
 
-  return `<div class="wizard-shell"><div class="wizard-card ${(w.step==='6a'||w.step==='5a')?'wizard-card-wide':''}">${progressBar()}<div class="card">${body}</div></div></div>`;
+  const showBar = ['1','5','5a','6','6a','7'].includes(w.step);
+  const wide = ['1g','2','3','5a','6a'].includes(w.step);
+  return `<div class="wizard-shell"><div class="wizard-card ${wide?'wizard-card-wide':''}">${showBar?progressBar():''}<div class="card">${body}</div></div></div>`;
 }
 
 function stepDept(){
@@ -733,43 +932,224 @@ function stepDept(){
   <button class="new-toggle" onclick="toggleNewDept()">${tr('Не нашли свой отдел? Вписать название вручную →')}</button>`;
 }
 
-function stepText(){
-  const w = state.wizard;
+const ACTIVITY_TYPES = [
+  {id:'strategic', label:'Стратегическая инициатива'},
+  {id:'project', label:'Проект'},
+  {id:'okr', label:'Инициатива OKR'},
+  {id:'task', label:'Задача'},
+  {id:'process', label:'Процесс'},
+  {id:'product', label:'Продукт'},
+];
+function activityTypeLabel(id){ const t = ACTIVITY_TYPES.find(x=>x.id===id); return t? tr(t.label) : ''; }
+
+const GLOSSARY_TERMS = [
+  {area:'strategic', cls:'gl-strategic-c', id:'gl-n-strategic', name:'Стратегическая инициатива',
+    def:'Бизнес-направление с целевым эффектом, привязано к цели из дерева целей, есть заказчик.',
+    ex:'Повысить удержание дистрибьюторов на 20%.',
+    q:'Что мы хотим изменить в бизнесе? Куда идём?'},
+  {area:'project', cls:'gl-project-c', id:'gl-n-project', name:'Проект',
+    def:'Временная работа с уникальным результатом, датами и ресурсами.',
+    ex:'Разработать личный кабинет дистрибьютора.',
+    q:'Что конкретно мы хотим создать или изменить? Что нужно для этого сделать?'},
+  {area:'okrL', cls:'gl-okr-c', id:'gl-n-okrL', name:'Инициатива OKR',
+    def:'Квартальное действие внутри проекта, двигающее его метрики.',
+    ex:'Реализовать модуль отслеживания заказов (Q1).',
+    q:'Что делаем в этом квартале?'},
+  {area:'okrR', cls:'gl-okr-c', id:'gl-n-okrR', name:'Инициатива OKR',
+    def:'Действие, двигающее Key Result к Objective, горизонт — один квартал.',
+    ex:'Добавить push-уведомление о статусе заказа.',
+    q:'Что делаем в этом квартале?'},
+  {area:'taskL', cls:'gl-task-c', id:'gl-n-taskL', name:'Задача',
+    def:'Атомарная единица работы, один исполнитель, до 2 недель.',
+    ex:'Подготовить прототип экрана отслеживания.',
+    q:'Что именно делаем сейчас и кто это делает?'},
+  {area:'taskR', cls:'gl-task-c', id:'gl-n-taskR', name:'Задача',
+    def:'Атомарная единица работы, один исполнитель, до 2 недель.',
+    ex:'Настроить шаблон push-уведомления.',
+    q:'Что именно делаем сейчас и кто это делает?'},
+  {area:'product', cls:'gl-outcome-c', id:'gl-n-product', name:'Продукт',
+    def:'Воспроизводимый результат, регулярно поставляемый клиенту через процесс.',
+    ex:'Личный кабинет с отслеживанием заказов.',
+    q:'Что в итоге получает пользователь?'},
+  {area:'process', cls:'gl-outcome-c', id:'gl-n-process', name:'Процесс',
+    def:'Повторяющаяся деятельность по расписанию или триггеру, измеряется эффективностью.',
+    ex:'Обработка онлайн-заказа и поддержка.',
+    q:'Что мы регулярно делаем? Что повторяется снова и снова?'},
+];
+
+function glossaryNodeHtml(t){
   return `
-  <div class="eyebrow">${esc(w.department)}</div>
-  <h2 class="q-title">${tr('Опишите вашу инициативу')}</h2>
-  <p class="q-sub">${tr('Коротко: что вы делаете (или планируете делать) и зачем.')}</p>
-  <textarea id="initiativeText" class="field" placeholder="${tr('Например: разрабатываем единый шаблон онбординга для новых сотрудников отдела, чтобы сократить время выхода на самостоятельную работу…')}">${esc(w.text)}</textarea>
-  <div class="btn-row">
-    <button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button>
-    <button class="btn btn-primary" onclick="nextFromText()">${tr('Продолжить →')}</button>
+  <div class="gl-cell ${t.area}">
+    <div class="gl-node ${t.cls}" id="${t.id}">
+      <span class="gl-term-label">${tr('Термин')}</span>
+      <p class="gl-term-name">${tr(t.name)}</p>
+      <p class="gl-term-text gl-def">${tr(t.def)}</p>
+      <p class="gl-term-text gl-ex" hidden>${tr(t.ex)}</p>
+      <p class="gl-term-text gl-q" hidden>${tr(t.q)}</p>
+      <div class="gl-tabs">
+        <button class="gl-tab-btn active" data-state="def">${tr('Термин')}</button>
+        <button class="gl-tab-btn" data-state="ex">${tr('Пример')}</button>
+        <button class="gl-tab-btn" data-state="q">${tr('Вопрос')}</button>
+      </div>
+    </div>
   </div>`;
 }
 
-function stepPercent(){
-  const w = state.wizard;
+function stepGlossary(){
   return `
-  <div class="eyebrow">${tr('Шаг 3 из 7')}</div>
-  <h2 class="q-title">${tr('Сколько % рабочего времени в неделю занимает эта инициатива?')}</h2>
-  <p class="q-sub">${tr('Ориентировочно — точность до 5% достаточна.')}</p>
-  <div class="percent-display">${w.percent}%</div>
-  <input type="range" min="0" max="100" step="5" value="${w.percent}" oninput="setPercent(this.value)">
-  <div class="btn-row">
+  <div class="glossary-embed">
+    <div class="gl-header">
+      <div class="gl-eyebrow">${tr('Корпоративный глоссарий')}</div>
+      <h2 class="gl-h1">${tr('Иерархия рабочих сущностей')}</h2>
+      <p class="gl-sub">${tr('У каждой карточки три режима:')} <b>${tr('Термин')}</b> — ${tr('определение,')} <b>${tr('Пример')}</b> — ${tr('как это выглядит в жизни,')} <b>${tr('Вопрос')}</b> — ${tr('что стоит спросить себя, чтобы сформулировать этот уровень правильно.')}</p>
+    </div>
+    <div class="gl-wrapper">
+      <svg class="gl-connectors" id="glSvgLines"></svg>
+      <div class="gl-grid">
+        ${GLOSSARY_TERMS.map(glossaryNodeHtml).join('')}
+      </div>
+    </div>
+    <div class="reset-bar" style="text-align:center;margin-top:36px;">
+      <button class="btn btn-ghost btn-sm" id="glResetAll">${tr('Показать все определения')}</button>
+    </div>
+    <div class="gl-legend">
+      <div class="gl-legend-item"><span class="gl-swatch" style="background:var(--gl-strategic)"></span>${tr('Стратегия')}</div>
+      <div class="gl-legend-item"><span class="gl-swatch" style="background:var(--gl-project)"></span>${tr('Проект')}</div>
+      <div class="gl-legend-item"><span class="gl-swatch" style="background:var(--gl-okr)"></span>OKR</div>
+      <div class="gl-legend-item"><span class="gl-swatch" style="background:var(--gl-task)"></span>${tr('Задача')}</div>
+      <div class="gl-legend-item"><span class="gl-swatch" style="background:var(--gl-outcome);border:1px solid var(--gl-outcome-border)"></span>${tr('Результат')}</div>
+      <div class="gl-legend-item"><span class="gl-swatch" style="background:var(--gl-question)"></span>${tr('Режим «Вопрос»')}</div>
+    </div>
+  </div>
+  <div class="btn-row" style="margin-top:24px;">
     <button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button>
-    <button class="btn btn-primary" onclick="goStep('4')">${tr('Продолжить →')}</button>
+    <button class="btn btn-primary" onclick="goStep('2')">${tr('Понятно, дальше →')}</button>
   </div>`;
 }
 
-function stepCustomer(){
+/* ---- glossary tree interactivity (plain DOM, re-attached after every render) ---- */
+let glossaryResizeBound = false;
+function drawGlossaryLines(){
+  const svg = document.getElementById('glSvgLines');
+  const wrapper = document.querySelector('.glossary-embed .gl-wrapper');
+  if(!svg || !wrapper) return;
+  const connections = [
+    ['gl-n-strategic','gl-n-project'], ['gl-n-strategic','gl-n-okrR'],
+    ['gl-n-project','gl-n-okrL'], ['gl-n-okrL','gl-n-taskL'], ['gl-n-okrR','gl-n-taskR'],
+    ['gl-n-taskL','gl-n-product'], ['gl-n-taskL','gl-n-process'], ['gl-n-taskR','gl-n-process'],
+  ];
+  function centerPoint(el, side){
+    const r = el.getBoundingClientRect(), w = wrapper.getBoundingClientRect();
+    const x = r.left - w.left + r.width/2;
+    return side==='bottom' ? {x, y:r.bottom-w.top} : {x, y:r.top-w.top};
+  }
+  function bezier(p1,p2){ const midY=(p1.y+p2.y)/2; return `M ${p1.x} ${p1.y} C ${p1.x} ${midY}, ${p2.x} ${midY}, ${p2.x} ${p2.y}`; }
+  const wr = wrapper.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${wr.width} ${wr.height}`);
+  svg.innerHTML='';
+  connections.forEach(([fromId,toId])=>{
+    const from=document.getElementById(fromId), to=document.getElementById(toId);
+    if(!from||!to) return;
+    const p1=centerPoint(from,'bottom'), p2=centerPoint(to,'top');
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', bezier(p1,p2));
+    svg.appendChild(path);
+  });
+}
+function glSetState(node, st){
+  node.querySelectorAll('.gl-term-text').forEach(el=>{ el.hidden=true; });
+  const target = node.querySelector('.gl-'+st);
+  if(target) target.hidden=false;
+  node.querySelectorAll('.gl-tab-btn').forEach(btn=> btn.classList.toggle('active', btn.dataset.state===st));
+  const label = node.querySelector('.gl-term-label');
+  if(label) label.textContent = st==='def'?tr('Термин'):(st==='ex'?tr('Пример'):tr('Вопрос'));
+  node.classList.toggle('gl-state-q', st==='q');
+  requestAnimationFrame(drawGlossaryLines);
+}
+function initGlossaryTree(){
+  const root = document.querySelector('.glossary-embed');
+  if(!root) return;
+  root.querySelectorAll('.gl-node').forEach(node=>{
+    node.querySelectorAll('.gl-tab-btn').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{ e.stopPropagation(); glSetState(node, btn.dataset.state); });
+    });
+  });
+  const resetBtn = document.getElementById('glResetAll');
+  if(resetBtn) resetBtn.addEventListener('click', ()=> root.querySelectorAll('.gl-node').forEach(n=>glSetState(n,'def')));
+  requestAnimationFrame(drawGlossaryLines);
+  setTimeout(drawGlossaryLines, 150);
+  if(!glossaryResizeBound){
+    window.addEventListener('resize', ()=>{ if(document.querySelector('.glossary-embed')) drawGlossaryLines(); });
+    glossaryResizeBound = true;
+  }
+}
+
+function stepBatchEntry(){
   const w = state.wizard;
+  const rows = w.batchRows;
+  const sum = rows.reduce((s,r)=> s + (parseInt(r.percent)||0), 0);
+  const over = sum>100;
+
   return `
-  <div class="eyebrow">${tr('Шаг 4 из 7')}</div>
-  <h2 class="q-title">${tr('Кто заказчик инициативы?')}</h2>
-  <p class="q-sub">${tr('Укажите ФИО — это может быть коллега, руководитель другого отдела, или вы сами.')}</p>
-  <input id="customerInput" class="field" placeholder="${tr('Иван Иванов')}" value="${esc(w.customer)}">
+  <div class="eyebrow">${tr('Шаг 1 из 4')}</div>
+  <h2 class="q-title">${tr('Опишите свои активности')}</h2>
+  <p class="q-sub">${tr('Укажите до 10 активностей. Для каждой — заказчика и долю времени, которую она забирает. Сумма по всем активностям не может превышать 100%.')}</p>
+  <div class="batch-rows">
+    ${rows.map((r,i)=>`
+      <div class="batch-row">
+        <span class="batch-idx">${i+1}.</span>
+        <input id="batchText_${i}" class="field batch-name" placeholder="${tr('Название активности')}" value="${esc(r.text)}" oninput="setBatchField(${i},'text',this.value)">
+        <input id="batchCustomer_${i}" class="field batch-customer" placeholder="${tr('Заказчик (ФИО)')}" value="${esc(r.customer)}" oninput="setBatchField(${i},'customer',this.value)">
+        <select id="batchType_${i}" class="field batch-type" onchange="setBatchField(${i},'activityType',this.value)">
+          <option value="" ${!r.activityType?'selected':''}>${tr('Тип активности')}</option>
+          ${ACTIVITY_TYPES.map(t=>`<option value="${t.id}" ${r.activityType===t.id?'selected':''}>${esc(tr(t.label))}</option>`).join('')}
+        </select>
+        <div class="batch-percent"><input id="batchPercent_${i}" type="number" min="0" max="100" step="5" value="${r.percent}" oninput="setBatchField(${i},'percent',this.value)"><span>%</span></div>
+        <button class="icon-btn" onclick="removeBatchRow(${i})" title="${tr('Удалить строку')}">✕</button>
+      </div>`).join('')}
+  </div>
+  ${rows.length<10? `<button class="new-toggle" onclick="addBatchRow()">${tr('+ Добавить активность')}</button>` : ''}
+  <div class="percent-banner ${over?'over':''}"><span>${tr('Занято времени')}</span><b>${sum}%</b></div>
+  ${over? `<div class="error-text">${tr('Сумма превышает 100% — уменьшите долю одной из активностей.')}</div>` : ''}
   <div class="btn-row">
     <button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button>
-    <button class="btn btn-primary" onclick="nextFromCustomer()">${tr('Продолжить →')}</button>
+    <button class="btn btn-primary" onclick="submitBatchEntry()">${tr('Далее →')}</button>
+  </div>`;
+}
+
+function stepInitiativeList(){
+  const w = state.wizard;
+  const items = sessionInitiatives();
+  const pendingCount = items.filter(i=>i.category===null).length;
+  return `
+  <div class="eyebrow">${tr('Шаг 2 из 4')}</div>
+  <h2 class="q-title">${tr('Список активностей')}</h2>
+  <p class="q-sub">${tr('Выберите одну или несколько (до 3) активностей, чтобы указать, к чему они относятся.')}</p>
+  ${items.length? `<div class="list-count">${tr('Осталось необработанных:')} ${pendingCount} ${tr('из')} ${items.length}</div>` : ''}
+  <div class="init-list">
+    ${items.length? items.map(i=>{
+      const checked = w.selectedIds.includes(i.id);
+      let badge, badgeClass;
+      if(i.category==='project'){ const p=findProject(i.projectId); badge = p? tr('Проект:')+' '+tr(p.name) : tr('Проект (удалён)'); badgeClass='change'; }
+      else if(i.category==='goal'){ const g=findGoal(i.trackId,i.goalId); badge = g? tr('Цель:')+' '+tr(g.text).slice(0,36)+'…' : tr('Цель (удалена)'); badgeClass='run'; }
+      else if(i.category==='none'){ badge = tr('Самостоятельная'); badgeClass='none'; }
+      else { badge = tr('Не обработана'); badgeClass='none'; }
+      return `
+      <div class="init-row ${checked?'checked':''}">
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleSelectRow('${i.id}')">
+        <div class="init-main" onclick="toggleSelectRow('${i.id}')">
+          <div class="init-name">${esc(i.text)||('&lt;'+tr('без названия')+'&gt;')}</div>
+          <div class="init-meta">${esc(i.customer||'—')} · ${i.percent}% ${tr('времени')}${i.activityType? ' · '+esc(activityTypeLabel(i.activityType)) : ''}</div>
+        </div>
+        <span class="type-tag ${badgeClass}">${badge}</span>
+        <button class="icon-btn" onclick="openEditInitiativeModal('${i.id}')" title="${tr('Редактировать')}">✎</button>
+        <button class="icon-btn" onclick="deleteInitiativeRow('${i.id}')" title="${tr('Удалить')}">✕</button>
+      </div>`;
+    }).join('') : `<div class="ac-empty">${tr('Список пуст')}</div>`}
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="backToBatchEntry()">${tr('← Изменить список')}</button>
+    <button class="btn btn-primary" onclick="proceedToMatch()" ${w.selectedIds.length===0?'disabled':''}>${tr('Далее →')}</button>
   </div>`;
 }
 
@@ -899,12 +1279,13 @@ function findGoal(trackId, goalId){ const t=findTrack(trackId); return t? t.goal
 
 function stepSummary(){
   const w = state.wizard;
+  const items = state.initiatives.filter(i=>w.activeGroupIds.includes(i.id));
   let banner='';
-  if(w.category==='project'){
-    const p = findProject(w.projectId);
+  if(w.matchCategory==='project'){
+    const p = findProject(w.matchProjectId);
     banner = `<div class="result-banner project"><div><div class="rb-title">${tr('Отнесена к проекту')}</div><div class="rb-sub"><b>${esc(tr(p.name))}</b><br>${esc(tr(p.goal))}</div></div></div>`;
-  } else if(w.category==='goal'){
-    const t = findTrack(w.trackId), g = findGoal(w.trackId,w.goalId);
+  } else if(w.matchCategory==='goal'){
+    const t = findTrack(w.matchTrackId), g = findGoal(w.matchTrackId,w.matchGoalId);
     banner = `<div class="result-banner goal"><div><div class="rb-title">${tr('Способствует стратегической цели')}</div><div class="rb-sub"><b>${esc(tr(t.name))}</b><br>${esc(tr(g.text))}</div></div></div>`;
   } else {
     banner = `<div class="result-banner none"><div><div class="rb-title">${tr('Самостоятельная инициатива')}</div><div class="rb-sub">${tr('Не отнесена к проекту или стратегической цели — фиксируем как есть, для дальнейшего анализа.')}</div></div></div>`;
@@ -914,20 +1295,31 @@ function stepSummary(){
   <h2 class="q-title">${tr('Проверьте и подтвердите')}</h2>
   ${banner}
   <div class="summary-row"><div class="sr-label">${tr('Отдел')}</div><div class="sr-val">${esc(tr(w.department))}</div></div>
-  <div class="summary-row"><div class="sr-label">${tr('Инициатива')}</div><div class="sr-val">${esc(w.text)}</div></div>
-  <div class="summary-row"><div class="sr-label">${tr('Загрузка')}</div><div class="sr-val">${w.percent} ${tr('% времени в неделю')}</div></div>
-  <div class="summary-row"><div class="sr-label">${tr('Заказчик')}</div><div class="sr-val">${esc(w.customer)}</div></div>
-  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><button class="btn btn-primary" onclick="submitInitiative()">${tr('Подтвердить и сохранить')}</button></div>`;
+  ${items.map(i=>`
+  <div class="summary-row"><div class="sr-label">${tr('Инициатива')}</div><div class="sr-val">${esc(i.text)}<br><span style="color:var(--ink-faint);font-weight:500;font-size:12px;">${esc(i.customer)} · ${i.percent}% ${tr('времени')}</span></div></div>`).join('')}
+  <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">${tr('← Назад')}</button><button class="btn btn-primary" onclick="submitGroupMatch()">${tr('Подтвердить и сохранить')}</button></div>`;
 }
 
-function renderDone(){
+function renderSessionDone(){
   return `<div class="wizard-shell"><div class="wizard-card"><div class="card done-wrap">
     <div class="done-icon">✓</div>
     <h2 class="q-title">${tr('Инициатива сохранена')}</h2>
-    <p class="q-sub">${tr('Спасибо! Можете добавить ещё одну инициативу того же отдела или закончить.')}</p>
-    <div class="btn-row" style="justify-content:center;gap:12px;">
+    <p class="q-sub">${tr('Спасибо! Теперь мы на 1 шаг ближе к приоритизации.')}</p>
+    <div class="btn-row" style="justify-content:center;gap:12px;flex-wrap:wrap;">
       <button class="btn btn-ghost" onclick="resetWizard(false)">${tr('Сменить отдел')}</button>
-      <button class="btn btn-primary" onclick="resetWizard(true)">${tr('Добавить ещё инициативу →')}</button>
+      <button class="btn btn-primary" onclick="addMoreInitiatives()">${tr('Добавить ещё инициативу →')}</button>
+      <button class="btn btn-coral" onclick="jumpStep('closed')">${tr('Завершить')}</button>
+    </div>
+  </div></div></div>`;
+}
+
+function renderClosed(){
+  return `<div class="wizard-shell"><div class="wizard-card"><div class="card done-wrap">
+    <div class="done-icon">✓</div>
+    <h2 class="q-title">${tr('Спасибо за ваши инициативы!')}</h2>
+    <p class="q-sub">${tr('Форма закрыта — данные сохранены. Можете закрыть вкладку браузера.')}</p>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-ghost" onclick="resetWizard(false)">${tr('Начать сначала')}</button>
     </div>
   </div></div></div>`;
 }
@@ -953,23 +1345,34 @@ function renderAdmin(){
 
 function adminDashboard(){
   const total = state.initiatives.length;
+  const testCount = state.initiatives.filter(i=>i.isTest).length;
   const toProject = state.initiatives.filter(i=>i.category==='project').length;
   const toGoal = state.initiatives.filter(i=>i.category==='goal').length;
   const none = state.initiatives.filter(i=>i.category==='none').length;
+  const pending = state.initiatives.filter(i=>i.category===null||i.category===undefined).length;
   const activeDepts = new Set(state.initiatives.map(i=>i.department));
   const untouchedDepts = state.departments.length - activeDepts.size;
   return `
   <div class="admin-header"><div><h2>${tr('Дашборд')}</h2><p>${tr('Общая картина по всем поданным инициативам')}</p></div></div>
-  <div class="ac-empty" style="border:1px dashed var(--border);padding:10px 14px;margin-bottom:18px;">☁ ${tr('Данные хранятся в общей базе Supabase и видны всем пользователям сайта, независимо от браузера и устройства.')}</div>
+  <div class="ac-empty" style="border:1px dashed var(--border);padding:10px 14px;margin-bottom:12px;">☁ ${tr('Данные хранятся в общей базе Supabase и видны всем пользователям сайта, независимо от браузера и устройства.')}</div>
+  <div class="test-toggle-row">
+    <label class="test-toggle">
+      <input type="checkbox" ${state.testMode?'checked':''} onchange="setTestMode(this.checked)">
+      <span>${tr('Режим тестирования (новые инициативы помечаются как тестовые)')}</span>
+    </label>
+    ${testCount? `<span class="q-sub" style="margin:0;">${tr('Помечено тестовыми:')} <b>${testCount}</b> ${tr('из')} ${total}</span>`:''}
+  </div>
   <div class="stat-grid">
     <div class="stat-card"><div class="sc-num">${total}</div><div class="sc-label">${tr('Инициатив подано')}</div></div>
     <div class="stat-card teal"><div class="sc-num">${toProject}</div><div class="sc-label">${tr('Часть проекта')}</div></div>
     <div class="stat-card coral"><div class="sc-num">${toGoal}</div><div class="sc-label">${tr('Влияют на цель трека')}</div></div>
     <div class="stat-card amber"><div class="sc-num">${none}</div><div class="sc-label">${tr('Самостоятельные')}</div></div>
+    <div class="stat-card"><div class="sc-num">${pending}</div><div class="sc-label">${tr('Не обработаны')}</div></div>
     <div class="stat-card"><div class="sc-num">${activeDepts.size}/${state.departments.length}</div><div class="sc-label">${tr('Отделов подали хотя бы одну')}</div></div>
   </div>
   <p class="q-sub">${tr('Ещё не подали ни одной инициативы:')} <b>${untouchedDepts}</b> ${tr('отдел(ов). Список — во вкладке «Инициативы» (фильтр по отделу).')}</p>`;
 }
+
 
 function projectTypeBadgeCounts(){
   const run = state.projects.filter(p=>p.type==='RUN').length;
@@ -1190,12 +1593,13 @@ function setInitCatFilter(v){ state.admin.initCatFilter=v; render(); }
 function categoryLabel(init){
   if(init.category==='project'){ const p=findProject(init.projectId); return p? tr('Проект:')+' '+tr(p.name) : tr('Проект (удалён)'); }
   if(init.category==='goal'){ const t=findTrack(init.trackId), g=findGoal(init.trackId, init.goalId); return (t&&g)? tr(t.name)+' — '+tr(g.text) : tr('Цель (удалена)'); }
+  if(init.category===null || init.category===undefined) return tr('Не обработана');
   return tr('Не отнесена');
 }
 function openExportModal(){
   const rows = filteredInitiatives();
-  const header = [tr('Отдел'),tr('Инициатива'),'%',tr('Заказчик'),tr('Отнесена к'),tr('Дата')];
-  const lines = [header.join(';')].concat(rows.map(r=>[r.department, r.text.replace(/;/g,','), r.percent+'%', r.customer, categoryLabel(r).replace(/;/g,','), new Date(r.submittedAt).toLocaleDateString('ru-RU')].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')));
+  const header = [tr('Отдел'),tr('Инициатива'),tr('Тип активности'),'%',tr('Заказчик'),tr('Отнесена к'),tr('Дата')];
+  const lines = [header.join(';')].concat(rows.map(r=>[r.department, r.text.replace(/;/g,','), r.activityType?activityTypeLabel(r.activityType):'', r.percent+'%', r.customer, categoryLabel(r).replace(/;/g,','), new Date(r.submittedAt).toLocaleDateString('ru-RU')].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')));
   state.modal = {kind:'export', csv: lines.join('\\n')};
   render();
 }
@@ -1278,9 +1682,24 @@ async function exportInitiativesExcel(){
 function filteredInitiatives(){
   return state.initiatives.filter(i=>
     (!state.admin.initDeptFilter || i.department===state.admin.initDeptFilter) &&
-    (state.admin.initCatFilter==='all' || i.category===state.admin.initCatFilter)
+    (state.admin.initCatFilter==='all' || (state.admin.initCatFilter==='pending'? (i.category===null||i.category===undefined) : i.category===state.admin.initCatFilter)) &&
+    (state.admin.initTestFilter==='all' || (state.admin.initTestFilter==='test'? !!i.isTest : !i.isTest))
   );
 }
+async function toggleInitiativeTest(id){
+  const it = state.initiatives.find(i=>i.id===id);
+  it.isTest = !it.isTest;
+  await saveKey('data:initiatives', state.initiatives);
+  render();
+}
+async function markVisibleAsTest(){
+  const ids = filteredInitiatives().map(i=>i.id);
+  state.initiatives = state.initiatives.map(i=> ids.includes(i.id) ? {...i, isTest:true} : i);
+  await saveKey('data:initiatives', state.initiatives);
+  showToast(tr('Отмечено тестовыми:')+' '+ids.length);
+  render();
+}
+function setInitTestFilter(v){ state.admin.initTestFilter=v; render(); }
 function adminInitiatives(){
   const rows = filteredInitiatives();
   const depts = [...new Set(state.initiatives.map(i=>i.department))];
@@ -1297,15 +1716,24 @@ function adminInitiatives(){
     </select>
     <select onchange="setInitCatFilter(this.value)">
       <option value="all" ${state.admin.initCatFilter==='all'?'selected':''}>${tr('Все категории')}</option>
+      <option value="pending" ${state.admin.initCatFilter==='pending'?'selected':''}>${tr('Не обработана')}</option>
       <option value="project" ${state.admin.initCatFilter==='project'?'selected':''}>${tr('Часть проекта')}</option>
       <option value="goal" ${state.admin.initCatFilter==='goal'?'selected':''}>${tr('Влияет на цель')}</option>
       <option value="none" ${state.admin.initCatFilter==='none'?'selected':''}>${tr('Самостоятельная')}</option>
     </select>
+    <select onchange="setInitTestFilter(this.value)">
+      <option value="all" ${state.admin.initTestFilter==='all'?'selected':''}>${tr('Тест и реальные')}</option>
+      <option value="real" ${state.admin.initTestFilter==='real'?'selected':''}>${tr('Только реальные')}</option>
+      <option value="test" ${state.admin.initTestFilter==='test'?'selected':''}>${tr('Только тестовые')}</option>
+    </select>
+    ${rows.length? `<button class="btn btn-ghost btn-sm" onclick="markVisibleAsTest()">${tr('Пометить видимые как тест')}</button>`:''}
   </div>
-  ${rows.length? `<table><thead><tr><th>${tr('Отдел')}</th><th>${tr('Инициатива')}</th><th style="width:60px">%</th><th>${tr('Заказчик')}</th><th>${tr('Отнесена к')}</th><th style="width:100px">${tr('Дата')}</th></tr></thead>
-  <tbody>${rows.map(r=>`<tr>
+  ${rows.length? `<table><thead><tr><th style="width:70px">${tr('Тест')}</th><th>${tr('Отдел')}</th><th>${tr('Инициатива')}</th><th>${tr('Тип активности')}</th><th style="width:60px">%</th><th>${tr('Заказчик')}</th><th>${tr('Отнесена к')}</th><th style="width:100px">${tr('Дата')}</th></tr></thead>
+  <tbody>${rows.map(r=>`<tr${r.isTest?' style="background:var(--amber-soft);"':''}>
+    <td><label style="display:flex;align-items:center;gap:0;"><input type="checkbox" ${r.isTest?'checked':''} onchange="toggleInitiativeTest('${r.id}')"></label></td>
     <td>${esc(tr(r.department))}</td>
     <td class="cell-truncate" title="${esc(r.text)}">${esc(r.text)}</td>
+    <td>${r.activityType? esc(activityTypeLabel(r.activityType)) : '—'}</td>
     <td>${r.percent}%</td>
     <td>${esc(r.customer)}</td>
     <td class="cell-truncate" title="${esc(categoryLabel(r))}">${esc(categoryLabel(r))}</td>
@@ -1344,6 +1772,19 @@ function renderModal(){
       ${p.goal? `<div class="si-goal" style="line-height:1.5;">${esc(tr(p.goal))}</div>` : `<div class="ac-empty" style="padding:0;">${tr('Цель проекта пока не заполнена в справочнике')}</div>`}
       <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
       <button class="btn btn-coral" onclick="pickProject('${p.id}')">${tr('Выбрать этот проект →')}</button></div>`;
+  } else if(m.kind==='editInitiative'){
+    const it = state.initiatives.find(i=>i.id===m.id);
+    content = `<h3>${tr('Редактировать активность')}</h3>
+      <label>${tr('Название активности')}</label><textarea id="mInitText" class="field" style="min-height:70px;">${esc(it.text)}</textarea>
+      <label>${tr('Заказчик')}</label><input id="mInitCustomer" class="field" value="${esc(it.customer)}">
+      <label>${tr('% времени в неделю')}</label><input id="mInitPercent" type="number" min="0" max="100" class="field" value="${it.percent}">
+      <label>${tr('Тип активности')}</label>
+      <select id="mInitType" class="field">
+        <option value="" ${!it.activityType?'selected':''}>—</option>
+        ${ACTIVITY_TYPES.map(t=>`<option value="${t.id}" ${it.activityType===t.id?'selected':''}>${esc(tr(t.label))}</option>`).join('')}
+      </select>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">${tr('Отмена')}</button>
+      <button class="btn btn-primary" onclick="submitEditInitiative('${m.id}')">${tr('Сохранить')}</button></div>`;
   } else if(m.kind==='addTrack'){
     content = `<h3>${tr('Добавить трек')}</h3>
       <label>${tr('Название трека')}</label><input id="mTrackName" class="field">
@@ -1397,6 +1838,7 @@ function render(){
   } else {
     root.innerHTML = `
       ${renderTopbar()}
+      ${state.testMode? renderTestBanner() : ''}
       <div class="main">${state.role==='lead' ? renderWizard() : renderAdmin()}</div>
       ${state.modal? renderModal() : ''}
       ${state.toast? `<div class="toast ${state.toast.type==='error'?'error':''}">${esc(state.toast.msg)}</div>` : ''}
@@ -1410,6 +1852,7 @@ function render(){
       if(selStart!=null && el.setSelectionRange){ try{ el.setSelectionRange(selStart, selEnd); }catch(e){} }
     }
   }
+  if(state.authed && state.role==='lead' && state.wizard.step==='1g'){ initGlossaryTree(); }
 }
 
 boot();

@@ -821,8 +821,13 @@ function removeBatchRow(idx){
 }
 function setBatchField(idx, field, value){
   state.wizard.batchRows[idx][field] = field==='percent' ? (parseInt(value)||0) : value;
-  if(field==='percent') state.wizard.overloadAck=false;
-  render();
+  if(field==='percent'){ state.wizard.overloadAck=false; render(); }
+  // text/customer/activityType: update state silently, no full-page re-render.
+  // These fields don't drive any other visible UI (unlike percent, which
+  // feeds the running total banner and the Далее button's enabled state),
+  // so re-rendering on every keystroke was pure risk with no benefit — it's
+  // what could make the focus-restoration logic fight fast typing/clicking
+  // across fields. The input already shows what was typed on its own.
 }
 function setOverloadAck(v){ state.wizard.overloadAck=!!v; render(); }
 async function submitBatchEntry(){
